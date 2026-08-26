@@ -278,16 +278,38 @@
   <main class="hero-updates-section" id="main-content" role="main">
     <div class="hero-updates-container">
 
-      <!-- LEFT: Hero Banner Card with Carousel -->
-      <div class="hero-card">
-        <div class="hero-bg-overlay"></div>
-        <img src="images/cbse_building_hero.jpg" alt="CBSE Building" class="hero-bg-img" id="hero-bg-img">
-
-        <!-- Banner Text Content -->
-        <div class="hero-content">
-          <h2 class="hero-title" id="hero-title">Examinations<br>2026</h2>
-          <p class="hero-subtitle" id="hero-subtitle">Latest updates, notifications, date sheets, results and more.</p>
-          <a href="#" class="hero-btn" id="hero-btn">View All Updates</a>
+      <!-- LEFT: Hero Banner Card with Fluid Sliding Carousel -->
+      <div class="hero-card" id="heroCard">
+        <div class="hero-slider-track" id="heroSliderTrack">
+          <!-- Slide 0: Cyber Crime -->
+          <div class="hero-slide-item">
+            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/Cyber_crime.JPG" alt="Cyber Crime Reporting Portal"
+                class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 1: NCW Women Helpline -->
+          <div class="hero-slide-item">
+            <a href="https://www.ncwwomenhelpline.in" target="_blank" rel="noopener" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/ncw_banner.jpg" alt="NCW Women Helpline"
+                class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 2: SAFAL Banner -->
+          <div class="hero-slide-item">
+            <a href="https://www.cbse.gov.in/cbsenew/documents//safal_video.mp4" target="_blank" rel="noopener"
+              class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/header/SAFAL%20Banner%20.jpg"
+                alt="SAFAL Assessment Framework" class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 3: Main Academic Banner -->
+          <div class="hero-slide-item">
+            <a href="#" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/banner_Main_08052025.jpg" alt="CBSE Academic Initiatives"
+                class="hero-slide-img">
+            </a>
+          </div>
         </div>
 
         <!-- Carousel Navigation Controls -->
@@ -299,6 +321,7 @@
             <span class="dot active" onclick="setSlide(0)"></span>
             <span class="dot" onclick="setSlide(1)"></span>
             <span class="dot" onclick="setSlide(2)"></span>
+            <span class="dot" onclick="setSlide(3)"></span>
           </div>
           <button class="carousel-arrow" id="carousel-next" onclick="nextSlide()" aria-label="Next slide">
             <i class="fas fa-chevron-right"></i>
@@ -964,6 +987,109 @@
         </div>
       </div>
   </section>
+
+  <!-- ================================================================
+       FEATURED RESOURCES SECTION
+       Placed right after the "What are you looking for?" section.
+  ================================================================ -->
+  <section class="featured-resources-section" id="featured-resources">
+    <div class="featured-resources-container">
+      <h2 class="featured-resources-title">Featured Resources</h2>
+
+      <div class="featured-resources-grid">
+
+        <!-- Card 1: DigiLocker Academic Documents -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="12" y1="8" x2="12" y2="14"/>
+                <line x1="9" y1="11" x2="15" y2="11"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">DigiLocker<br>Academic Documents</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 2: CBSE Academic Repository -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="14" r="2"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">CBSE Academic<br>Repository</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 3: Forms & Downloads -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Forms &amp;<br>Downloads</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 4: Regional Offices -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Regional<br>Offices</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 5: Locate a School (Where I Belong) -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Locate a School<br>(Where I Belong)</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 6: Citizen Reader & RTI -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="9" y1="12" x2="15" y2="12"/>
+                <line x1="12" y1="9" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Citizen Reader<br>&amp; RTI</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <footer class="main-footer" id="main-footer" role="contentinfo">
 
     <!--

@@ -486,46 +486,66 @@ function escapeHtml(text) {
 var currentSlideIndex = 0;
 var slideData = [
   {
-    title: 'Examinations<br>2026',
-    subtitle: 'Latest updates, notifications, date sheets, results and more.',
-    btnText: 'View All Updates'
+    image: 'https://www.cbse.gov.in/cbsenew/images/Cyber_crime.JPG',
+    link: 'https://cybercrime.gov.in/',
+    title: 'Cyber Crime Reporting Portal'
   },
   {
-    title: 'Academic<br>Resources',
-    subtitle: 'Curriculum frameworks, sample question papers and learning materials.',
-    btnText: 'Explore Academics'
+    image: 'https://www.cbse.gov.in/cbsenew/images/ncw_banner.jpg',
+    link: 'https://www.ncwwomenhelpline.in',
+    title: 'NCW Women Helpline'
   },
   {
-    title: 'Digital<br>Services',
-    subtitle: 'Access DigiLocker certificates, online verification, and student portals.',
-    btnText: 'Access Services'
+    image: 'https://www.cbse.gov.in/cbsenew/images/header/SAFAL%20Banner%20.jpg',
+    link: 'https://www.cbse.gov.in/cbsenew/documents//safal_video.mp4',
+    title: 'SAFAL Assessment Framework'
+  },
+  {
+    image: 'https://www.cbse.gov.in/cbsenew/images/banner_Main_08052025.jpg',
+    link: '#',
+    title: 'CBSE Academic Initiatives'
   }
 ];
 
 function updateSlideUI() {
-  var titleEl = document.getElementById('hero-title');
-  var subEl   = document.getElementById('hero-subtitle');
-  var btnEl   = document.getElementById('hero-btn');
-  var dots    = document.querySelectorAll('.carousel-dots .dot');
+  var track = document.getElementById('heroSliderTrack');
+  var dotsContainer = document.querySelector('.carousel-dots');
 
-  if (titleEl && slideData[currentSlideIndex]) {
-    titleEl.innerHTML = slideData[currentSlideIndex].title;
-    subEl.textContent = slideData[currentSlideIndex].subtitle;
-    btnEl.textContent = slideData[currentSlideIndex].btnText;
+  if (track) {
+    var translateXPercent = -(currentSlideIndex * 25); // 25% width per slide (4 slides)
+    track.style.transform = 'translateX(' + translateXPercent + '%)';
   }
 
-  dots.forEach(function (dot, idx) {
-    if (idx === currentSlideIndex) {
-      dot.classList.add('active');
-    } else {
-      dot.classList.remove('active');
+  if (dotsContainer) {
+    var dotsHtml = '';
+    for (var i = 0; i < slideData.length; i++) {
+      dotsHtml += '<span class="dot ' + (i === currentSlideIndex ? 'active' : '') + '" onclick="setSlide(' + i + ')"></span>';
     }
-  });
+    dotsContainer.innerHTML = dotsHtml;
+  }
+}
+
+/* Auto-scroll timer for Hero Carousel */
+var heroAutoTimer = null;
+
+function startHeroAutoScroll() {
+  stopHeroAutoScroll();
+  heroAutoTimer = setInterval(function () {
+    nextSlide();
+  }, 4000);
+}
+
+function stopHeroAutoScroll() {
+  if (heroAutoTimer) {
+    clearInterval(heroAutoTimer);
+    heroAutoTimer = null;
+  }
 }
 
 function setSlide(index) {
   currentSlideIndex = index;
   updateSlideUI();
+  startHeroAutoScroll();
 }
 
 function nextSlide() {
@@ -536,6 +556,17 @@ function nextSlide() {
 function prevSlide() {
   currentSlideIndex = (currentSlideIndex - 1 + slideData.length) % slideData.length;
   updateSlideUI();
+  startHeroAutoScroll();
+}
+
+// Start auto-scroll on page load
+startHeroAutoScroll();
+
+// Pause auto-scroll when hovering over the hero card
+var heroCardElem = document.getElementById('heroCard');
+if (heroCardElem) {
+  heroCardElem.addEventListener('mouseenter', stopHeroAutoScroll);
+  heroCardElem.addEventListener('mouseleave', startHeroAutoScroll);
 }
 
 
