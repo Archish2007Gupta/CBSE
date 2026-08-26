@@ -441,88 +441,77 @@ img {
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* The <ul> container for all nav items */
+/* The <ul> container for all nav items - Strictly Single Row */
 .nav-list {
   display: flex;
-  /*
-    flex-wrap: wrap means if items don't fit in one row,
-    they move down to the next row automatically.
-  */
-  flex-wrap: wrap;
-  padding: 0 8px;
-  margin: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 /* Each <li> nav item */
 .nav-item {
-  /*
-    position: relative is CRUCIAL for dropdowns!
-    It makes the dropdown position itself relative to this item,
-    not relative to the page.
-  */
   position: relative;
+  flex-shrink: 0;
 }
 
 /* Each navigation link (the clickable text) */
 .nav-link {
-  display: block;          /* Takes full height of nav bar */
-  padding: 15px 14px;
-  font-size: 14.5px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 13px 6px;
+  font-size: 13.2px;
+  font-weight: 700;
   color: var(--text-dark);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   white-space: nowrap;     /* Prevent text from wrapping to 2 lines */
-  transition: color 0.2s;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
 }
 .nav-link:hover,
 .nav-link.active {
   color: var(--teal-primary);
+  background-color: #f0f9ff;
   text-decoration: none;
 }
 
 /* Small down-arrow chevron icon beside nav items with dropdowns */
 .nav-chevron {
-  font-size: 8px;
-  margin-left: 3px;
-  vertical-align: middle;
+  font-size: 8.5px;
+  margin-left: 1px;
+  opacity: 0.75;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 
 /* ================================================================
    6. DROPDOWN MENUS
    Submenus that appear when hovering over a nav item.
-
-   THE TRICK:
-     - By default: .dropdown-menu has display:none (invisible).
-     - On hover:   .has-dropdown:hover .dropdown-menu gets display:block.
-     - The :hover pseudo-class is what "watches" for mouse hover.
 ================================================================ */
 
 /* Hidden by default */
 .dropdown-menu {
   display: none;
-
-  /*
-    position: absolute removes the dropdown from normal page flow.
-    It positions itself relative to the nearest 'position:relative' parent,
-    which is .nav-item (we set that above).
-  */
   position: absolute;
-  top: 100%;     /* Appear just below the nav item (100% = full height of parent) */
+  top: 100%;
   left: 0;
-
   background: white;
   border: 1px solid var(--border-light);
   border-top: 2px solid var(--teal-primary); /* Teal top accent line */
   min-width: 210px;
   box-shadow: var(--shadow-md);
-
-  /*
-    z-index controls layering — higher numbers appear ON TOP of lower numbers.
-    We set 1000 so the dropdown appears above the search section below.
-  */
   z-index: 1000;
+}
+
+/* Align rightmost dropdowns to the right edge so they stay inside the screen */
+.nav-list > .nav-item:nth-last-child(-n+4) .dropdown-menu {
+  left: auto;
+  right: 0;
 }
 
 /* Show the dropdown when hovering over the parent nav item */
@@ -547,13 +536,75 @@ img {
   background-color: var(--teal-primary);
   color: white;
   text-decoration: none;
-  padding-left: 20px;  /* Slight indent on hover (subtle animation) */
+  padding-left: 20px;  /* Slight indent on hover */
 }
 
 /* Rotate the chevron arrow when hovering over nav item with dropdown */
 .nav-item.has-dropdown:hover .nav-chevron {
-  transform: rotate(180deg); /* Flip arrow to point upward */
+  transform: rotate(180deg);
   transition: transform 0.2s;
+}
+
+/* Mega Dropdown Multi-Column System */
+.dropdown-menu.mega-dropdown {
+  min-width: 580px;
+  max-width: 720px;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+  border-top: 3px solid var(--teal-primary);
+}
+
+.nav-item.has-dropdown:hover > .dropdown-menu.mega-dropdown {
+  display: grid;
+}
+
+.mega-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-heading {
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e0f2fe;
+}
+
+.mega-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mega-column ul li a {
+  display: block;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  border-radius: 6px;
+  border-bottom: none !important;
+  white-space: normal;
+  line-height: 1.35;
+  transition: all 0.15s ease;
+}
+
+.mega-column ul li a:hover {
+  background: #f0f9ff;
+  color: #2ea2c7;
+  padding-left: 12px;
 }
 
 
