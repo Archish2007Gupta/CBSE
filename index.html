@@ -56,40 +56,9 @@
   ================================================================ -->
   <div class="top-bar" id="top-bar">
 
-    <!-- Left side: Ashoka Chakra (wheel) SVG + Government text -->
+    <!-- Left side: National emblem (Satyamev Jayate SMJW.png) + Government text -->
     <div class="top-bar-left">
-      <!--
-        SVG = Scalable Vector Graphic.
-        It's code that draws shapes — no image file needed!
-        This SVG draws the Ashoka Chakra (24-spoke wheel).
-      -->
-      <svg class="gov-emblem" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="25" cy="25" r="22" fill="none" stroke="#1a5276" stroke-width="2" />
-        <circle cx="25" cy="25" r="4" fill="#1a5276" />
-        <!-- 24 spokes radiating from the center -->
-        <line x1="25" y1="25" x2="25" y2="3" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="30.7" y2="4" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="36" y2="6.7" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="40" y2="11" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="43" y2="16.5" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="44.5" y2="22.7" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="44.5" y2="27.3" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="43" y2="33.5" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="40" y2="39" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="36" y2="43.3" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="30.7" y2="46" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="25" y2="47" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="19.3" y2="46" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="14" y2="43.3" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="10" y2="39" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="7" y2="33.5" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="5.5" y2="27.3" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="5.5" y2="22.7" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="7" y2="16.5" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="10" y2="11" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="14" y2="6.7" stroke="#1a5276" stroke-width="1.2" />
-        <line x1="25" y1="25" x2="19.3" y2="4" stroke="#1a5276" stroke-width="1.2" />
-      </svg>
+      <img src="images/SMJW.png" alt="Satyamev Jayate - Government of India" class="gov-emblem-img">
       <span class="gov-text">Government of India | Central Board of Secondary Education</span>
     </div>
 
@@ -139,11 +108,6 @@
         </a>
       </div>
 
-      <!-- Search button (top-right corner magnifying glass) -->
-      <button class="top-search-btn" onclick="focusSearch()" title="Search" aria-label="Go to search">
-        <i class="fas fa-search" aria-hidden="true"></i>
-      </button>
-
     </div>
   </div><!-- END: top-bar -->
 
@@ -156,107 +120,34 @@
   ================================================================ -->
   <header class="main-header" id="main-header">
 
-    <!-- LEFT: CBSE Logo + title text side by side -->
+    <!-- LEFT: Official CBSE Logo with Name -->
     <div class="header-brand">
-
-      <!--
-        CBSE Circular Seal Logo drawn with SVG.
-        A <circle> tag draws a circle.
-        <text> draws text inside the SVG.
-        <path> draws free-form curves (like the lamp flame).
-      -->
-      <div class="cbse-logo-wrap" aria-label="CBSE circular logo">
-        <svg class="cbse-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background circle -->
-          <circle cx="50" cy="50" r="48" fill="white" stroke="#2ea2c7" stroke-width="3" />
-          <!-- Inner dashed ring for decoration -->
-          <circle cx="50" cy="50" r="41" fill="none" stroke="#2ea2c7" stroke-width="0.8" stroke-dasharray="3,3" />
-          <!-- Lamp base (ellipse = flattened circle) -->
-          <ellipse cx="50" cy="66" rx="13" ry="4.5" fill="#2ea2c7" opacity="0.4" />
-          <!-- Lamp bowl -->
-          <path d="M43,66 Q50,50 57,66" fill="#e67e22" stroke="#c0392b" stroke-width="0.8" />
-          <!-- Flame (orange) -->
-          <ellipse cx="50" cy="46" rx="3.5" ry="6" fill="#f39c12" opacity="0.95" />
-          <!-- Flame highlight (yellow) -->
-          <ellipse cx="50" cy="45" rx="1.8" ry="3" fill="#f1c40f" />
-          <!-- Book at the base -->
-          <rect x="37" y="67" width="26" height="7" rx="2" fill="#2ea2c7" opacity="0.75" />
-          <line x1="50" y1="67" x2="50" y2="74" stroke="white" stroke-width="0.8" />
-          <!-- Hindi text: शिक्षा बोर्ड (Education Board) -->
-          <text x="50" y="86" text-anchor="middle" font-size="6.5" font-weight="bold" fill="#1a5276"
-            font-family="Open Sans,Arial,sans-serif">शिक्षा बोर्ड</text>
-          <!-- English top arc text -->
-          <text x="50" y="18" text-anchor="middle" font-size="6" font-weight="bold" fill="#2ea2c7"
-            font-family="Open Sans,Arial,sans-serif">केन्द्रीय माध्यमिक</text>
-        </svg>
-      </div>
-
-      <!-- Title text beside the logo -->
-      <div class="header-title-block">
-        <!--
-          <h1> = the most important heading on the page.
-          Best practice: only ONE <h1> per page.
-          Following headings use <h2>, <h3>, etc.
-        -->
-        <h1 class="cbse-main-title">CENTRAL BOARD OF SECONDARY EDUCATION</h1>
-        <p class="cbse-tagline">Committed to Equity and Excellence in Education</p>
-      </div>
+      <img src="images/cbse-logo-with-name.png"
+        alt="Central Board of Secondary Education - Committed to Equity and Excellence in Education"
+        class="cbse-logo-name-img">
     </div>
 
     <!-- RIGHT: Partner/government initiative logos -->
     <div class="header-partner-logos">
-
-      <!-- G20 India (India hosted the G20 Summit) -->
+      <!-- G20 India -->
       <div class="partner-badge" title="G20 India">
-        <div class="g20-wrap">
-          <div class="g20-main">
-            <span class="g20-g">G</span><span class="g20-num">20</span>
-          </div>
-          <div class="g20-flower">🪷</div>
-          <div class="g20-india">भारत INDIA</div>
-        </div>
+        <img src="images/g20-logo.png" alt="G20 India" class="partner-img">
       </div>
 
-      <!-- Azadi Ka Amrit Mahotsav: 75 years of Indian Independence -->
+      <!-- Azadi Ka Amrit Mahotsav -->
       <div class="partner-badge" title="Azadi Ka Amrit Mahotsav - 75 Years of Independence">
-        <div class="amrit-wrap">
-          <div class="amrit-num-wrap">
-            <span class="amrit-num">75</span>
-          </div>
-          <div class="amrit-label">Azadi Ka<br>Amrit Mahotsav</div>
-        </div>
+        <img src="images/amritmahotsav.png" alt="Azadi Ka Amrit Mahotsav" class="partner-img">
       </div>
 
-      <!-- Swachh Bharat: Clean India Mission (Gandhi glasses icon) -->
+      <!-- Swachh Bharat -->
       <div class="partner-badge" title="Swachh Bharat - Clean India Mission">
-        <div class="swachh-wrap">
-          <!-- Gandhi-style spectacles drawn with SVG -->
-          <svg class="swachh-glasses-svg" viewBox="0 0 70 35" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="14" fill="none" stroke="#555" stroke-width="3.5" />
-            <circle cx="52" cy="18" r="14" fill="none" stroke="#555" stroke-width="3.5" />
-            <line x1="32" y1="18" x2="38" y2="18" stroke="#555" stroke-width="3.5" />
-            <line x1="4" y1="18" x2="0" y2="12" stroke="#555" stroke-width="3.5" />
-            <line x1="66" y1="18" x2="70" y2="12" stroke="#555" stroke-width="3.5" />
-          </svg>
-          <div class="swachh-text">स्वच्छ<br>भारत</div>
-          <div class="swachh-sub">एक कदम स्वच्छता की ओर</div>
-        </div>
+        <img src="images/swach-bharat.png" alt="Swachh Bharat" class="partner-img">
       </div>
 
-      <!-- DigiCBSE: digital initiative -->
+      <!-- DigiCBSE -->
       <div class="partner-badge" title="DigiCBSE">
-        <div class="digi-wrap">
-          <svg class="digi-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40,12 C56,12 68,24 68,40 C68,56 56,68 40,68 C28,68 18,62 14,52" fill="none" stroke="#e67e22"
-              stroke-width="5.5" stroke-linecap="round" />
-            <path d="M40,12 C24,12 12,24 12,40 C12,56 24,68 40,68" fill="none" stroke="#2ea2c7" stroke-width="5.5"
-              stroke-linecap="round" />
-            <circle cx="40" cy="40" r="9" fill="#2ea2c7" />
-          </svg>
-          <div class="digi-text">Digi<span class="digi-cbse-span">CBSE</span></div>
-        </div>
+        <img src="images/digitalcbselogo.png" alt="DigiCBSE" class="partner-img">
       </div>
-
     </div>
   </header><!-- END: main-header -->
 
@@ -264,29 +155,17 @@
   <!-- ================================================================
        MAIN NAVIGATION BAR
        A horizontal menu. Each item can have a dropdown submenu.
-
-       HOW DROPDOWNS WORK:
-         - CSS shows/hides the dropdown using :hover
-         - The .dropdown-menu is hidden with display:none
-         - When you hover over .has-dropdown, the child .dropdown-menu
-           gets display:block and becomes visible.
   ================================================================ -->
   <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
-    <!-- <ul> = unordered list = the menu container -->
     <ul class="nav-list" id="nav-list">
-
-      <!-- HOME (no submenu) -->
       <li class="nav-item">
         <a href="#" class="nav-link active" id="nav-home">HOME</a>
       </li>
 
-      <!-- ABOUT CBSE — has a dropdown submenu -->
-      <!-- The class "has-dropdown" tells our CSS to show a submenu on hover -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           ABOUT CBSE <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
         </a>
-        <!-- <ul> inside the <li> = the dropdown submenu -->
         <ul class="dropdown-menu">
           <li><a href="#">Overview</a></li>
           <li><a href="#">Vision &amp; Mission</a></li>
@@ -297,7 +176,6 @@
         </ul>
       </li>
 
-      <!-- BYE-LAWS & RULES -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           BYE-LAWS &amp; RULES <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -311,7 +189,6 @@
         </ul>
       </li>
 
-      <!-- BOARD EXAMINATIONS -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           BOARD EXAMINATIONS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -327,7 +204,6 @@
         </ul>
       </li>
 
-      <!-- CIRCULARS -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           CIRCULARS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -341,7 +217,6 @@
         </ul>
       </li>
 
-      <!-- MEDIA & PR AND COUNSELING -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           MEDIA &amp; PR AND COUNSELING <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -355,7 +230,6 @@
         </ul>
       </li>
 
-      <!-- QUICK NAVIGATION -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           QUICK NAVIGATION <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -369,7 +243,6 @@
         </ul>
       </li>
 
-      <!-- CBSE EMPLOYEE -->
       <li class="nav-item has-dropdown">
         <a href="#" class="nav-link" aria-haspopup="true">
           CBSE EMPLOYEE <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
@@ -382,15 +255,126 @@
         </ul>
       </li>
 
-      <!-- CONTACT US (no submenu) -->
       <li class="nav-item">
         <a href="#" class="nav-link">CONTACT US</a>
       </li>
-
     </ul>
   </nav><!-- END: main-nav -->
 
 
+  <!-- ================================================================
+       SITEMAP BAR
+       A thin bar just below the navigation. SITEMAP is right-aligned.
+  ================================================================ -->
+  <div class="sitemap-bar">
+    <a href="#" class="sitemap-link">SITEMAP</a>
+  </div>
+
+
+  <!-- ================================================================
+       HERO & LATEST @ CBSE SECTION
+       Placed right after the Sitemap Bar.
+  ================================================================ -->
+  <main class="hero-updates-section" id="main-content" role="main">
+    <div class="hero-updates-container">
+
+      <!-- LEFT: Hero Banner Card with Carousel -->
+      <div class="hero-card">
+        <div class="hero-bg-overlay"></div>
+        <img src="images/cbse_building_hero.jpg" alt="CBSE Building" class="hero-bg-img" id="hero-bg-img">
+
+        <!-- Banner Text Content -->
+        <div class="hero-content">
+          <h2 class="hero-title" id="hero-title">Examinations<br>2026</h2>
+          <p class="hero-subtitle" id="hero-subtitle">Latest updates, notifications, date sheets, results and more.</p>
+          <a href="#" class="hero-btn" id="hero-btn">View All Updates</a>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="hero-carousel-controls">
+          <button class="carousel-arrow" id="carousel-prev" onclick="prevSlide()" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-dots">
+            <span class="dot active" onclick="setSlide(0)"></span>
+            <span class="dot" onclick="setSlide(1)"></span>
+            <span class="dot" onclick="setSlide(2)"></span>
+          </div>
+          <button class="carousel-arrow" id="carousel-next" onclick="nextSlide()" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Latest @ CBSE Card -->
+      <div class="updates-card">
+        <div class="updates-header">
+          <h3 class="updates-title">Latest @ CBSE</h3>
+          <a href="#" class="updates-view-all">View All</a>
+        </div>
+
+        <ul class="updates-list">
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">CTET July 2026 – Information Bulletin</a>
+              <span class="update-date">16 May 2026</span>
+            </div>
+            <span class="update-badge badge-blue">Examinations</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Post Result Services for Class X &amp; XII – 2026</a>
+              <span class="update-date">15 May 2026</span>
+            </div>
+            <span class="update-badge badge-green">Results</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Supplementary Result Class X &amp; XII – 2026</a>
+              <span class="update-date">14 May 2026</span>
+            </div>
+            <span class="update-badge badge-green">Results</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Recruitment Notice – KVS (Various Posts)</a>
+              <span class="update-date">13 May 2026</span>
+            </div>
+            <span class="update-badge badge-purple">Careers</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Curriculum Resources: Secondary Stage</a>
+              <span class="update-date">12 May 2026</span>
+            </div>
+            <span class="update-badge badge-orange">Academics</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </main>
 
   <!-- ================================================================
        FOOTER

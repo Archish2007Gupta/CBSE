@@ -315,38 +315,25 @@ img {
   flex-shrink: 0; /* Don't let this shrink when space is tight */
 }
 
-/* CBSE circular logo SVG size */
-.cbse-logo-svg {
-  width: 82px;
-  height: 82px;
+/* The Satyamev Jayate emblem image size */
+.gov-emblem-img {
+  height: 28px;
+  width: auto;
   flex-shrink: 0;
 }
 
-/* Title text container */
-.header-title-block {
-  line-height: 1.35;
+/* Official CBSE logo with name image */
+.cbse-logo-name-img {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* "CENTRAL BOARD OF SECONDARY EDUCATION" heading */
-.cbse-main-title {
-  font-size: 21px;
-  font-weight: 800;
-  color: var(--teal-primary);
-  letter-spacing: 0.4px;
-  /*
-    text-transform: uppercase — forces text to ALL CAPS regardless of HTML.
-    We already wrote it in caps, but this is a safety net.
-  */
-  text-transform: uppercase;
-}
-
-/* "Committed to Equity and Excellence in Education" */
-.cbse-tagline {
-  font-size: 14px;
-  color: var(--text-medium);
-  font-weight: 600;
-  font-style: italic;
-  margin-top: 2px;
+/* Partner logos (G20, Amrit Mahotsav, Swachh Bharat, DigiCBSE) */
+.partner-img {
+  max-height: 55px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* ---- Right side: Partner/initiative logos ---- */
@@ -581,6 +568,276 @@ img {
   transition: color 0.2s;
 }
 .sitemap-link:hover { color: var(--teal-primary); }
+
+
+/* ================================================================
+   7.5. HERO & LATEST @ CBSE UPDATES SECTION
+   Placed right after the Sitemap Bar.
+================================================================ */
+.hero-updates-section {
+  background-color: #f7fafc;
+  padding: 24px 20px;
+}
+
+.hero-updates-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ---- LEFT: HERO CARD (CAROUSEL) ---- */
+.hero-card {
+  position: relative;
+  background-color: #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 36px 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Background image */
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Overlay gradient (fade left to right so text is readable) */
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(240, 246, 255, 0.95) 0%, rgba(240, 246, 255, 0.82) 42%, rgba(240, 246, 255, 0.15) 80%, rgba(240, 246, 255, 0) 100%);
+  z-index: 1;
+}
+
+/* Text content inside hero banner */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 320px;
+}
+
+.hero-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #0b1f3a;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 500;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 24px;
+  background-color: #031b33;
+  color: #ffffff;
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(3, 27, 51, 0.25);
+}
+.hero-btn:hover {
+  background-color: #0a2f57;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Carousel Controls (bottom left) */
+.hero-carousel-controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.carousel-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s, color 0.2s;
+}
+.carousel-arrow:hover {
+  background: #031b33;
+  color: white;
+  border-color: #031b33;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cbd5e0;
+  cursor: pointer;
+  transition: background-color 0.25s, width 0.25s;
+}
+.carousel-dots .dot.active {
+  background-color: #031b33;
+  width: 10px;
+  height: 10px;
+}
+
+
+/* ---- RIGHT: LATEST @ CBSE CARD ---- */
+.updates-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 20px 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.updates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.updates-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1a202c;
+}
+
+.updates-view-all {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3182ce;
+  transition: color 0.2s;
+}
+.updates-view-all:hover {
+  color: #2b6cb0;
+  text-decoration: underline;
+}
+
+.updates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.update-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f7fafc;
+}
+.update-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.update-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.update-icon {
+  color: #2b6cb0;
+  font-size: 15px;
+}
+
+.update-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.update-link {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.update-link:hover {
+  color: #3182ce;
+}
+
+.update-date {
+  font-size: 11px;
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+/* Category Pill Badges */
+.update-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-blue   { background-color: #ebf8ff; color: #2b6cb0; }
+.badge-green  { background-color: #f0fff4; color: #276749; }
+.badge-purple { background-color: #faf5ff; color: #6b46c1; }
+.badge-orange { background-color: #fffaf0; color: #dd6b20; }
 
 
 /* ================================================================

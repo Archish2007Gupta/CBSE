@@ -334,3 +334,64 @@ function escapeHtml(text) {
   // Return the escaped HTML
   return div.innerHTML;
 }
+
+
+/* ================================================================
+   FEATURE 8: HERO BANNER CAROUSEL SLIDER
+   Allows switching hero slides using next/prev buttons and dots.
+================================================================ */
+var currentSlideIndex = 0;
+var slideData = [
+  {
+    title: 'Examinations<br>2026',
+    subtitle: 'Latest updates, notifications, date sheets, results and more.',
+    btnText: 'View All Updates'
+  },
+  {
+    title: 'Academic<br>Resources',
+    subtitle: 'Curriculum frameworks, sample question papers and learning materials.',
+    btnText: 'Explore Academics'
+  },
+  {
+    title: 'Digital<br>Services',
+    subtitle: 'Access DigiLocker certificates, online verification, and student portals.',
+    btnText: 'Access Services'
+  }
+];
+
+function updateSlideUI() {
+  var titleEl = document.getElementById('hero-title');
+  var subEl   = document.getElementById('hero-subtitle');
+  var btnEl   = document.getElementById('hero-btn');
+  var dots    = document.querySelectorAll('.carousel-dots .dot');
+
+  if (titleEl && slideData[currentSlideIndex]) {
+    titleEl.innerHTML = slideData[currentSlideIndex].title;
+    subEl.textContent = slideData[currentSlideIndex].subtitle;
+    btnEl.textContent = slideData[currentSlideIndex].btnText;
+  }
+
+  dots.forEach(function (dot, idx) {
+    if (idx === currentSlideIndex) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
+function setSlide(index) {
+  currentSlideIndex = index;
+  updateSlideUI();
+}
+
+function nextSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % slideData.length;
+  updateSlideUI();
+}
+
+function prevSlide() {
+  currentSlideIndex = (currentSlideIndex - 1 + slideData.length) % slideData.length;
+  updateSlideUI();
+}
+
