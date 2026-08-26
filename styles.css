@@ -2133,4 +2133,231 @@ body.font-small .nav-link    { font-size: 10px; }
 }
 
 
+/* ================================================================
+   16. CBSE TODAY SECTION
+   ================================================================ */
+.cbse-today-section {
+  width: 100%;
+  padding: 44px 0 52px;
+  background-color: #fafbfc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cbse-today-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cbse-today-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.cbse-today-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cbse-today-line {
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background-color: #cbd5e1;
+}
+
+.cbse-today-title {
+  font-family: var(--font-main);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.cbse-today-subtitle {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* 3-Column Grid */
+.cbse-today-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.cbse-update-card {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cbse-update-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+}
+
+/* THEMES */
+/* Green Theme */
+.theme-green {
+  background-color: #f7fdf9;
+  border: 1px solid #dcfce7;
+}
+.icon-green { color: #16a34a; background: #dcfce7; }
+.link-green { color: #16a34a; }
+.date-green { color: #16a34a; font-weight: 700; }
+.bullet-green { background-color: #16a34a; }
+.btn-green { color: #15803d; font-weight: 800; }
+.btn-green:hover { color: #166534; }
+
+/* Blue Theme */
+.theme-blue {
+  background-color: #f8fafc;
+  border: 1px solid #e0f2fe;
+}
+.icon-blue { color: #2563eb; background: #dbeafe; }
+.link-blue { color: #2563eb; }
+.date-blue { color: #2563eb; font-weight: 700; }
+.btn-blue { color: #1d4ed8; font-weight: 800; }
+.btn-blue:hover { color: #1e40af; }
+
+/* Purple Theme */
+.theme-purple {
+  background-color: #fcf8ff;
+  border: 1px solid #f3e8ff;
+}
+.icon-purple { color: #9333ea; background: #f3e8ff; }
+.link-purple { color: #9333ea; }
+.date-purple { color: #9333ea; font-weight: 700; }
+.btn-purple { color: #7e22ce; font-weight: 800; }
+.btn-purple:hover { color: #6b21a8; }
+
+/* Header inside Card */
+.update-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.update-card-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.update-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.update-card-title {
+  font-family: var(--font-main);
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.update-header-link {
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.update-header-link:hover {
+  text-decoration: underline;
+}
+
+/* List Items */
+.update-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.update-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.update-date {
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 95px;
+}
+
+.date-bullet {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.update-item-title {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.update-item-title:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+/* Footer Button */
+.update-card-footer {
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.update-footer-btn {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease;
+}
+
+.update-footer-btn:hover {
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .cbse-today-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
