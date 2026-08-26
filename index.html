@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  index.html - CBSE Website Clone (Search Page)
+  ================================================================
+  HTML = the SKELETON / STRUCTURE of the page.
+  CSS  = the PAINT / STYLE (how it looks).
+  JS   = the BRAIN / BEHAVIOUR (what it does).
+
+  Sections in this file:
+    1. <head>        - invisible settings (title, fonts, CSS link)
+    2. Top Bar       - thin strip at the very top
+    3. Header        - CBSE logo + partner logos
+    4. Navigation    - horizontal menu with dropdowns
+    5. Sitemap Bar   - slim bar with SITEMAP link
+    6. Main          - the search box
+    7. Footer        - 4-column info area
+    8. <script>      - link to JavaScript file
+  ================================================================
+-->
+<html lang="en">
+
+<head>
+  <!-- Encoding: tells the browser to support all characters (Hindi, English, etc.) -->
+  <meta charset="UTF-8">
+
+  <!-- Viewport: makes the page scale correctly on phones & tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page title shown in browser tab and search engine results -->
+  <title>Search - Central Board of Secondary Education</title>
+
+  <!-- Meta description: what search engines show under the link -->
+  <meta name="description" content="Search the CBSE website for board examinations, results, circulars, and more.">
+
+  <!-- Google Fonts: loads 'Open Sans' font with weights 600, 700, 800, 900 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome: a library of 1000+ icons (social icons, arrows, location pin, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Our custom CSS file: link rel="stylesheet" connects this HTML to styles.css -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ================================================================
+       TOP UTILITY BAR
+       The thin strip at the very top of the page.
+       Contains: government text | accessibility | language | social icons
+  ================================================================ -->
+  <div class="top-bar" id="top-bar">
+
+    <!-- Left side: Ashoka Chakra (wheel) SVG + Government text -->
+    <div class="top-bar-left">
+      <!--
+        SVG = Scalable Vector Graphic.
+        It's code that draws shapes — no image file needed!
+        This SVG draws the Ashoka Chakra (24-spoke wheel).
+      -->
+      <svg class="gov-emblem" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="25" cy="25" r="22" fill="none" stroke="#1a5276" stroke-width="2" />
+        <circle cx="25" cy="25" r="4" fill="#1a5276" />
+        <!-- 24 spokes radiating from the center -->
+        <line x1="25" y1="25" x2="25" y2="3" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="30.7" y2="4" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="36" y2="6.7" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="40" y2="11" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="43" y2="16.5" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="44.5" y2="22.7" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="44.5" y2="27.3" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="43" y2="33.5" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="40" y2="39" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="36" y2="43.3" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="30.7" y2="46" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="25" y2="47" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="19.3" y2="46" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="14" y2="43.3" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="10" y2="39" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="7" y2="33.5" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="5.5" y2="27.3" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="5.5" y2="22.7" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="7" y2="16.5" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="10" y2="11" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="14" y2="6.7" stroke="#1a5276" stroke-width="1.2" />
+        <line x1="25" y1="25" x2="19.3" y2="4" stroke="#1a5276" stroke-width="1.2" />
+      </svg>
+      <span class="gov-text">Government of India | Central Board of Secondary Education</span>
+    </div>
+
+    <!-- Right side: accessibility + language + social icons + search -->
+    <div class="top-bar-right">
+
+      <!-- Skip link: lets keyboard users jump straight to the search box -->
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!--
+        Font size buttons: clicking these calls JavaScript functions.
+        onclick="functionName()" runs a JS function when clicked.
+      -->
+      <div class="font-size-controls" role="group" aria-label="Font size controls">
+        <button onclick="changeFontSize('increase')" class="font-btn" title="Increase font size">A<sup>+</sup></button>
+        <button onclick="changeFontSize('normal')" class="font-btn" title="Normal font size">A</button>
+        <button onclick="changeFontSize('decrease')" class="font-btn" title="Decrease font size">A<sup>-</sup></button>
+        <!-- Dark button toggles black-background "high contrast" mode -->
+        <button onclick="toggleHighContrast()" class="font-btn contrast-btn" id="contrast-btn"
+          title="Toggle high contrast mode">A</button>
+      </div>
+
+      <!-- Language switch to Hindi -->
+      <div class="language-switch">
+        <a href="#" class="lang-link" title="Switch to Hindi">&#12354; हिन्दी</a>
+      </div>
+
+      <!-- Screen Reader Access: used by visually impaired people with screen reading software -->
+      <a href="#" class="screen-reader-link" title="Screen Reader Access">
+        <i class="fas fa-volume-up" aria-hidden="true"></i>
+        Screen Reader Access
+      </a>
+
+      <!-- Social Media Icons -->
+      <div class="social-icons" role="navigation" aria-label="Social media">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="soc-icon" title="Instagram">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" class="soc-icon" title="Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="soc-icon" title="Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="soc-icon" title="YouTube">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Search button (top-right corner magnifying glass) -->
+      <button class="top-search-btn" onclick="focusSearch()" title="Search" aria-label="Go to search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
+
+    </div>
+  </div><!-- END: top-bar -->
+
+
+  <!-- ================================================================
+       MAIN HEADER
+       Contains the CBSE logo on the left and partner logos on the right.
+       <header> is a semantic HTML5 tag — it tells browsers "this is the
+       page header" which helps screen readers and search engines.
+  ================================================================ -->
+  <header class="main-header" id="main-header">
+
+    <!-- LEFT: CBSE Logo + title text side by side -->
+    <div class="header-brand">
+
+      <!--
+        CBSE Circular Seal Logo drawn with SVG.
+        A <circle> tag draws a circle.
+        <text> draws text inside the SVG.
+        <path> draws free-form curves (like the lamp flame).
+      -->
+      <div class="cbse-logo-wrap" aria-label="CBSE circular logo">
+        <svg class="cbse-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background circle -->
+          <circle cx="50" cy="50" r="48" fill="white" stroke="#2ea2c7" stroke-width="3" />
+          <!-- Inner dashed ring for decoration -->
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#2ea2c7" stroke-width="0.8" stroke-dasharray="3,3" />
+          <!-- Lamp base (ellipse = flattened circle) -->
+          <ellipse cx="50" cy="66" rx="13" ry="4.5" fill="#2ea2c7" opacity="0.4" />
+          <!-- Lamp bowl -->
+          <path d="M43,66 Q50,50 57,66" fill="#e67e22" stroke="#c0392b" stroke-width="0.8" />
+          <!-- Flame (orange) -->
+          <ellipse cx="50" cy="46" rx="3.5" ry="6" fill="#f39c12" opacity="0.95" />
+          <!-- Flame highlight (yellow) -->
+          <ellipse cx="50" cy="45" rx="1.8" ry="3" fill="#f1c40f" />
+          <!-- Book at the base -->
+          <rect x="37" y="67" width="26" height="7" rx="2" fill="#2ea2c7" opacity="0.75" />
+          <line x1="50" y1="67" x2="50" y2="74" stroke="white" stroke-width="0.8" />
+          <!-- Hindi text: शिक्षा बोर्ड (Education Board) -->
+          <text x="50" y="86" text-anchor="middle" font-size="6.5" font-weight="bold" fill="#1a5276"
+            font-family="Open Sans,Arial,sans-serif">शिक्षा बोर्ड</text>
+          <!-- English top arc text -->
+          <text x="50" y="18" text-anchor="middle" font-size="6" font-weight="bold" fill="#2ea2c7"
+            font-family="Open Sans,Arial,sans-serif">केन्द्रीय माध्यमिक</text>
+        </svg>
+      </div>
+
+      <!-- Title text beside the logo -->
+      <div class="header-title-block">
+        <!--
+          <h1> = the most important heading on the page.
+          Best practice: only ONE <h1> per page.
+          Following headings use <h2>, <h3>, etc.
+        -->
+        <h1 class="cbse-main-title">CENTRAL BOARD OF SECONDARY EDUCATION</h1>
+        <p class="cbse-tagline">Committed to Equity and Excellence in Education</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Partner/government initiative logos -->
+    <div class="header-partner-logos">
+
+      <!-- G20 India (India hosted the G20 Summit) -->
+      <div class="partner-badge" title="G20 India">
+        <div class="g20-wrap">
+          <div class="g20-main">
+            <span class="g20-g">G</span><span class="g20-num">20</span>
+          </div>
+          <div class="g20-flower">🪷</div>
+          <div class="g20-india">भारत INDIA</div>
+        </div>
+      </div>
+
+      <!-- Azadi Ka Amrit Mahotsav: 75 years of Indian Independence -->
+      <div class="partner-badge" title="Azadi Ka Amrit Mahotsav - 75 Years of Independence">
+        <div class="amrit-wrap">
+          <div class="amrit-num-wrap">
+            <span class="amrit-num">75</span>
+          </div>
+          <div class="amrit-label">Azadi Ka<br>Amrit Mahotsav</div>
+        </div>
+      </div>
+
+      <!-- Swachh Bharat: Clean India Mission (Gandhi glasses icon) -->
+      <div class="partner-badge" title="Swachh Bharat - Clean India Mission">
+        <div class="swachh-wrap">
+          <!-- Gandhi-style spectacles drawn with SVG -->
+          <svg class="swachh-glasses-svg" viewBox="0 0 70 35" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="#555" stroke-width="3.5" />
+            <circle cx="52" cy="18" r="14" fill="none" stroke="#555" stroke-width="3.5" />
+            <line x1="32" y1="18" x2="38" y2="18" stroke="#555" stroke-width="3.5" />
+            <line x1="4" y1="18" x2="0" y2="12" stroke="#555" stroke-width="3.5" />
+            <line x1="66" y1="18" x2="70" y2="12" stroke="#555" stroke-width="3.5" />
+          </svg>
+          <div class="swachh-text">स्वच्छ<br>भारत</div>
+          <div class="swachh-sub">एक कदम स्वच्छता की ओर</div>
+        </div>
+      </div>
+
+      <!-- DigiCBSE: digital initiative -->
+      <div class="partner-badge" title="DigiCBSE">
+        <div class="digi-wrap">
+          <svg class="digi-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40,12 C56,12 68,24 68,40 C68,56 56,68 40,68 C28,68 18,62 14,52" fill="none" stroke="#e67e22"
+              stroke-width="5.5" stroke-linecap="round" />
+            <path d="M40,12 C24,12 12,24 12,40 C12,56 24,68 40,68" fill="none" stroke="#2ea2c7" stroke-width="5.5"
+              stroke-linecap="round" />
+            <circle cx="40" cy="40" r="9" fill="#2ea2c7" />
+          </svg>
+          <div class="digi-text">Digi<span class="digi-cbse-span">CBSE</span></div>
+        </div>
+      </div>
+
+    </div>
+  </header><!-- END: main-header -->
+
+
+  <!-- ================================================================
+       MAIN NAVIGATION BAR
+       A horizontal menu. Each item can have a dropdown submenu.
+
+       HOW DROPDOWNS WORK:
+         - CSS shows/hides the dropdown using :hover
+         - The .dropdown-menu is hidden with display:none
+         - When you hover over .has-dropdown, the child .dropdown-menu
+           gets display:block and becomes visible.
+  ================================================================ -->
+  <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <!-- <ul> = unordered list = the menu container -->
+    <ul class="nav-list" id="nav-list">
+
+      <!-- HOME (no submenu) -->
+      <li class="nav-item">
+        <a href="#" class="nav-link active" id="nav-home">HOME</a>
+      </li>
+
+      <!-- ABOUT CBSE — has a dropdown submenu -->
+      <!-- The class "has-dropdown" tells our CSS to show a submenu on hover -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          ABOUT CBSE <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <!-- <ul> inside the <li> = the dropdown submenu -->
+        <ul class="dropdown-menu">
+          <li><a href="#">Overview</a></li>
+          <li><a href="#">Vision &amp; Mission</a></li>
+          <li><a href="#">Organizational Structure</a></li>
+          <li><a href="#">Regional Offices</a></li>
+          <li><a href="#">Affiliated Schools</a></li>
+          <li><a href="#">Right to Information</a></li>
+        </ul>
+      </li>
+
+      <!-- BYE-LAWS & RULES -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          BYE-LAWS &amp; RULES <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Affiliation Bye-Laws</a></li>
+          <li><a href="#">Examination Bye-Laws</a></li>
+          <li><a href="#">Senior School Curriculum</a></li>
+          <li><a href="#">Secondary School Curriculum</a></li>
+          <li><a href="#">Important Instructions</a></li>
+        </ul>
+      </li>
+
+      <!-- BOARD EXAMINATIONS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          BOARD EXAMINATIONS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Class X</a></li>
+          <li><a href="#">Class XII</a></li>
+          <li><a href="#">Date Sheet</a></li>
+          <li><a href="#">Admit Cards</a></li>
+          <li><a href="#">Results</a></li>
+          <li><a href="#">Mark Verification / Re-evaluation</a></li>
+          <li><a href="#">Compartment Exams</a></li>
+        </ul>
+      </li>
+
+      <!-- CIRCULARS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          CIRCULARS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Academic Circulars</a></li>
+          <li><a href="#">Examination Circulars</a></li>
+          <li><a href="#">Affiliation Circulars</a></li>
+          <li><a href="#">Training &amp; Capacity Building</a></li>
+          <li><a href="#">All Circulars</a></li>
+        </ul>
+      </li>
+
+      <!-- MEDIA & PR AND COUNSELING -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          MEDIA &amp; PR AND COUNSELING <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Press Notes</a></li>
+          <li><a href="#">Tele-Counseling</a></li>
+          <li><a href="#">Photo Gallery</a></li>
+          <li><a href="#">Videos</a></li>
+          <li><a href="#">Events</a></li>
+        </ul>
+      </li>
+
+      <!-- QUICK NAVIGATION -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          QUICK NAVIGATION <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">For Schools</a></li>
+          <li><a href="#">For Students</a></li>
+          <li><a href="#">For Teachers</a></li>
+          <li><a href="#">For Parents</a></li>
+          <li><a href="#">DigiLocker</a></li>
+        </ul>
+      </li>
+
+      <!-- CBSE EMPLOYEE -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          CBSE EMPLOYEE <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Employee Login</a></li>
+          <li><a href="#">HR Policies</a></li>
+          <li><a href="#">Transfers &amp; Postings</a></li>
+          <li><a href="#">Pension &amp; Benefits</a></li>
+        </ul>
+      </li>
+
+      <!-- CONTACT US (no submenu) -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">CONTACT US</a>
+      </li>
+
+    </ul>
+  </nav><!-- END: main-nav -->
+
+
+
+  <!-- ================================================================
+       FOOTER
+       Dark section at the bottom. Divided into 4 columns.
+       Also contains a decorative silhouette of children playing.
+  ================================================================ -->
+  <footer class="main-footer" id="main-footer" role="contentinfo">
+
+    <!--
+      Decorative silhouette background (children, tree, swing, dog).
+      aria-hidden="true" tells screen readers to skip this — it's only visual.
+      This SVG is positioned behind the footer text using CSS (position:absolute).
+    -->
+    <div class="footer-silhouette-wrap" aria-hidden="true">
+      <svg class="footer-sil-svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax meet"
+        xmlns="http://www.w3.org/2000/svg">
+        <!-- BIG TREE (left side) -->
+        <ellipse cx="230" cy="105" rx="72" ry="88" fill="#263238" opacity="0.5" />
+        <ellipse cx="265" cy="90" rx="50" ry="62" fill="#263238" opacity="0.4" />
+        <rect x="220" y="155" width="18" height="55" fill="#263238" opacity="0.5" />
+        <!-- PERSON 1: elderly walking with stick -->
+        <circle cx="105" cy="98" r="12" fill="#263238" opacity="0.55" />
+        <rect x="99" y="110" width="12" height="30" fill="#263238" opacity="0.55" />
+        <line x1="99" y1="122" x2="88" y2="140" stroke="#263238" stroke-width="4.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="111" y1="122" x2="105" y2="140" stroke="#263238" stroke-width="4.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="89" y1="113" x2="77" y2="142" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- PERSON 2: running child -->
+        <circle cx="420" cy="104" r="10" fill="#263238" opacity="0.55" />
+        <rect x="415" y="114" width="10" height="26" fill="#263238" opacity="0.55" />
+        <line x1="415" y1="124" x2="403" y2="140" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="425" y1="124" x2="435" y2="138" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- DOG -->
+        <ellipse cx="530" cy="148" rx="23" ry="11" fill="#263238" opacity="0.5" />
+        <circle cx="550" cy="137" r="10" fill="#263238" opacity="0.5" />
+        <path d="M507,143 Q498,126 507,120" fill="none" stroke="#263238" stroke-width="4.5" opacity="0.5"
+          stroke-linecap="round" />
+        <ellipse cx="556" cy="130" rx="5" ry="9" fill="#263238" opacity="0.5" transform="rotate(30,556,130)" />
+        <!-- PERSON 3: child with arms raised -->
+        <circle cx="660" cy="100" r="10" fill="#263238" opacity="0.55" />
+        <rect x="655" y="110" width="10" height="27" fill="#263238" opacity="0.55" />
+        <line x1="655" y1="118" x2="641" y2="106" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="665" y1="118" x2="679" y2="106" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="657" y1="137" x2="650" y2="155" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="663" y1="137" x2="671" y2="155" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- SWING SET (right side) -->
+        <line x1="1090" y1="45" x2="1090" y2="148" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1210" y1="45" x2="1210" y2="148" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1085" y1="46" x2="1215" y2="46" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1118" y1="46" x2="1123" y2="112" stroke="#263238" stroke-width="3" opacity="0.55" />
+        <line x1="1162" y1="46" x2="1157" y2="112" stroke="#263238" stroke-width="3" opacity="0.55" />
+        <rect x="1123" y="110" width="34" height="6" rx="3" fill="#263238" opacity="0.55" />
+        <circle cx="1140" cy="98" r="10" fill="#263238" opacity="0.55" />
+        <!-- PERSON 4: child flying a kite -->
+        <circle cx="1350" cy="106" r="10" fill="#263238" opacity="0.55" />
+        <rect x="1345" y="116" width="10" height="26" fill="#263238" opacity="0.55" />
+        <line x1="1355" y1="120" x2="1370" y2="107" stroke="#263238" stroke-width="3.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1370" y1="107" x2="1400" y2="58" stroke="#263238" stroke-width="1.5" opacity="0.45" />
+        <polygon points="1400,42 1414,58 1400,74 1386,58" fill="#263238" opacity="0.5" />
+      </svg>
+    </div>
+
+    <!-- 4-column footer content grid -->
+    <div class="footer-grid">
+
+      <!-- COLUMN 1: MEDIA LINKS -->
+      <div class="footer-col" id="footer-col-media">
+        <h3 class="footer-col-heading">MEDIA</h3>
+        <ul class="footer-link-list">
+          <li>
+            <a href="#" class="footer-link">
+              <i class="fas fa-newspaper footer-li-icon" aria-hidden="true"></i>
+              Press Notes
+            </a>
+          </li>
+          <li>
+            <a href="https://facebook.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-facebook-f footer-li-icon" aria-hidden="true"></i>
+              Facebook
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-twitter footer-li-icon" aria-hidden="true"></i>
+              Twitter
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/cbse.hq" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-instagram footer-li-icon" aria-hidden="true"></i>
+              Instagram
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-youtube footer-li-icon" aria-hidden="true"></i>
+              Youtube
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 2: CONTACT INFO -->
+      <div class="footer-col" id="footer-col-contact">
+        <h3 class="footer-col-heading">CONTACT</h3>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-map-marker-alt footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Address :</strong> CBSE Integrated Office Complex<br>
+            Sector-23, Phase - 1, Dwarka New Delhi - 110077
+          </p>
+        </div>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-phone footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Tel:</strong> 011-24050336, 011-24050337,
+            011-24050338, 011-24050339, 011-24050340,
+            011-24050341, 011-24050342
+          </p>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: USEFUL LINKS -->
+      <div class="footer-col" id="footer-col-useful">
+        <h3 class="footer-col-heading">USEFUL LINKS</h3>
+        <ul class="footer-link-list">
+          <li><a href="#" class="footer-link">Statistics Of Result</a></li>
+          <li><a href="#" class="footer-link">Recruitment</a></li>
+          <li><a href="#" class="footer-link">Web Information Manager</a></li>
+          <li><a href="#" class="footer-link">Gallery</a></li>
+          <li>
+            <a href="https://goidirectory.gov.in" target="_blank" rel="noopener" class="footer-link">
+              GOI Directory
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.india.gov.in" target="_blank" rel="noopener" class="footer-link">
+              India Portal
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer-link">
+              Website Policy
+              <i class="fas fa-file-pdf footer-ext-icon" aria-hidden="true"></i>
+              (336 KB)
+            </a>
+          </li>
+          <li><a href="#" class="footer-link">Help</a></li>
+          <li><a href="#" class="footer-link">Feedback</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 4: LIVE CLOCK + CERTIFICATE + LAST UPDATED -->
+      <div class="footer-col" id="footer-col-info">
+
+        <!--
+          Live Clock: shows the current time.
+          id="clock-display" is used by script.js to update it every second.
+          aria-live="polite" announces time changes to screen readers.
+        -->
+        <div class="footer-clock" id="footer-clock" aria-live="polite">
+          <span id="clock-display">00:00:00 AM</span>
+        </div>
+
+        <!-- IGBC Certificate badge -->
+        <div class="cert-section">
+          <p class="cert-label">IGBC Certificate (Platinum)</p>
+          <!-- This circular badge is styled with CSS -->
+          <div class="cqw-badge" title="IGBC Green Building - Platinum Rating">
+            <span class="cqw-text">CQW</span>
+          </div>
+        </div>
+
+        <!-- Date of last update -->
+        <div class="last-updated-box">
+          <p class="last-updated-text">
+            Last Updated On 07 July 2026 - 05:00 PM
+          </p>
+        </div>
+
+      </div><!-- END: column 4 -->
+
+    </div><!-- END: footer-grid -->
+
+    <!-- Bottom copyright strip inside the footer -->
+    <div class="copyright-strip">
+      <!-- &#169; is the HTML code for the © symbol -->
+      <p class="copyright-text">&#169; Copyright CBSE</p>
+    </div>
+
+  </footer><!-- END: main-footer -->
+
+
+  <!--
+    Script tag at the END of <body> (not in <head>).
+    WHY? The browser reads HTML top-to-bottom.
+    If the script is in <head>, it runs BEFORE the HTML elements exist,
+    so JavaScript can't find them. Placing it here means all elements
+    are already loaded when the script runs.
+  -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

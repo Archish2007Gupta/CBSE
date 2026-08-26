@@ -1,0 +1,990 @@
+/* ================================================================
+   styles.css - CBSE Website Clone Stylesheet
+   ================================================================
+   CSS = Cascading Style Sheets.
+   This file controls HOW everything LOOKS: colors, sizes, layout.
+
+   HOW CSS WORKS:
+     selector { property: value; }
+     Example: .nav-link { color: red; font-size: 14px; }
+     The selector picks HTML elements, the properties style them.
+
+   CONTENTS OF THIS FILE:
+     1.  CSS Variables        -- reusable color/size values
+     2.  Reset & Base         -- removes browser default styles
+     3.  Top Utility Bar      -- thin strip at the very top
+     4.  Main Header          -- CBSE logo + partner logos
+     5.  Navigation Bar       -- horizontal menu
+     6.  Dropdown Menus       -- submenus that appear on hover
+     7.  Sitemap Bar          -- thin bar below nav
+     8.  Search Section       -- the main search area
+     9.  Footer               -- dark bottom section
+     10. Copyright Strip      -- very bottom strip
+     11. Accessibility        -- high-contrast & font-size classes
+================================================================ */
+
+
+/* ================================================================
+   1. CSS VARIABLES (Custom Properties)
+   Variables let you define a value once and reuse it everywhere.
+   If you change --teal-primary, the new color applies everywhere!
+
+   Syntax:  --variable-name: value;
+   Usage:   color: var(--variable-name);
+================================================================ */
+:root {
+  /* ---- PRIMARY COLORS ---- */
+  --teal-primary:    #2ea2c7;   /* Main teal/blue -- nav, buttons, links    */
+  --teal-dark:       #1a8ab0;   /* Darker teal for hover states             */
+  --teal-search-bar: #3ab3cd;   /* Slightly lighter teal for search bar     */
+
+  /* ---- LAYOUT COLORS ---- */
+  --top-bar-bg:      #f5f5f5;   /* Very light grey -- top utility bar       */
+  --header-bg:       #ffffff;   /* White -- main header                     */
+  --nav-bg:          #ffffff;   /* White -- navigation bar                  */
+  --sitemap-bg:      #f7f7f7;   /* Near-white -- sitemap bar                */
+  --search-bg:       #ececec;   /* Light grey -- search section background  */
+  --search-card-bg:  #f8f8f8;   /* Slightly off-white -- search card        */
+
+  /* ---- FOOTER COLORS ---- */
+  --footer-bg:       #3b4b51;   /* Dark slate grey -- main footer           */
+  --copyright-bg:    #202a2d;   /* Very dark -- copyright strip             */
+
+  /* ---- TEXT COLORS ---- */
+  --text-dark:       #333333;   /* Dark grey for most text                  */
+  --text-medium:     #555555;   /* Medium grey for secondary text           */
+  --text-light:      #cccccc;   /* Light grey for footer text               */
+  --text-white:      #ffffff;   /* Pure white                               */
+
+  /* ---- BORDER & SHADOW ---- */
+  --border-light:    #dddddd;   /* Light border color                       */
+  --shadow-sm:       0 2px 8px rgba(0, 0, 0, 0.10); /* Small drop shadow   */
+  --shadow-md:       0 4px 16px rgba(0, 0, 0, 0.15); /* Medium drop shadow  */
+
+  /* ---- TYPOGRAPHY ---- */
+  --font-main:       'Open Sans', Arial, sans-serif; /* Primary font Open Sans */
+  --font-base:       15px;      /* Default font size (body text)            */
+}
+
+
+/* ================================================================
+   2. RESET & BASE STYLES
+   Different browsers apply different default styles (margins, padding,
+   box-sizing). This "reset" removes them so our page looks consistent
+   everywhere.
+================================================================ */
+
+/* The * selector means "apply to EVERY element on the page" */
+*,
+*::before,
+*::after {
+  margin: 0;             /* Remove default outer spacing             */
+  padding: 0;            /* Remove default inner spacing             */
+  /*
+    box-sizing: border-box
+    By default, padding ADDS to an element's width (confusing!).
+    border-box makes padding included in the width — much easier to use.
+    Example: a 200px box with 10px padding is still 200px wide total.
+  */
+  box-sizing: border-box;
+}
+
+/* Base styles for the whole page */
+html {
+  font-size: var(--font-base);  /* Sets the default text size to 14px */
+  scroll-behavior: smooth;       /* Smooth scrolling when clicking anchor links */
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  line-height: 1.5;               /* Space between lines of text */
+  background-color: var(--header-bg);
+}
+
+/* Remove underline & color from all <a> tags by default */
+a {
+  text-decoration: none;
+  color: inherit;                 /* Inherit color from parent element */
+}
+
+/* Remove bullet points from all <ul> lists */
+ul {
+  list-style: none;
+}
+
+/* Make images never overflow their container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ================================================================
+   3. TOP UTILITY BAR
+   The very thin bar at the top.
+   Uses Flexbox to place left group and right group on opposite ends.
+
+   FLEXBOX QUICK GUIDE:
+     display: flex         -- turns container into a flex layout
+     align-items: center   -- vertically center children
+     justify-content: ...  -- horizontal alignment of children
+     gap: 10px             -- space between children
+================================================================ */
+.top-bar {
+  background-color: var(--top-bar-bg);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* Left group LEFT, right group RIGHT */
+  padding: 6px 18px;
+  font-size: 13px;
+  min-height: 40px;
+}
+
+/* Left group: Ashoka wheel + government text */
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-medium);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* The Ashoka Chakra SVG icon size */
+.gov-emblem {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0; /* Don't let flex shrink this icon */
+}
+
+/* Right group: accessibility, language, social, search */
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;  /* Wrap to next line if screen is too small */
+}
+
+/* "Skip to main content" link for keyboard/screen-reader users */
+.skip-link {
+  color: var(--text-medium);
+  font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.2s; /* 'transition' makes color change animate smoothly */
+}
+.skip-link:hover { color: var(--teal-primary); }
+
+/* ---- Font Size Control Buttons (A+, A, A-) ---- */
+.font-size-controls {
+  display: flex;
+  gap: 1px;
+}
+
+/*
+  .font-btn styles ALL four accessibility buttons.
+  'button' elements have browser defaults we need to override:
+  background:none removes grey button background.
+  cursor:pointer shows a hand cursor on hover.
+*/
+.font-btn {
+  background: none;
+  border: 1px solid #c0c0c0;
+  padding: 2px 8px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-medium);
+  cursor: pointer;
+  border-radius: 2px;
+  line-height: 1.6;
+  /* transition: smoothly animate background and color on hover */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.font-btn:hover,
+.font-btn:focus {
+  background-color: var(--teal-primary);
+  color: white;
+  border-color: var(--teal-primary);
+  outline: none;  /* Remove default focus ring (we styled it with background) */
+}
+/* The dark "A" button (high contrast toggle) */
+.contrast-btn {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+.contrast-btn:hover,
+.contrast-btn.active-contrast {
+  background-color: var(--teal-primary);
+  border-color: var(--teal-primary);
+}
+
+/* ---- Language Switch ---- */
+.language-switch { display: flex; align-items: center; }
+.lang-link {
+  color: var(--text-medium);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.lang-link:hover { color: var(--teal-primary); text-decoration: underline; }
+
+/* ---- Screen Reader Access ---- */
+.screen-reader-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-medium);
+  font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.screen-reader-link:hover { color: var(--teal-primary); }
+
+/* ---- Social Media Icons ---- */
+.social-icons {
+  display: flex;
+  gap: 5px;
+}
+
+/*
+  Each social icon is a square box with a centered icon inside.
+  The border makes the square box visible.
+  display:flex + align-items + justify-content centers the icon inside.
+*/
+.soc-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  color: #666;
+  font-size: 13px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.soc-icon:hover {
+  background-color: var(--teal-primary);
+  color: white;
+  border-color: var(--teal-primary);
+  text-decoration: none;
+}
+
+/* ---- Top Search Button (top-right corner) ---- */
+.top-search-btn {
+  background-color: var(--teal-primary);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+.top-search-btn:hover { background-color: var(--teal-dark); }
+
+
+/* ================================================================
+   4. MAIN HEADER
+   The white bar with the CBSE logo and partner logos.
+   Uses Flexbox: left (brand) and right (partner logos) on same row.
+================================================================ */
+.main-header {
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e8e8e8;
+  gap: 15px;
+}
+
+/* Left: logo + title side by side */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0; /* Don't let this shrink when space is tight */
+}
+
+/* CBSE circular logo SVG size */
+.cbse-logo-svg {
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+}
+
+/* Title text container */
+.header-title-block {
+  line-height: 1.35;
+}
+
+/* "CENTRAL BOARD OF SECONDARY EDUCATION" heading */
+.cbse-main-title {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--teal-primary);
+  letter-spacing: 0.4px;
+  /*
+    text-transform: uppercase — forces text to ALL CAPS regardless of HTML.
+    We already wrote it in caps, but this is a safety net.
+  */
+  text-transform: uppercase;
+}
+
+/* "Committed to Equity and Excellence in Education" */
+.cbse-tagline {
+  font-size: 14px;
+  color: var(--text-medium);
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ---- Right side: Partner/initiative logos ---- */
+.header-partner-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Each logo wrapper: centers content and adds a right border separator */
+.partner-badge {
+  text-align: center;
+  padding: 4px 12px;
+  border-right: 1px solid #e0e0e0;
+}
+.partner-badge:last-child {
+  border-right: none; /* Remove border from last badge */
+}
+
+/* ---- G20 Logo ---- */
+.g20-wrap { display: flex; flex-direction: column; align-items: center; }
+.g20-main { line-height: 1; }
+/* The "G" is in dark navy */
+.g20-g {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1a1a6e;
+  font-style: italic;
+}
+/* The "20" is in orange */
+.g20-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: #e67e22;
+  font-style: italic;
+}
+.g20-flower { font-size: 13px; line-height: 1.2; }
+.g20-india  { font-size: 8px; font-weight: 600; color: var(--text-dark); line-height: 1.4; }
+
+/* ---- Azadi Ka Amrit Mahotsav Logo ---- */
+.amrit-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.amrit-num-wrap {
+  border: 2px solid #888;
+  border-radius: 4px;
+  padding: 1px 5px;
+  line-height: 1;
+}
+/* The "75" uses the Indian flag gradient (saffron → white → green) */
+.amrit-num {
+  font-size: 26px;
+  font-weight: 900;
+  /*
+    background: linear-gradient(...) applies a gradient color.
+    -webkit-background-clip: text clips the gradient to just the text shape.
+    -webkit-text-fill-color: transparent makes the text itself transparent
+    so the background (gradient) shows through.
+    This creates multicolored text!
+  */
+  background: linear-gradient(to bottom, #ff9933 33%, #138808 67%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+.amrit-label {
+  font-size: 7.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ---- Swachh Bharat Logo ---- */
+.swachh-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.swachh-glasses-svg { width: 42px; height: 22px; }
+.swachh-text { font-size: 8.5px; font-weight: 700; color: var(--text-dark); line-height: 1.3; text-align: center; }
+.swachh-sub  { font-size: 6.5px; color: var(--text-medium); text-align: center; line-height: 1.3; }
+
+/* ---- DigiCBSE Logo ---- */
+.digi-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.digi-svg  { width: 42px; height: 42px; }
+.digi-text { font-size: 10px; font-weight: 700; color: #2ea2c7; }
+.digi-cbse-span { color: #e67e22; }
+
+
+/* ================================================================
+   5. NAVIGATION BAR
+   Horizontal menu bar below the header.
+   display:flex makes nav items sit side by side in one row.
+================================================================ */
+.main-nav {
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--border-light);
+  /* position:relative is needed so child dropdowns position correctly */
+  position: relative;
+}
+
+/* The <ul> container for all nav items */
+.nav-list {
+  display: flex;
+  /*
+    flex-wrap: wrap means if items don't fit in one row,
+    they move down to the next row automatically.
+  */
+  flex-wrap: wrap;
+  padding: 0 8px;
+  margin: 0;
+}
+
+/* Each <li> nav item */
+.nav-item {
+  /*
+    position: relative is CRUCIAL for dropdowns!
+    It makes the dropdown position itself relative to this item,
+    not relative to the page.
+  */
+  position: relative;
+}
+
+/* Each navigation link (the clickable text) */
+.nav-link {
+  display: block;          /* Takes full height of nav bar */
+  padding: 14px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;     /* Prevent text from wrapping to 2 lines */
+  transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--teal-primary);
+  text-decoration: none;
+}
+
+/* Small down-arrow chevron icon beside nav items with dropdowns */
+.nav-chevron {
+  font-size: 8px;
+  margin-left: 3px;
+  vertical-align: middle;
+}
+
+
+/* ================================================================
+   6. DROPDOWN MENUS
+   Submenus that appear when hovering over a nav item.
+
+   THE TRICK:
+     - By default: .dropdown-menu has display:none (invisible).
+     - On hover:   .has-dropdown:hover .dropdown-menu gets display:block.
+     - The :hover pseudo-class is what "watches" for mouse hover.
+================================================================ */
+
+/* Hidden by default */
+.dropdown-menu {
+  display: none;
+
+  /*
+    position: absolute removes the dropdown from normal page flow.
+    It positions itself relative to the nearest 'position:relative' parent,
+    which is .nav-item (we set that above).
+  */
+  position: absolute;
+  top: 100%;     /* Appear just below the nav item (100% = full height of parent) */
+  left: 0;
+
+  background: white;
+  border: 1px solid var(--border-light);
+  border-top: 2px solid var(--teal-primary); /* Teal top accent line */
+  min-width: 210px;
+  box-shadow: var(--shadow-md);
+
+  /*
+    z-index controls layering — higher numbers appear ON TOP of lower numbers.
+    We set 1000 so the dropdown appears above the search section below.
+  */
+  z-index: 1000;
+}
+
+/* Show the dropdown when hovering over the parent nav item */
+.nav-item.has-dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Each item in the dropdown */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  border-bottom: 1px solid #f2f2f2;
+  transition: background-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.dropdown-menu li:last-child a {
+  border-bottom: none; /* Remove border from last item */
+}
+.dropdown-menu li a:hover {
+  background-color: var(--teal-primary);
+  color: white;
+  text-decoration: none;
+  padding-left: 20px;  /* Slight indent on hover (subtle animation) */
+}
+
+/* Rotate the chevron arrow when hovering over nav item with dropdown */
+.nav-item.has-dropdown:hover .nav-chevron {
+  transform: rotate(180deg); /* Flip arrow to point upward */
+  transition: transform 0.2s;
+}
+
+
+/* ================================================================
+   7. SITEMAP BAR
+   A very slim bar between navigation and the search section.
+   Text is right-aligned using text-align: right.
+================================================================ */
+.sitemap-bar {
+  background-color: var(--sitemap-bg);
+  border-bottom: 1px solid #e2e2e2;
+  text-align: right; /* Push content to the right */
+  padding: 5px 22px;
+}
+
+.sitemap-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.sitemap-link:hover { color: var(--teal-primary); }
+
+
+/* ================================================================
+   8. SEARCH SECTION
+   The main content area. Contains:
+   - Teal "SEARCH" title bar
+   - Light grey background
+   - White search card with the search input
+================================================================ */
+.search-section {
+  background-color: var(--search-bg);
+  /* min-height ensures the section has enough space even with no content */
+  min-height: 240px;
+  padding-bottom: 60px;
+}
+
+/* Teal title bar with the word "SEARCH" */
+.search-title-bar {
+  background: linear-gradient(to right, #2ea2c7, #3ab8d4);
+  padding: 14px 20px;
+  text-align: center;
+}
+.search-heading {
+  color: white;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 3px;  /* Spread letters apart for a title look */
+  text-transform: uppercase;
+}
+
+/* Outer padding container */
+.search-outer-wrap {
+  padding: 28px 18px 10px;
+}
+
+/* The white card that holds the search box */
+.search-card {
+  max-width: 940px;      /* Don't let it stretch too wide on big screens */
+  margin: 0 auto;        /* Center it horizontally (auto left+right margins) */
+  background-color: var(--search-card-bg);
+  border: 1px solid #d8d8d8;
+  padding: 18px 16px;
+  border-radius: 2px;
+}
+
+/*
+  Search row: the horizontal bar containing icon + input.
+  display:flex makes them sit side by side.
+  border: 1px solid #c8c8c8 draws the search box outline.
+*/
+.search-row {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c8c8c8;
+  background: white;
+  border-radius: 2px;
+  padding: 9px 13px;
+  gap: 10px;
+}
+.search-row:focus-within {
+  /* :focus-within activates when any child (the input) is focused */
+  border-color: var(--teal-primary);
+  box-shadow: 0 0 0 2px rgba(46, 162, 199, 0.15);
+}
+
+/* Magnifying glass icon on the left of the search box */
+.search-icon-left {
+  color: #999;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/*
+  The actual text input field.
+  flex: 1 makes it grow to fill all remaining space in the flex row.
+  border: none removes the default input border (we use .search-row's border).
+  outline: none removes the default blue glow when clicked.
+*/
+.search-input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  /* Remove the default 'x' (clear) button in some browsers */
+  -webkit-appearance: none;
+}
+.search-input-field::placeholder {
+  color: #aaa;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+/* Remove the 'x' clear button in Internet Explorer/Edge */
+.search-input-field::-ms-clear { display: none; }
+
+/* Search submit button (visible but small) */
+.search-submit-btn {
+  background: var(--teal-primary);
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+.search-submit-btn:hover { background-color: var(--teal-dark); }
+
+/* Area where search result messages appear */
+.search-results-area {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-medium);
+  min-height: 20px;
+}
+
+
+/* ================================================================
+   9. FOOTER
+   Dark slate-grey section with 4 columns.
+   CSS Grid is used for the 4-column layout.
+
+   CSS GRID vs FLEXBOX:
+     Flexbox: best for 1-dimensional layouts (row OR column)
+     Grid:    best for 2-dimensional layouts (rows AND columns)
+   For 4 columns, Grid is cleaner.
+================================================================ */
+.main-footer {
+  background-color: var(--footer-bg);
+  color: white;
+  /*
+    position: relative is needed so the .footer-silhouette-wrap
+    (which uses position:absolute) positions itself inside the footer.
+  */
+  position: relative;
+  overflow: hidden; /* Hide any overflow from the silhouette SVG */
+}
+
+/* ---- Decorative Silhouette Background ---- */
+.footer-silhouette-wrap {
+  position: absolute;  /* Removed from normal flow, overlays the footer */
+  bottom: 38px;        /* Sits just above the copyright strip */
+  left: 0;
+  right: 0;
+  height: 185px;
+  pointer-events: none; /* Clicks pass through to links below */
+}
+.footer-sil-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Footer 4-column grid ---- */
+.footer-grid {
+  display: grid;
+  /*
+    grid-template-columns defines the widths of each column.
+    1fr = 1 fraction of available space.
+    1.4fr = slightly wider column.
+    'fr' units distribute space proportionally.
+  */
+  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  gap: 28px;              /* Space between columns */
+  padding: 38px 40px 65px;
+  position: relative;     /* Sits above the silhouette (z-index) */
+  z-index: 1;
+}
+
+/* Each footer column */
+.footer-col {
+  min-width: 0; /* Prevents grid overflow issues */
+}
+
+/* Column heading (MEDIA, CONTACT, USEFUL LINKS) */
+.footer-col-heading {
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ---- Footer link list ---- */
+.footer-link-list {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 9px;
+}
+
+/* Each footer link */
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  font-size: 13px;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+.footer-link:hover {
+  color: var(--teal-primary);
+  text-decoration: none;
+}
+
+/* Icon before each footer link (Facebook, Twitter, etc.) */
+.footer-li-icon {
+  color: var(--teal-primary);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+/* Small external link icon (tiny arrow) */
+.footer-ext-icon {
+  font-size: 10px;
+  color: #999;
+  margin-left: 2px;
+}
+
+/* ---- Contact column rows (address, phone) ---- */
+.footer-contact-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.65;
+  align-items: flex-start; /* Align icon to top of multi-line text */
+}
+
+/* Location pin / phone icon */
+.footer-contact-icon {
+  color: var(--teal-primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.footer-contact-row strong {
+  color: white; /* Make label text white */
+}
+
+/* ---- Live Clock ---- */
+.footer-clock {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  font-variant-numeric: tabular-nums; /* Numbers take equal width (prevents clock "jumping") */
+}
+
+/* ---- IGBC Certificate ---- */
+.cert-section {
+  margin-bottom: 18px;
+}
+.cert-label {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Circular CQW badge */
+.cqw-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;     /* 50% border-radius = perfect circle */
+  /* Gradient background from dark blue to lighter blue */
+  background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+  border: 3px solid #90caf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(66, 165, 245, 0.35);
+}
+.cqw-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Last Updated ---- */
+.last-updated-text {
+  font-size: 12.5px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   10. COPYRIGHT STRIP
+   The very bottom bar inside the footer.
+================================================================ */
+.copyright-strip {
+  background-color: var(--copyright-bg);
+  text-align: center;
+  padding: 12px 20px;
+  position: relative;
+  z-index: 1;            /* Appears above the footer silhouette */
+}
+/* "© Copyright CBSE" text in teal */
+.copyright-text {
+  color: var(--teal-primary);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+/* ================================================================
+   11. ACCESSIBILITY CLASSES
+   Applied by JavaScript when user clicks the A+, A-, or Contrast buttons.
+   JavaScript uses classList.add() and classList.remove() to toggle these.
+================================================================ */
+
+/* High contrast mode: dark background, white text, bright outlines */
+body.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+body.high-contrast .top-bar,
+body.high-contrast .main-header,
+body.high-contrast .main-nav,
+body.high-contrast .sitemap-bar {
+  background-color: #111;
+  border-color: #444;
+}
+body.high-contrast .nav-link,
+body.high-contrast .gov-text,
+body.high-contrast .top-bar-left,
+body.high-contrast .lang-link,
+body.high-contrast .skip-link,
+body.high-contrast .screen-reader-link {
+  color: #fff;
+}
+body.high-contrast .cbse-main-title  { color: #55ddff; }
+body.high-contrast .cbse-tagline     { color: #ccc; }
+body.high-contrast .search-section   { background-color: #1a1a1a; }
+body.high-contrast .search-card      { background-color: #222; border-color: #555; }
+body.high-contrast .search-row       { background: #333; border-color: #666; }
+body.high-contrast .search-input-field { color: #fff; }
+body.high-contrast .sitemap-link     { color: #ddd; }
+body.high-contrast .dropdown-menu    { background: #111; border-color: #555; }
+body.high-contrast .dropdown-menu li a { color: #ddd; border-color: #333; }
+
+/* Large font: increases ALL text on the page */
+body.font-large {
+  font-size: 17px; /* This scales everything since we use rem/em relative units */
+}
+body.font-large .nav-link    { font-size: 13.5px; }
+body.font-large .footer-link { font-size: 14px; }
+
+/* Small font */
+body.font-small {
+  font-size: 11px;
+}
+body.font-small .nav-link    { font-size: 10px; }
+
+
+/* ================================================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   @media rules apply styles only at certain screen widths.
+   max-width: 900px means "only if screen is 900px or narrower".
+   This makes the layout adjust for tablets and phones.
+================================================================ */
+@media (max-width: 1100px) {
+  /* Reduce partner logo sizes on smaller screens */
+  .header-partner-logos { gap: 6px; }
+  .partner-badge        { padding: 4px 7px; }
+}
+
+@media (max-width: 900px) {
+  /* Stack header brand and partner logos vertically */
+  .main-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  /* Footer: switch from 4 columns to 2 columns */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 30px 20px 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Footer: switch to 1 column (everything stacks) */
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Hide some top bar items on very small screens */
+  .screen-reader-link { display: none; }
+  .language-switch    { display: none; }
+  /* Reduce padding */
+  .top-bar { padding: 5px 10px; }
+  .main-header { padding: 10px 12px; }
+  .cbse-main-title { font-size: 15px; }
+}
