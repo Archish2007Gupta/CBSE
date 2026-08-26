@@ -33,11 +33,11 @@
   <!-- Meta description: what search engines show under the link -->
   <meta name="description" content="Search the CBSE website for board examinations, results, circulars, and more.">
 
-  <!-- Google Fonts: loads 'Open Sans' font with weights 600, 700, 800, 900 -->
+  <!-- Google Fonts: loads 'Open Sans', 'Bricolage Grotesque', and 'Hanken Grotesk' -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
     rel="stylesheet">
 
   <!-- Font Awesome: a library of 1000+ icons (social icons, arrows, location pin, etc.) -->
@@ -377,10 +377,588 @@
   </main>
 
   <!-- ================================================================
-       FOOTER
-       Dark section at the bottom. Divided into 4 columns.
-       Also contains a decorative silhouette of children playing.
+       WHAT ARE YOU LOOKING FOR? (PERSONA CARDS SECTION)
+       Infinite auto-scrolling marquee with CBSE portal cards
   ================================================================ -->
+  <section class="persona-section">
+    <div class="persona-container">
+
+      <!-- Section Header with Navigation Arrows -->
+      <div class="persona-header">
+        <div class="persona-header-text">
+          <h2 class="persona-title">What are you looking for?</h2>
+          <p class="persona-subtitle">Select the option that best describes you to find relevant information and services.</p>
+        </div>
+        <div class="persona-nav-controls">
+          <button class="persona-nav-btn" id="personaPrevBtn" aria-label="Scroll left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="persona-nav-btn" id="personaNextBtn" aria-label="Scroll right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Infinite Marquee Reel for CBSE Portal Cards -->
+      <div class="persona-marquee-wrapper">
+        <div class="persona-marquee-track">
+
+          <!-- Card 1: RAJBHASHA HINDI -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//rajbhasha.JPG" alt="RAJBHASHA HINDI">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RAJBHASHA HINDI</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 2: VERIFICATION PROCESS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Verification_10062026.JPG" alt="VERIFICATION PROCESS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">VERIFICATION PROCESS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 3: PRIVATE CANDIDATE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//Private_Main.JPG" alt="PRIVATE CANDIDATE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRIVATE CANDIDATE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 4: CBSE EMPLOYEE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Pension_Window_12062025.JPG" alt="CBSE EMPLOYEE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE EMPLOYEE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG" alt="NATIONAL TEACHERS AWARDS 2026">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 6: OASIS 5.0 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/OASIS_5.JPG" alt="OASIS 5.0">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">OASIS 5.0</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 7: CBSE SPORTS SYSTEM (CSS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//CSS_23082023.JPG" alt="CBSE SPORTS SYSTEM (CSS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE SPORTS SYSTEM (CSS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 8: SCHOOL AS KNOWLEDGE & SKILL HUB | SAKSH -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//skill.jpg" alt="SCHOOL AS KNOWLEDGE &amp; SKILL HUB">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL AS KNOWLEDGE &amp; SKILL HUB | SAKSH</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 9: RECRUITMENT -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//recr.png" alt="RECRUITMENT">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RECRUITMENT</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 10: SCHOLARSHIP -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//scholarship1.png" alt="SCHOLARSHIP">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOLARSHIP</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 11: PARINAM MANJUSHA -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parinam_small.png" alt="PARINAM MANJUSHA">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PARINAM MANJUSHA</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png" alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 13: BOARD'S CIRCULARS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/course4.jpg" alt="BOARD'S CIRCULARS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD'S CIRCULARS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 14: BOARD EXAMINATIONS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/b-e(1).png" alt="BOARD EXAMINATIONS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD EXAMINATIONS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 15: CTET -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/ctet1.jpg" alt="CTET">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CTET</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 16: PROFESSIONAL EXAMS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pro_exams.png" alt="PROFESSIONAL EXAMS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PROFESSIONAL EXAMS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 17: SKILL COURSES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/management.jpg" alt="SKILL COURSES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SKILL COURSES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 18: RESULTS & STATISTICS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/result.jpg" alt="RESULTS &amp; STATISTICS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RESULTS &amp; STATISTICS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 19: PUBLIC SERVICES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pubserv.jpg" alt="PUBLIC SERVICES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PUBLIC SERVICES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 20: EXTERNAL LINKS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//external.png" alt="EXTERNAL LINKS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">EXTERNAL LINKS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 21: ADMIN & LEGAL WING -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/adminleagal.jpg" alt="ADMIN &amp; LEGAL WING">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">ADMIN &amp; LEGAL WING</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 22: SCHOOL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//classroom.png" alt="SCHOOL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 23: PRINCIPAL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//pr.jpg" alt="PRINCIPAL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRINCIPAL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 24: TEACHERS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//teacher.jpg" alt="TEACHERS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">TEACHERS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 25: STUDENTS & PARENTS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parents.jpg" alt="STUDENTS &amp; PARENTS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">STUDENTS &amp; PARENTS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+
+          <!-- DUPLICATE SET FOR CONTINUOUS INFINITE MARQUEE LOOP -->
+
+          <!-- Card 1: RAJBHASHA HINDI -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//rajbhasha.JPG" alt="RAJBHASHA HINDI">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RAJBHASHA HINDI</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 2: VERIFICATION PROCESS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Verification_10062026.JPG" alt="VERIFICATION PROCESS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">VERIFICATION PROCESS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 3: PRIVATE CANDIDATE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//Private_Main.JPG" alt="PRIVATE CANDIDATE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRIVATE CANDIDATE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 4: CBSE EMPLOYEE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Pension_Window_12062025.JPG" alt="CBSE EMPLOYEE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE EMPLOYEE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG" alt="NATIONAL TEACHERS AWARDS 2026">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 6: OASIS 5.0 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/OASIS_5.JPG" alt="OASIS 5.0">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">OASIS 5.0</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 7: CBSE SPORTS SYSTEM (CSS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//CSS_23082023.JPG" alt="CBSE SPORTS SYSTEM (CSS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE SPORTS SYSTEM (CSS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 8: SCHOOL AS KNOWLEDGE & SKILL HUB | SAKSH -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//skill.jpg" alt="SCHOOL AS KNOWLEDGE &amp; SKILL HUB">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL AS KNOWLEDGE &amp; SKILL HUB | SAKSH</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 9: RECRUITMENT -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//recr.png" alt="RECRUITMENT">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RECRUITMENT</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 10: SCHOLARSHIP -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//scholarship1.png" alt="SCHOLARSHIP">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOLARSHIP</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 11: PARINAM MANJUSHA -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parinam_small.png" alt="PARINAM MANJUSHA">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PARINAM MANJUSHA</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png" alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 13: BOARD'S CIRCULARS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/course4.jpg" alt="BOARD'S CIRCULARS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD'S CIRCULARS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 14: BOARD EXAMINATIONS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/b-e(1).png" alt="BOARD EXAMINATIONS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD EXAMINATIONS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 15: CTET -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/ctet1.jpg" alt="CTET">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CTET</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 16: PROFESSIONAL EXAMS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pro_exams.png" alt="PROFESSIONAL EXAMS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PROFESSIONAL EXAMS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 17: SKILL COURSES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/management.jpg" alt="SKILL COURSES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SKILL COURSES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 18: RESULTS & STATISTICS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/result.jpg" alt="RESULTS &amp; STATISTICS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RESULTS &amp; STATISTICS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 19: PUBLIC SERVICES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pubserv.jpg" alt="PUBLIC SERVICES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PUBLIC SERVICES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 20: EXTERNAL LINKS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//external.png" alt="EXTERNAL LINKS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">EXTERNAL LINKS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 21: ADMIN & LEGAL WING -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/adminleagal.jpg" alt="ADMIN &amp; LEGAL WING">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">ADMIN &amp; LEGAL WING</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 22: SCHOOL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//classroom.png" alt="SCHOOL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 23: PRINCIPAL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//pr.jpg" alt="PRINCIPAL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRINCIPAL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 24: TEACHERS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//teacher.jpg" alt="TEACHERS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">TEACHERS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 25: STUDENTS & PARENTS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parents.jpg" alt="STUDENTS &amp; PARENTS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">STUDENTS &amp; PARENTS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+        </div>
+      </div>
+  </section>
   <footer class="main-footer" id="main-footer" role="contentinfo">
 
     <!--

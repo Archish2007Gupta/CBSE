@@ -190,6 +190,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+
+  /* ============================================================
+     FEATURE 9: PERSONA MARQUEE MANUAL ARROW NAVIGATION
+     Clicking left (←) or right (→) buttons manual-scrolls the reel.
+  ============================================================ */
+  var personaWrapper = document.querySelector('.persona-marquee-wrapper');
+  var personaPrevBtn = document.getElementById('personaPrevBtn');
+  var personaNextBtn = document.getElementById('personaNextBtn');
+
+  if (personaWrapper && personaPrevBtn && personaNextBtn) {
+    var scrollAmount = 300; // scroll step per click (card width + gap)
+
+    personaNextBtn.addEventListener('click', function () {
+      personaWrapper.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+
+    personaPrevBtn.addEventListener('click', function () {
+      personaWrapper.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+  }
+
 }); // End of DOMContentLoaded
 
 
@@ -394,4 +421,9 @@ function prevSlide() {
   currentSlideIndex = (currentSlideIndex - 1 + slideData.length) % slideData.length;
   updateSlideUI();
 }
+
+
+
+
+
 
