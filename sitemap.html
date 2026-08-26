@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap - Central Board of Secondary Education</title>
+  <meta name="description"
+    content="Complete sitemap and directory of all CBSE portals, examinations, results, circulars, and academic resources.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ================================================================
+       TOP UTILITY BAR
+  ================================================================ -->
+  <div class="top-bar" id="top-bar">
+    <div class="top-bar-left">
+      <img src="images/SMJW.png" alt="Satyamev Jayate - Government of India" class="gov-emblem-img">
+      <span class="gov-text">Government of India | Central Board of Secondary Education</span>
+    </div>
+
+    <div class="top-bar-right">
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <div class="font-size-controls" role="group" aria-label="Font size controls">
+        <button onclick="changeFontSize('increase')" class="font-btn" title="Increase font size">A<sup>+</sup></button>
+        <button onclick="changeFontSize('normal')" class="font-btn" title="Normal font size">A</button>
+        <button onclick="changeFontSize('decrease')" class="font-btn" title="Decrease font size">A<sup>-</sup></button>
+        <button onclick="toggleHighContrast()" class="font-btn contrast-btn" id="contrast-btn"
+          title="Toggle high contrast mode">A</button>
+      </div>
+
+      <div class="language-switch">
+        <a href="#" class="lang-link" title="Switch to Hindi">&#12354; हिन्दी</a>
+      </div>
+
+      <a href="#" class="screen-reader-link" title="Screen Reader Access">
+        <i class="fas fa-volume-up" aria-hidden="true"></i> Screen Reader Access
+      </a>
+
+      <div class="social-icons" role="navigation" aria-label="Social media">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="soc-icon" title="Instagram"><i
+            class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" class="soc-icon" title="Twitter"><i
+            class="fab fa-twitter"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="soc-icon" title="Facebook"><i
+            class="fab fa-facebook-f"></i></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="soc-icon" title="YouTube"><i
+            class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MAIN HEADER
+  ================================================================ -->
+  <header class="main-header" id="main-header">
+    <div class="header-brand">
+      <a href="index.html">
+        <img src="images/cbse-logo-with-name.png" alt="Central Board of Secondary Education" class="cbse-logo-name-img">
+      </a>
+    </div>
+
+    <div class="header-partner-logos">
+      <div class="partner-badge" title="G20 India">
+        <img src="images/g20-logo.png" alt="G20 India" class="partner-img">
+      </div>
+      <div class="partner-badge" title="Azadi Ka Amrit Mahotsav">
+        <img src="images/amritmahotsav.png" alt="Azadi Ka Amrit Mahotsav" class="partner-img">
+      </div>
+      <div class="partner-badge" title="Swachh Bharat">
+        <img src="images/swach-bharat.png" alt="Swachh Bharat" class="partner-img">
+      </div>
+      <div class="partner-badge" title="DigiCBSE">
+        <img src="images/digitalcbselogo.png" alt="DigiCBSE" class="partner-img">
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================================
+       MAIN NAVIGATION BAR
+  ================================================================ -->
+  <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <ul class="nav-list" id="nav-list">
+      <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">ABOUT CBSE <i class="fas fa-chevron-down nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Overview</a></li>
+          <li><a href="#">Vision &amp; Mission</a></li>
+          <li><a href="#">Organizational Structure</a></li>
+          <li><a href="#">Regional Offices</a></li>
+          <li><a href="#">Affiliated Schools</a></li>
+          <li><a href="#">Right to Information</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">BYE-LAWS &amp; RULES <i
+            class="fas fa-chevron-down nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Affiliation Bye-Laws</a></li>
+          <li><a href="#">Examination Bye-Laws</a></li>
+          <li><a href="#">Senior School Curriculum</a></li>
+          <li><a href="#">Secondary School Curriculum</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">BOARD EXAMINATIONS <i
+            class="fas fa-chevron-down nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Class X</a></li>
+          <li><a href="#">Class XII</a></li>
+          <li><a href="#">Date Sheet</a></li>
+          <li><a href="#">Admit Cards</a></li>
+          <li><a href="#">Results</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">CIRCULARS <i class="fas fa-chevron-down nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Academic Circulars</a></li>
+          <li><a href="#">Examination Circulars</a></li>
+          <li><a href="#">Affiliation Circulars</a></li>
+          <li><a href="#">All Circulars</a></li>
+        </ul>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">QUICK NAVIGATION <i
+            class="fas fa-chevron-down nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">For Schools</a></li>
+          <li><a href="#">For Students</a></li>
+          <li><a href="#">For Teachers</a></li>
+          <li><a href="#">For Parents</a></li>
+          <li><a href="#">DigiLocker</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="sitemap.html" class="nav-link active">SITEMAP</a></li>
+      <li class="nav-item"><a href="#main-footer" class="nav-link">CONTACT US</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================================================================
+       SITEMAP HERO SECTION
+  ================================================================ -->
+  <main id="main-content">
+    <section class="sitemap-hero">
+      <div class="sitemap-hero-container">
+
+        <!-- Breadcrumb -->
+        <nav class="sitemap-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> &rsaquo; <span>Website Sitemap</span>
+        </nav>
+
+        <div class="sitemap-hero-header">
+          <div>
+            <h1 class="sitemap-page-title">CBSE Website Sitemap</h1>
+            <p class="sitemap-page-subtitle">A comprehensive, structured directory of all portals, services,
+              examinations, circulars, and official CBSE resources.</p>
+          </div>
+          <a href="index.html" class="sitemap-back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Main Portal
+          </a>
+        </div>
+
+        <!-- Sitemap Live Search Filter Box -->
+        <div class="sitemap-search-card">
+          <div class="sitemap-search-input-wrap">
+            <i class="fas fa-search sitemap-search-icon"></i>
+            <input type="text" id="sitemapFilterInput" class="sitemap-search-input"
+              placeholder="Filter sitemap links (e.g. Results, CTET, Affiliation, Syllabus)..."
+              onkeyup="filterSitemapLinks()">
+          </div>
+          <span class="sitemap-filter-count" id="sitemapFilterCount">Showing all 6 categories</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SITEMAP CATEGORIZED GRID SECTION
+    ================================================================ -->
+    <section class="sitemap-body-section">
+      <div class="sitemap-body-container">
+
+        <div class="sitemap-grid" id="sitemapGrid">
+
+          <!-- Category 1: Main Portals & Persona Services -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-blue">
+              <i class="fas fa-cubes sitemap-cat-icon"></i>
+              <h3>Main Portals &amp; Personas</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="index.html"><i class="fas fa-angle-right"></i> Main CBSE Portal Homepage</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Students &amp; Parents Corner</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Schools Corner &amp; Directory</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Teachers Corner &amp; Resources</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Private Candidate Portal</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> CBSE Employee Corner &amp; Pension Window</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Principal Corner &amp; Leadership</a></li>
+            </ul>
+          </div>
+
+          <!-- Category 2: Examinations & CTET -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-teal">
+              <i class="fas fa-pen-nib sitemap-cat-icon"></i>
+              <h3>Examinations &amp; Evaluation</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Class X Board Examinations 2026</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Class XII Board Examinations 2026</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> CTET (Central Teacher Eligibility Test)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Professional Examinations Unit</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Date Sheets &amp; Exam Timetable</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Online Admit Card Download</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Question Papers &amp; Marking Scheme</a></li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Results & Verification -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-purple">
+              <i class="fas fa-award sitemap-cat-icon"></i>
+              <h3>Results &amp; Document Services</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Parinam Manjusha (Academic Repository)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Duplicate Academic Document System (DADS)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Verification of Marks &amp; Answer Sheets</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Re-evaluation &amp; Scrutiny Portal</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Migration &amp; Provisional Certificates</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> DigiLocker Digital Certificates</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Board Examination Statistics</a></li>
+            </ul>
+          </div>
+
+          <!-- Category 4: Academics & Skill Education -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-orange">
+              <i class="fas fa-book-open sitemap-cat-icon"></i>
+              <h3>Academics &amp; Curriculum</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Secondary &amp; Senior Secondary Curriculum</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Skill Education &amp; Vocational Courses</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Sample Question Papers (SQPs)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> NCERT Textbooks &amp; E-Learning</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> School as Knowledge &amp; Skill Hub (SAKSH)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> SQAA Quality Assessment Framework</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Science Exhibitions &amp; Competitions</a></li>
+            </ul>
+          </div>
+
+          <!-- Category 5: School Affiliation & OASIS -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-green">
+              <i class="fas fa-school sitemap-cat-icon"></i>
+              <h3>School Affiliation &amp; Systems</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="#"><i class="fas fa-angle-right"></i> OASIS 5.0 School Information System</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> SARAS Affiliation Portal</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> National Teachers Awards 2026</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> CBSE Sports System (CSS)</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Teacher Training &amp; Capacity Building</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> School Inspection Reports</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> CBSE Scholarships for Meritorious Students</a></li>
+            </ul>
+          </div>
+
+          <!-- Category 6: Administration & Public Services -->
+          <div class="sitemap-card">
+            <div class="sitemap-card-header header-slate">
+              <i class="fas fa-building sitemap-cat-icon"></i>
+              <h3>Administration &amp; Information</h3>
+            </div>
+            <ul class="sitemap-link-list">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Board Circulars &amp; Notifications</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Admin &amp; Legal Wing Services</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Recruitment &amp; Vacancies</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Rajbhasha Hindi Portal</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Public Services &amp; Grievance Redressal</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Regional Offices &amp; Contact Directory</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Tenders, Bids &amp; Procurement</a></li>
+            </ul>
+          </div>
+
+        </div><!-- END: sitemap-grid -->
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================ -->
+  <footer class="main-footer" id="main-footer" role="contentinfo">
+    <div class="footer-silhouette-wrap" aria-hidden="true">
+      <svg class="footer-sil-svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax meet">
+        <path fill="#202a2d"
+          d="M0,180 L1440,180 L1440,140 C1280,120 1120,160 960,135 C800,110 640,150 480,130 C320,110 160,140 0,125 Z" />
+      </svg>
+    </div>
+
+    <!-- 4-column footer content grid -->
+    <div class="footer-grid">
+
+      <!-- COLUMN 1: MEDIA LINKS -->
+      <div class="footer-col" id="footer-col-media">
+        <h3 class="footer-col-heading">MEDIA</h3>
+        <ul class="footer-link-list">
+          <li>
+            <a href="#" class="footer-link">
+              <i class="fas fa-newspaper footer-li-icon" aria-hidden="true"></i>
+              Press Notes
+            </a>
+          </li>
+          <li>
+            <a href="https://facebook.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-facebook-f footer-li-icon" aria-hidden="true"></i>
+              Facebook
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-twitter footer-li-icon" aria-hidden="true"></i>
+              Twitter
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/cbse.hq" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-instagram footer-li-icon" aria-hidden="true"></i>
+              Instagram
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-youtube footer-li-icon" aria-hidden="true"></i>
+              Youtube
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 2: CONTACT INFO -->
+      <div class="footer-col" id="footer-col-contact">
+        <h3 class="footer-col-heading">CONTACT</h3>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-map-marker-alt footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Address :</strong> CBSE Integrated Office Complex<br>
+            Sector-23, Phase - 1, Dwarka New Delhi - 110077
+          </p>
+        </div>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-phone footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Tel:</strong> 011-24050336, 011-24050337,
+            011-24050338, 011-24050339, 011-24050340,
+            011-24050341, 011-24050342
+          </p>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: USEFUL LINKS -->
+      <div class="footer-col" id="footer-col-useful">
+        <h3 class="footer-col-heading">USEFUL LINKS</h3>
+        <ul class="footer-link-list">
+          <li><a href="sitemap.html" class="footer-link">Website Sitemap</a></li>
+          <li><a href="#" class="footer-link">Statistics Of Result</a></li>
+          <li><a href="#" class="footer-link">Recruitment</a></li>
+          <li><a href="#" class="footer-link">Web Information Manager</a></li>
+          <li><a href="#" class="footer-link">Gallery</a></li>
+          <li>
+            <a href="https://goidirectory.gov.in" target="_blank" rel="noopener" class="footer-link">
+              GOI Directory
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.india.gov.in" target="_blank" rel="noopener" class="footer-link">
+              India Portal
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer-link">
+              Website Policy
+              <i class="fas fa-file-pdf footer-ext-icon" aria-hidden="true"></i>
+              (336 KB)
+            </a>
+          </li>
+          <li><a href="#" class="footer-link">Help</a></li>
+          <li><a href="#" class="footer-link">Feedback</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 4: LIVE CLOCK + CERTIFICATE + LAST UPDATED -->
+      <div class="footer-col" id="footer-col-info">
+        <div class="footer-clock" id="footer-clock" aria-live="polite">
+          <span id="clock-display">00:00:00 AM</span>
+        </div>
+
+        <div class="cert-section">
+          <p class="cert-label">IGBC Certificate (Platinum)</p>
+          <div class="cqw-badge" title="IGBC Green Building - Platinum Rating">
+            <span class="cqw-text">CQW</span>
+          </div>
+        </div>
+
+        <div class="last-updated-box">
+          <p class="last-updated-text">
+            Last Updated On 26 August 2026
+          </p>
+        </div>
+
+      </div><!-- END: column 4 -->
+
+    </div><!-- END: footer-grid -->
+
+    <!-- Bottom copyright strip inside the footer -->
+    <div class="copyright-strip">
+      <p class="copyright-text">&#169; Copyright CBSE &bull; All Rights Reserved</p>
+    </div>
+
+  </footer><!-- END: main-footer -->
+
+
+  <!-- ================================================================
+       CBSE AI ASSISTANT CHATBOT WIDGET
+  ================================================================ -->
+  <div class="chatbot-widget" id="cbseChatbotWidget">
+
+    <button class="chatbot-trigger-btn" id="chatbotTriggerBtn" aria-label="Open CBSE Helpdesk Chatbot">
+      <i class="fas fa-comments chatbot-icon-open"></i>
+      <i class="fas fa-times chatbot-icon-close"></i>
+      <span class="chatbot-badge-dot"></span>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <div class="chatbot-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h3 class="chatbot-title">CBSE AI Assistant</h3>
+            <span class="chatbot-status"><span class="status-dot"></span> Online | Official Support</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" id="chatbotCloseBtn" aria-label="Close Chatbot">&times;</button>
+      </div>
+
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="chat-message bot-message">
+          <div class="message-content">
+            <p>Namaste! 🙏 Welcome to CBSE Official Helpdesk.</p>
+            <p>How can I assist you today?</p>
+          </div>
+        </div>
+
+        <div class="chat-quick-chips" id="chatQuickChips">
+          <button class="chip-btn" onclick="sendQuickMessage('Board Exam Results')">📊 Exam Results</button>
+          <button class="chip-btn" onclick="sendQuickMessage('CTET 2026')">📝 CTET 2026</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Download Admit Card')">🎟️ Admit Cards</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Verification Process')">🔍 Verification</button>
+        </div>
+      </div>
+
+      <div class="chatbot-footer">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your question here..." />
+        <button class="chatbot-send-btn" id="chatbotSendBtn" aria-label="Send Message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Sitemap Live Search Filter Function
+    function filterSitemapLinks() {
+      var input = document.getElementById('sitemapFilterInput');
+      var filter = input.value.toLowerCase().trim();
+      var cards = document.querySelectorAll('.sitemap-card');
+      var countSpan = document.getElementById('sitemapFilterCount');
+      var visibleCount = 0;
+
+      cards.forEach(function (card) {
+        var links = card.querySelectorAll('.sitemap-link-list li');
+        var cardTitle = card.querySelector('h3').textContent.toLowerCase();
+        var matchFoundInCard = false;
+
+        links.forEach(function (li) {
+          var text = li.textContent.toLowerCase();
+          if (filter === '' || text.includes(filter) || cardTitle.includes(filter)) {
+            li.style.display = '';
+            matchFoundInCard = true;
+          } else {
+            li.style.display = 'none';
+          }
+        });
+
+        if (matchFoundInCard) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (countSpan) {
+        if (filter === '') {
+          countSpan.textContent = 'Showing all 6 categories';
+        } else {
+          countSpan.textContent = 'Showing ' + visibleCount + ' matching categories';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

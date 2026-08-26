@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 
   <!-- Font Awesome: a library of 1000+ icons (social icons, arrows, location pin, etc.) -->
@@ -267,7 +267,7 @@
        A thin bar just below the navigation. SITEMAP is right-aligned.
   ================================================================ -->
   <div class="sitemap-bar">
-    <a href="#" class="sitemap-link">SITEMAP</a>
+    <a href="sitemap.html" class="sitemap-link">SITEMAP</a>
   </div>
 
 
@@ -387,7 +387,8 @@
       <div class="persona-header">
         <div class="persona-header-text">
           <h2 class="persona-title">What are you looking for?</h2>
-          <p class="persona-subtitle">Select the option that best describes you to find relevant information and services.</p>
+          <p class="persona-subtitle">Select the option that best describes you to find relevant information and
+            services.</p>
         </div>
         <div class="persona-nav-controls">
           <button class="persona-nav-btn" id="personaPrevBtn" aria-label="Scroll left">
@@ -450,7 +451,8 @@
           <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
           <a href="#" class="cbse-portal-card">
             <div class="portal-card-banner">
-              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG" alt="NATIONAL TEACHERS AWARDS 2026">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG"
+                alt="NATIONAL TEACHERS AWARDS 2026">
             </div>
             <div class="portal-card-footer">
               <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
@@ -527,7 +529,8 @@
           <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
           <a href="#" class="cbse-portal-card">
             <div class="portal-card-banner">
-              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png" alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png"
+                alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
             </div>
             <div class="portal-card-footer">
               <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
@@ -728,7 +731,8 @@
           <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
           <a href="#" class="cbse-portal-card">
             <div class="portal-card-banner">
-              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG" alt="NATIONAL TEACHERS AWARDS 2026">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG"
+                alt="NATIONAL TEACHERS AWARDS 2026">
             </div>
             <div class="portal-card-footer">
               <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
@@ -805,7 +809,8 @@
           <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
           <a href="#" class="cbse-portal-card">
             <div class="portal-card-banner">
-              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png" alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png"
+                alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
             </div>
             <div class="portal-card-footer">
               <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
@@ -1097,6 +1102,7 @@
       <div class="footer-col" id="footer-col-useful">
         <h3 class="footer-col-heading">USEFUL LINKS</h3>
         <ul class="footer-link-list">
+          <li><a href="sitemap.html" class="footer-link">Website Sitemap</a></li>
           <li><a href="#" class="footer-link">Statistics Of Result</a></li>
           <li><a href="#" class="footer-link">Recruitment</a></li>
           <li><a href="#" class="footer-link">Web Information Manager</a></li>
@@ -1164,6 +1170,65 @@
     </div>
 
   </footer><!-- END: main-footer -->
+
+
+  <!-- ================================================================
+       CBSE AI ASSISTANT CHATBOT WIDGET
+       Floating widget at the bottom right corner of the page
+  ================================================================ -->
+  <div class="chatbot-widget" id="cbseChatbotWidget">
+
+    <!-- Floating Trigger Button -->
+    <button class="chatbot-trigger-btn" id="chatbotTriggerBtn" aria-label="Open CBSE Helpdesk Chatbot">
+      <i class="fas fa-comments chatbot-icon-open"></i>
+      <i class="fas fa-times chatbot-icon-close"></i>
+      <span class="chatbot-badge-dot"></span>
+    </button>
+
+    <!-- Chat Popup Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+      <!-- Chat Header -->
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <div class="chatbot-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h3 class="chatbot-title">CBSE AI Assistant</h3>
+            <span class="chatbot-status"><span class="status-dot"></span> Online | Official Support</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" id="chatbotCloseBtn" aria-label="Close Chatbot">&times;</button>
+      </div>
+
+      <!-- Chat Messages Body -->
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="chat-message bot-message">
+          <div class="message-content">
+            <p>Namaste! 🙏 Welcome to CBSE Official Helpdesk.</p>
+            <p>How can I assist you today?</p>
+          </div>
+        </div>
+
+        <!-- Quick Action Suggestion Chips -->
+        <div class="chat-quick-chips" id="chatQuickChips">
+          <button class="chip-btn" onclick="sendQuickMessage('Board Exam Results')">📊 Exam Results</button>
+          <button class="chip-btn" onclick="sendQuickMessage('CTET 2026')">📝 CTET 2026</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Download Admit Card')">🎟️ Admit Cards</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Verification Process')">🔍 Verification</button>
+        </div>
+      </div>
+
+      <!-- Chat Input Footer -->
+      <div class="chatbot-footer">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your question here..." />
+        <button class="chatbot-send-btn" id="chatbotSendBtn" aria-label="Send Message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
 
 
   <!--

@@ -217,6 +217,122 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ============================================================
+     FEATURE 10: STICKY NAVBAR SCROLL HANDLER
+     Toggles .is-sticky class on scroll down to trigger shadow & blur
+  ============================================================ */
+  var mainNav = document.querySelector('.main-nav');
+  if (mainNav) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 80) {
+        mainNav.classList.add('is-sticky');
+      } else {
+        mainNav.classList.remove('is-sticky');
+      }
+    });
+  }
+
+
+  /* ============================================================
+     FEATURE 11: CBSE AI ASSISTANT CHATBOT INTERACTIVES
+  ============================================================ */
+  var cbseWidget = document.getElementById('cbseChatbotWidget');
+  var chatbotTriggerBtn = document.getElementById('chatbotTriggerBtn');
+  var chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+  var chatbotSendBtn = document.getElementById('chatbotSendBtn');
+  var chatbotInput = document.getElementById('chatbotInput');
+  var chatbotBody = document.getElementById('chatbotBody');
+
+  if (cbseWidget && chatbotTriggerBtn && chatbotCloseBtn) {
+    // Toggle chatbot open/close
+    chatbotTriggerBtn.addEventListener('click', function () {
+      cbseWidget.classList.toggle('active');
+      if (cbseWidget.classList.contains('active') && chatbotInput) {
+        chatbotInput.focus();
+      }
+    });
+
+    chatbotCloseBtn.addEventListener('click', function () {
+      cbseWidget.classList.remove('active');
+    });
+
+    // Send message handlers
+    if (chatbotSendBtn && chatbotInput) {
+      chatbotSendBtn.addEventListener('click', handleUserSendMessage);
+      chatbotInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          handleUserSendMessage();
+        }
+      });
+    }
+  }
+
+  function handleUserSendMessage() {
+    if (!chatbotInput) return;
+    var text = chatbotInput.value.trim();
+    if (text === '') return;
+
+    addUserChatMessage(text);
+    chatbotInput.value = '';
+    processBotResponse(text);
+  }
+
+  function addUserChatMessage(msgText) {
+    if (!chatbotBody) return;
+    var userMsgDiv = document.createElement('div');
+    userMsgDiv.className = 'chat-message user-message';
+    userMsgDiv.innerHTML = '<div class="message-content"><p>' + escapeHtml(msgText) + '</p></div>';
+    chatbotBody.appendChild(userMsgDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+  }
+
+  function processBotResponse(userMsg) {
+    if (!chatbotBody) return;
+
+    // Show typing indicator
+    var typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-message bot-message typing-msg';
+    typingDiv.innerHTML = '<div class="message-content typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
+    chatbotBody.appendChild(typingDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+    setTimeout(function () {
+      typingDiv.remove();
+      var botReply = generateBotReply(userMsg);
+      var botMsgDiv = document.createElement('div');
+      botMsgDiv.className = 'chat-message bot-message';
+      botMsgDiv.innerHTML = '<div class="message-content">' + botReply + '</div>';
+      chatbotBody.appendChild(botMsgDiv);
+      chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }, 1000);
+  }
+
+  function generateBotReply(query) {
+    var lower = query.toLowerCase();
+    if (lower.includes('result') || lower.includes('marks')) {
+      return '<p>You can check the latest Class X & XII Board Exam Results on the official <strong>Parinam Manjusha</strong> portal or DigiLocker.</p><p>👉 Visit <a href="https://results.cbse.nic.in" target="_blank" style="color:#2ea2c7; text-decoration:underline;">results.cbse.nic.in</a></p>';
+    } else if (lower.includes('ctet')) {
+      return '<p>CTET 2026 notifications, eligibility criteria, and application forms are available on the official CTET portal.</p><p>👉 Visit <a href="https://ctet.nic.in" target="_blank" style="color:#2ea2c7; text-decoration:underline;">ctet.nic.in</a></p>';
+    } else if (lower.includes('admit') || lower.includes('hall ticket')) {
+      return '<p>Admit Cards for private candidates and regular schools can be downloaded directly from the <strong>Main CBSE Portal</strong>.</p>';
+    } else if (lower.includes('verif') || lower.includes('reval')) {
+      return '<p>Online applications for Verification of Marks & Re-evaluation are processed under the <strong>Verification Process Portal</strong>.</p>';
+    } else if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+      return '<p>Hello! How can I help you today? Feel free to ask about results, admit cards, or circulars!</p>';
+    } else {
+      return '<p>Thank you for reaching out! For official queries, please refer to the main CBSE circulars or call the toll-free helpline <strong>1800-11-8002</strong>.</p>';
+    }
+  }
+
+  // Global function for quick chip buttons
+  window.sendQuickMessage = function (text) {
+    if (cbseWidget && !cbseWidget.classList.contains('active')) {
+      cbseWidget.classList.add('active');
+    }
+    addUserChatMessage(text);
+    processBotResponse(text);
+  };
+
 }); // End of DOMContentLoaded
 
 
