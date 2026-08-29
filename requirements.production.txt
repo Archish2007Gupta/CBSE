@@ -1,0 +1,19 @@
+# Production requirements - fixed versions for deployment stability
+fastapi==0.115.6
+supabase==2.9.1
+uvicorn[standard]==0.32.1
+
+# AI layer - stable versions
+langchain-core==0.3.29
+langchain==0.3.29
+langchain-community==0.3.29
+langchain-text-splitters==0.3.29
+langchain-groq==0.3.8
+
+# Optional Ollama support (not required for deployment)
+langchain-ollama==0.3.10
+
+# Core dependencies
+pydantic==2.12.5
+python-dotenv==1.2.2
+httpx==0.28.1
