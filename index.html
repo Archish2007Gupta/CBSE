@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  index.html - CBSE Website Clone (Search Page)
+  ================================================================
+  HTML = the SKELETON / STRUCTURE of the page.
+  CSS  = the PAINT / STYLE (how it looks).
+  JS   = the BRAIN / BEHAVIOUR (what it does).
+
+  Sections in this file:
+    1. <head>        - invisible settings (title, fonts, CSS link)
+    2. Top Bar       - thin strip at the very top
+    3. Header        - CBSE logo + partner logos
+    4. Navigation    - horizontal menu with dropdowns
+    5. Sitemap Bar   - slim bar with SITEMAP link
+    6. Main          - the search box
+    7. Footer        - 4-column info area
+    8. <script>      - link to JavaScript file
+  ================================================================
+-->
+<html lang="en">
+
+<head>
+  <!-- Encoding: tells the browser to support all characters (Hindi, English, etc.) -->
+  <meta charset="UTF-8">
+
+  <!-- Viewport: makes the page scale correctly on phones & tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page title shown in browser tab and search engine results -->
+  <title>Search - Central Board of Secondary Education</title>
+
+  <!-- Meta description: what search engines show under the link -->
+  <meta name="description" content="Search the CBSE website for board examinations, results, circulars, and more.">
+
+  <!-- Google Fonts: loads 'Open Sans', 'Bricolage Grotesque', and 'Hanken Grotesk' -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome: a library of 1000+ icons (social icons, arrows, location pin, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Our custom CSS file: link rel="stylesheet" connects this HTML to styles.css -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ================================================================
+       TOP UTILITY BAR
+       The thin strip at the very top of the page.
+       Contains: government text | accessibility | language | social icons
+  ================================================================ -->
+  <div class="top-bar" id="top-bar">
+
+    <!-- Left side: National emblem (Satyamev Jayate SMJW.png) + Government text -->
+    <div class="top-bar-left">
+      <img src="images/SMJW.png" alt="Satyamev Jayate - Government of India" class="gov-emblem-img">
+      <span class="gov-text">Government of India | Central Board of Secondary Education</span>
+    </div>
+
+    <!-- Right side: accessibility + language + social icons + search -->
+    <div class="top-bar-right">
+
+      <!-- Skip link: lets keyboard users jump straight to the search box -->
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!--
+        Font size buttons: clicking these calls JavaScript functions.
+        onclick="functionName()" runs a JS function when clicked.
+      -->
+      <div class="font-size-controls" role="group" aria-label="Font size controls">
+        <button onclick="changeFontSize('increase')" class="font-btn" title="Increase font size">A<sup>+</sup></button>
+        <button onclick="changeFontSize('normal')" class="font-btn" title="Normal font size">A</button>
+        <button onclick="changeFontSize('decrease')" class="font-btn" title="Decrease font size">A<sup>-</sup></button>
+        <!-- Dark button toggles black-background "high contrast" mode -->
+        <button onclick="toggleHighContrast()" class="font-btn contrast-btn" id="contrast-btn"
+          title="Toggle high contrast mode">A</button>
+      </div>
+
+      <!-- Language switch to Hindi -->
+      <div class="language-switch">
+        <a href="#" class="lang-link" title="Switch to Hindi">&#12354; हिन्दी</a>
+      </div>
+
+      <!-- Screen Reader Access: used by visually impaired people with screen reading software -->
+      <a href="#" class="screen-reader-link" title="Screen Reader Access">
+        <i class="fas fa-volume-up" aria-hidden="true"></i>
+        Screen Reader Access
+      </a>
+
+      <!-- Social Media Icons -->
+      <div class="social-icons" role="navigation" aria-label="Social media">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" class="soc-icon" title="Instagram">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" class="soc-icon" title="Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="soc-icon" title="Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="soc-icon" title="YouTube">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+  </div><!-- END: top-bar -->
+
+
+  <!-- ================================================================
+       MAIN HEADER
+       Contains the CBSE logo on the left and partner logos on the right.
+       <header> is a semantic HTML5 tag — it tells browsers "this is the
+       page header" which helps screen readers and search engines.
+  ================================================================ -->
+  <header class="main-header" id="main-header">
+
+    <!-- LEFT: Official CBSE Logo with Name -->
+    <div class="header-brand">
+      <img src="images/cbse-logo-with-name.png"
+        alt="Central Board of Secondary Education - Committed to Equity and Excellence in Education"
+        class="cbse-logo-name-img">
+    </div>
+
+    <!-- RIGHT: Partner/government initiative logos -->
+    <div class="header-partner-logos">
+      <!-- G20 India -->
+      <div class="partner-badge" title="G20 India">
+        <img src="images/g20-logo.png" alt="G20 India" class="partner-img">
+      </div>
+
+      <!-- Azadi Ka Amrit Mahotsav -->
+      <div class="partner-badge" title="Azadi Ka Amrit Mahotsav - 75 Years of Independence">
+        <img src="images/amritmahotsav.png" alt="Azadi Ka Amrit Mahotsav" class="partner-img">
+      </div>
+
+      <!-- Swachh Bharat -->
+      <div class="partner-badge" title="Swachh Bharat - Clean India Mission">
+        <img src="images/swach-bharat.png" alt="Swachh Bharat" class="partner-img">
+      </div>
+
+      <!-- DigiCBSE -->
+      <div class="partner-badge" title="DigiCBSE">
+        <img src="images/digitalcbselogo.png" alt="DigiCBSE" class="partner-img">
+      </div>
+    </div>
+  </header><!-- END: main-header -->
+
+
+  <!-- ================================================================
+       MAIN NAVIGATION BAR
+       A horizontal menu. Each item can have a dropdown submenu.
+  ================================================================ -->
+  <!-- ================================================================
+       MAIN NAVIGATION BAR
+       Redesigned Streamlined 8-Item Information Architecture
+  ================================================================ -->
+  <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <ul class="nav-list" id="nav-list">
+      
+      <!-- 1. HOME -->
+      <li class="nav-item">
+        <a href="index.html" class="nav-link active" id="nav-home">HOME</a>
+      </li>
+
+      <!-- 2. ABOUT CBSE -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          ABOUT CBSE <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">About CBSE</a></li>
+          <li><a href="#">About the Board</a></li>
+          <li><a href="#">History &amp; CBSE@90</a></li>
+          <li><a href="#">Organogram</a></li>
+          <li><a href="#">Departments &amp; Heads</a></li>
+          <li><a href="#">Regional Offices</a></li>
+          <li><a href="#">COEs &amp; Heads</a></li>
+          <li><a href="#">Standards Followed</a></li>
+          <li><a href="#">Right to Information (RTI)</a></li>
+          <li><a href="#">Contact Information</a></li>
+        </ul>
+      </li>
+
+      <!-- 3. EXAMINATIONS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          EXAMINATIONS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Board Examinations</h4>
+            <ul>
+              <li><a href="#">Class X</a></li>
+              <li><a href="#">Class XII</a></li>
+              <li><a href="#">Examination Calendar</a></li>
+              <li><a href="#">Date Sheets</a></li>
+              <li><a href="#">Admit Cards</a></li>
+              <li><a href="#">Previous Year Papers</a></li>
+              <li><a href="#">Sample Question Papers</a></li>
+              <li><a href="#">Question Bank</a></li>
+              <li><a href="#">Marking Scheme</a></li>
+              <li><a href="#">Model Answers</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Examination Information</h4>
+            <ul>
+              <li><a href="#">Examination Bye-Laws</a></li>
+              <li><a href="#">Examination Policies</a></li>
+              <li><a href="#">Grading System</a></li>
+              <li><a href="#">Subjects Offered</a></li>
+              <li><a href="#">Registration / LOC</a></li>
+              <li><a href="#">PWD Candidates</a></li>
+              <li><a href="#">Shortage of Attendance</a></li>
+              <li><a href="#">Change of Subjects</a></li>
+              <li><a href="#">Direct Admission</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">After Examination</h4>
+            <ul>
+              <li><a href="#">Results</a></li>
+              <li><a href="#">Verification of Marks</a></li>
+              <li><a href="#">Photocopy of Answer Book</a></li>
+              <li><a href="#">Re-evaluation</a></li>
+              <li><a href="#">Improvement / Compartment</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 4. ACADEMICS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          ACADEMICS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Curriculum</h4>
+            <ul>
+              <li><a href="#">Curriculum Framework</a></li>
+              <li><a href="#">Syllabus</a></li>
+              <li><a href="#">Subjects Offered</a></li>
+              <li><a href="#">NCERT E-books</a></li>
+              <li><a href="#">Academic Publications</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Academic Resources</h4>
+            <ul>
+              <li><a href="#">Sample Question Papers (SQPs)</a></li>
+              <li><a href="#">Question Bank</a></li>
+              <li><a href="#">Marking Schemes</a></li>
+              <li><a href="#">Model Answers</a></li>
+              <li><a href="#">E-Resources Portal</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Skill &amp; Initiatives</h4>
+            <ul>
+              <li><a href="#">Skill Courses &amp; Subjects</a></li>
+              <li><a href="#">Skill Education Resources</a></li>
+              <li><a href="#">Academic Horizon Portal</a></li>
+              <li><a href="#">SAKSH Hub</a></li>
+              <li><a href="#">Other Academic Initiatives</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 5. STUDENTS & PARENTS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          STUDENTS &amp; PARENTS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Examinations</h4>
+            <ul>
+              <li><a href="#">Date Sheet</a></li>
+              <li><a href="#">Admit Card Download</a></li>
+              <li><a href="#">Exam Information</a></li>
+              <li><a href="#">Board Exam Results</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Study &amp; Support</h4>
+            <ul>
+              <li><a href="#">Sample Papers &amp; E-books</a></li>
+              <li><a href="#">Student Manuals</a></li>
+              <li><a href="#">Tele-Counseling &amp; Wellness</a></li>
+              <li><a href="#">Cyber Safety Resources</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Services &amp; Search</h4>
+            <ul>
+              <li><a href="#">Marksheet &amp; Verification</a></li>
+              <li><a href="#">Re-evaluation Portal</a></li>
+              <li><a href="#">Duplicate Documents (DADS)</a></li>
+              <li><a href="#">Search a CBSE School</a></li>
+              <li><a href="#">TAMANNA &amp; Fee Refund</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 6. SCHOOLS & EDUCATORS -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          SCHOOLS &amp; EDUCATORS <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Schools &amp; Affiliation</h4>
+            <ul>
+              <li><a href="#">School Management</a></li>
+              <li><a href="#">SARAS Affiliation Portal</a></li>
+              <li><a href="#">OASIS 5.0 System</a></li>
+              <li><a href="#">SQAA Quality Self Assessment</a></li>
+              <li><a href="#">International Schools</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Principals &amp; Teachers</h4>
+            <ul>
+              <li><a href="#">Principal Resources &amp; Annual Plan</a></li>
+              <li><a href="#">Expectations &amp; Framework</a></li>
+              <li><a href="#">Teacher Resources &amp; Manuals</a></li>
+              <li><a href="#">Teacher Qualification Rules</a></li>
+              <li><a href="#">National Teachers Awards</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Training &amp; Development</h4>
+            <ul>
+              <li><a href="#">Training &amp; Capacity Building</a></li>
+              <li><a href="#">Skill Education Training</a></li>
+              <li><a href="#">Continuous Professional Dev</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 7. NEWS & UPDATES -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          NEWS &amp; UPDATES <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Latest</h4>
+            <ul>
+              <li><a href="#">Latest @ CBSE</a></li>
+              <li><a href="#">Announcements</a></li>
+              <li><a href="#">Official Notifications</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Circulars</h4>
+            <ul>
+              <li><a href="#">Academic Circulars</a></li>
+              <li><a href="#">Affiliation Circulars</a></li>
+              <li><a href="#">Examination Circulars</a></li>
+              <li><a href="#">Finance Circulars</a></li>
+              <li><a href="#">Skill &amp; Training Circulars</a></li>
+              <li><a href="#">Miscellaneous Circulars</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Media &amp; PR</h4>
+            <ul>
+              <li><a href="#">Press Releases &amp; Notes</a></li>
+              <li><a href="#">Media &amp; PR Wing</a></li>
+              <li><a href="#">Photo &amp; Video Gallery</a></li>
+              <li><a href="#">Social Media Channels</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 8. SERVICES -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          SERVICES <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown">
+          <div class="mega-column">
+            <h4 class="mega-heading">Documents</h4>
+            <ul>
+              <li><a href="#">Duplicate Academic Documents (DADS)</a></li>
+              <li><a href="#">DigiLocker Digital Certificates</a></li>
+              <li><a href="#">Correction in Particulars</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Post-Result Services</h4>
+            <ul>
+              <li><a href="#">Verification of Marks</a></li>
+              <li><a href="#">Photocopy of Answer Book</a></li>
+              <li><a href="#">Re-evaluation Portal</a></li>
+            </ul>
+          </div>
+          <div class="mega-column">
+            <h4 class="mega-heading">Online Portals</h4>
+            <ul>
+              <li><a href="#">Parinam Manjusha</a></li>
+              <li><a href="#">OECMS Operational Portal</a></li>
+              <li><a href="#">Search a CBSE School</a></li>
+              <li><a href="#">Affiliation Services</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- 9. HELP & CONTACT -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link" aria-haspopup="true">
+          HELP &amp; CONTACT <i class="fas fa-chevron-down nav-chevron" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Help Manual</a></li>
+          <li><a href="#">Find the Right Service</a></li>
+          <li><a href="#">Accessibility &amp; Listen</a></li>
+          <li><a href="#">Screen Reader Access</a></li>
+          <li><a href="#">Regional Offices Directory</a></li>
+          <li><a href="#">Contact CBSE</a></li>
+          <li><a href="#">Grievance Redressal / Support</a></li>
+          <li><a href="#">Right to Information (RTI)</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </nav><!-- END: main-nav -->
+
+
+  <!-- ================================================================
+       SITEMAP BAR
+       A thin bar just below the navigation. SITEMAP is right-aligned.
+  ================================================================ -->
+  <div class="sitemap-bar">
+    <a href="sitemap.html" class="sitemap-link">SITEMAP</a>
+  </div>
+
+
+  <!-- ================================================================
+       HERO & LATEST @ CBSE SECTION
+       Placed right after the Sitemap Bar.
+  ================================================================ -->
+  <main class="hero-updates-section" id="main-content" role="main">
+    <div class="hero-updates-container">
+
+      <!-- LEFT: Hero Banner Card with Fluid Sliding Carousel -->
+      <div class="hero-card" id="heroCard">
+        <div class="hero-slider-track" id="heroSliderTrack">
+          <!-- Slide 0: Cyber Crime -->
+          <div class="hero-slide-item">
+            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/Cyber_crime.JPG" alt="Cyber Crime Reporting Portal"
+                class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 1: NCW Women Helpline -->
+          <div class="hero-slide-item">
+            <a href="https://www.ncwwomenhelpline.in" target="_blank" rel="noopener" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/ncw_banner.jpg" alt="NCW Women Helpline"
+                class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 2: SAFAL Banner -->
+          <div class="hero-slide-item">
+            <a href="https://www.cbse.gov.in/cbsenew/documents//safal_video.mp4" target="_blank" rel="noopener"
+              class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/header/SAFAL%20Banner%20.jpg"
+                alt="SAFAL Assessment Framework" class="hero-slide-img">
+            </a>
+          </div>
+          <!-- Slide 3: Main Academic Banner -->
+          <div class="hero-slide-item">
+            <a href="#" class="hero-slide-link">
+              <img src="https://www.cbse.gov.in/cbsenew/images/banner_Main_08052025.jpg" alt="CBSE Academic Initiatives"
+                class="hero-slide-img">
+            </a>
+          </div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="hero-carousel-controls">
+          <button class="carousel-arrow" id="carousel-prev" onclick="prevSlide()" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-dots">
+            <span class="dot active" onclick="setSlide(0)"></span>
+            <span class="dot" onclick="setSlide(1)"></span>
+            <span class="dot" onclick="setSlide(2)"></span>
+            <span class="dot" onclick="setSlide(3)"></span>
+          </div>
+          <button class="carousel-arrow" id="carousel-next" onclick="nextSlide()" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Latest @ CBSE Card -->
+      <div class="updates-card">
+        <div class="updates-header">
+          <h3 class="updates-title">Latest @ CBSE</h3>
+          <a href="#" class="updates-view-all">View All</a>
+        </div>
+
+        <ul class="updates-list">
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">CTET July 2026 – Information Bulletin</a>
+              <span class="update-date">16 May 2026</span>
+            </div>
+            <span class="update-badge badge-blue">Examinations</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Post Result Services for Class X &amp; XII – 2026</a>
+              <span class="update-date">15 May 2026</span>
+            </div>
+            <span class="update-badge badge-green">Results</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Supplementary Result Class X &amp; XII – 2026</a>
+              <span class="update-date">14 May 2026</span>
+            </div>
+            <span class="update-badge badge-green">Results</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Recruitment Notice – KVS (Various Posts)</a>
+              <span class="update-date">13 May 2026</span>
+            </div>
+            <span class="update-badge badge-purple">Careers</span>
+          </li>
+
+          <li class="update-item">
+            <div class="update-icon-wrap">
+              <i class="far fa-file-alt update-icon"></i>
+            </div>
+            <div class="update-info">
+              <a href="#" class="update-link">Curriculum Resources: Secondary Stage</a>
+              <span class="update-date">12 May 2026</span>
+            </div>
+            <span class="update-badge badge-orange">Academics</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================================================================
+       WHAT ARE YOU LOOKING FOR? (PERSONA CARDS SECTION)
+       Infinite auto-scrolling marquee with CBSE portal cards
+  ================================================================ -->
+  <section class="persona-section">
+    <div class="persona-container">
+
+      <!-- Section Header with Navigation Arrows -->
+      <div class="persona-header">
+        <div class="persona-header-text">
+          <h2 class="persona-title">What are you looking for?</h2>
+          <p class="persona-subtitle">Select the option that best describes you to find relevant information and
+            services.</p>
+        </div>
+        <div class="persona-nav-controls">
+          <button class="persona-nav-btn" id="personaPrevBtn" aria-label="Scroll left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="persona-nav-btn" id="personaNextBtn" aria-label="Scroll right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Infinite Marquee Reel for CBSE Portal Cards -->
+      <div class="persona-marquee-wrapper">
+        <div class="persona-marquee-track">
+
+          <!-- Card 1: RAJBHASHA HINDI -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//rajbhasha.JPG" alt="RAJBHASHA HINDI">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RAJBHASHA HINDI</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 2: VERIFICATION PROCESS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Verification_10062026.JPG" alt="VERIFICATION PROCESS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">VERIFICATION PROCESS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 3: PRIVATE CANDIDATE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//Private_Main.JPG" alt="PRIVATE CANDIDATE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRIVATE CANDIDATE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 4: CBSE EMPLOYEE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Pension_Window_12062025.JPG" alt="CBSE EMPLOYEE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE EMPLOYEE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG"
+                alt="NATIONAL TEACHERS AWARDS 2026">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 6: OASIS 5.0 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/OASIS_5.JPG" alt="OASIS 5.0">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">OASIS 5.0</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 7: CBSE SPORTS SYSTEM (CSS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//CSS_23082023.JPG" alt="CBSE SPORTS SYSTEM (CSS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE SPORTS SYSTEM (CSS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 8: SCHOOL AS KNOWLEDGE & SKILL HUB | SAKSH -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//skill.jpg" alt="SCHOOL AS KNOWLEDGE &amp; SKILL HUB">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL AS KNOWLEDGE &amp; SKILL HUB | SAKSH</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 9: RECRUITMENT -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//recr.png" alt="RECRUITMENT">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RECRUITMENT</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 10: SCHOLARSHIP -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//scholarship1.png" alt="SCHOLARSHIP">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOLARSHIP</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 11: PARINAM MANJUSHA -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parinam_small.png" alt="PARINAM MANJUSHA">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PARINAM MANJUSHA</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png"
+                alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 13: BOARD'S CIRCULARS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/course4.jpg" alt="BOARD'S CIRCULARS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD'S CIRCULARS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 14: BOARD EXAMINATIONS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/b-e(1).png" alt="BOARD EXAMINATIONS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD EXAMINATIONS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 15: CTET -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/ctet1.jpg" alt="CTET">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CTET</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 16: PROFESSIONAL EXAMS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pro_exams.png" alt="PROFESSIONAL EXAMS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PROFESSIONAL EXAMS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 17: SKILL COURSES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/management.jpg" alt="SKILL COURSES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SKILL COURSES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 18: RESULTS & STATISTICS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/result.jpg" alt="RESULTS &amp; STATISTICS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RESULTS &amp; STATISTICS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 19: PUBLIC SERVICES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pubserv.jpg" alt="PUBLIC SERVICES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PUBLIC SERVICES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 20: EXTERNAL LINKS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//external.png" alt="EXTERNAL LINKS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">EXTERNAL LINKS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 21: ADMIN & LEGAL WING -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/adminleagal.jpg" alt="ADMIN &amp; LEGAL WING">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">ADMIN &amp; LEGAL WING</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 22: SCHOOL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//classroom.png" alt="SCHOOL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 23: PRINCIPAL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//pr.jpg" alt="PRINCIPAL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRINCIPAL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 24: TEACHERS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//teacher.jpg" alt="TEACHERS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">TEACHERS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 25: STUDENTS & PARENTS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parents.jpg" alt="STUDENTS &amp; PARENTS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">STUDENTS &amp; PARENTS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+
+          <!-- DUPLICATE SET FOR CONTINUOUS INFINITE MARQUEE LOOP -->
+
+          <!-- Card 1: RAJBHASHA HINDI -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//rajbhasha.JPG" alt="RAJBHASHA HINDI">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RAJBHASHA HINDI</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 2: VERIFICATION PROCESS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Verification_10062026.JPG" alt="VERIFICATION PROCESS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">VERIFICATION PROCESS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 3: PRIVATE CANDIDATE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//Private_Main.JPG" alt="PRIVATE CANDIDATE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRIVATE CANDIDATE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 4: CBSE EMPLOYEE -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/Pension_Window_12062025.JPG" alt="CBSE EMPLOYEE">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE EMPLOYEE</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 5: NATIONAL TEACHERS AWARDS 2026 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//Teacher_Award_2025.JPG"
+                alt="NATIONAL TEACHERS AWARDS 2026">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">NATIONAL TEACHERS AWARDS 2026</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 6: OASIS 5.0 -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1/OASIS_5.JPG" alt="OASIS 5.0">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">OASIS 5.0</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 7: CBSE SPORTS SYSTEM (CSS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//CSS_23082023.JPG" alt="CBSE SPORTS SYSTEM (CSS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CBSE SPORTS SYSTEM (CSS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 8: SCHOOL AS KNOWLEDGE & SKILL HUB | SAKSH -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//skill.jpg" alt="SCHOOL AS KNOWLEDGE &amp; SKILL HUB">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL AS KNOWLEDGE &amp; SKILL HUB | SAKSH</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 9: RECRUITMENT -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img1//recr.png" alt="RECRUITMENT">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RECRUITMENT</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 10: SCHOLARSHIP -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//scholarship1.png" alt="SCHOLARSHIP">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOLARSHIP</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 11: PARINAM MANJUSHA -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parinam_small.png" alt="PARINAM MANJUSHA">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PARINAM MANJUSHA</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 12: DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS) -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/dupexam.png"
+                alt="DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">DUPLICATE ACADEMIC DOCUMENT SYSTEM (DADS)</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 13: BOARD'S CIRCULARS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/course4.jpg" alt="BOARD'S CIRCULARS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD'S CIRCULARS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 14: BOARD EXAMINATIONS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/b-e(1).png" alt="BOARD EXAMINATIONS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">BOARD EXAMINATIONS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 15: CTET -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/ctet1.jpg" alt="CTET">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">CTET</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 16: PROFESSIONAL EXAMS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pro_exams.png" alt="PROFESSIONAL EXAMS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PROFESSIONAL EXAMS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 17: SKILL COURSES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/management.jpg" alt="SKILL COURSES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SKILL COURSES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 18: RESULTS & STATISTICS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/result.jpg" alt="RESULTS &amp; STATISTICS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">RESULTS &amp; STATISTICS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 19: PUBLIC SERVICES -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/pubserv.jpg" alt="PUBLIC SERVICES">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PUBLIC SERVICES</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 20: EXTERNAL LINKS -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//external.png" alt="EXTERNAL LINKS">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">EXTERNAL LINKS</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 21: ADMIN & LEGAL WING -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img/adminleagal.jpg" alt="ADMIN &amp; LEGAL WING">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">ADMIN &amp; LEGAL WING</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 22: SCHOOL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//classroom.png" alt="SCHOOL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">SCHOOL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 23: PRINCIPAL CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//pr.jpg" alt="PRINCIPAL CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">PRINCIPAL CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 24: TEACHERS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//teacher.jpg" alt="TEACHERS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">TEACHERS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+          <!-- Card 25: STUDENTS & PARENTS CORNER -->
+          <a href="#" class="cbse-portal-card">
+            <div class="portal-card-banner">
+              <img src="https://www.cbse.gov.in/cbsenew/img//parents.jpg" alt="STUDENTS &amp; PARENTS CORNER">
+            </div>
+            <div class="portal-card-footer">
+              <span class="portal-card-title">STUDENTS &amp; PARENTS CORNER</span>
+              <i class="fas fa-chevron-down portal-chevron"></i>
+            </div>
+          </a>
+
+        </div>
+      </div>
+  </section>
+
+  <!-- ================================================================
+       CBSE TODAY SECTION
+       Three themed update cards: Latest Circulars, Examination Updates, News & Announcements
+  ================================================================ -->
+  <section class="cbse-today-section" id="cbse-today">
+    <div class="cbse-today-container">
+      
+      <!-- Section Header with Lines -->
+      <div class="cbse-today-header">
+        <div class="cbse-today-title-wrap">
+          <span class="cbse-today-line"></span>
+          <h2 class="cbse-today-title">CBSE Today</h2>
+          <span class="cbse-today-line"></span>
+        </div>
+        <p class="cbse-today-subtitle">Stay updated with the latest information from CBSE.</p>
+      </div>
+
+      <!-- 3-Column Updates Grid -->
+      <div class="cbse-today-grid">
+        
+        <!-- CARD 1: LATEST CIRCULARS (GREEN THEME) -->
+        <div class="cbse-update-card theme-green">
+          <div class="update-card-header">
+            <div class="update-card-title-box">
+              <div class="update-icon-wrap icon-green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <h3 class="update-card-title">Latest Circulars</h3>
+            </div>
+            <a href="#" class="update-header-link link-green">View All</a>
+          </div>
+
+          <ul class="update-list">
+            <li>
+              <span class="update-date date-green"><span class="date-bullet bullet-green"></span> 26 Aug 2026</span>
+              <a href="#" class="update-item-title">Academic Circular – 2026</a>
+            </li>
+            <li>
+              <span class="update-date date-green"><span class="date-bullet bullet-green"></span> 24 Aug 2026</span>
+              <a href="#" class="update-item-title">School Circular – 2026</a>
+            </li>
+            <li>
+              <span class="update-date date-green"><span class="date-bullet bullet-green"></span> 21 Aug 2026</span>
+              <a href="#" class="update-item-title">Training Circular – 2026</a>
+            </li>
+            <li>
+              <span class="update-date date-green"><span class="date-bullet bullet-green"></span> 19 Aug 2026</span>
+              <a href="#" class="update-item-title">Affiliation Circular – 2026</a>
+            </li>
+          </ul>
+
+          <div class="update-card-footer">
+            <a href="#" class="update-footer-btn btn-green">View All Circulars &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 2: EXAMINATION UPDATES (BLUE THEME) -->
+        <div class="cbse-update-card theme-blue">
+          <div class="update-card-header">
+            <div class="update-card-title-box">
+              <div class="update-icon-wrap icon-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                  <polyline points="9 16 11 18 15 14"></polyline>
+                </svg>
+              </div>
+              <h3 class="update-card-title">Examination Updates</h3>
+            </div>
+            <a href="#" class="update-header-link link-blue">View All</a>
+          </div>
+
+          <ul class="update-list">
+            <li>
+              <span class="update-date date-blue">26 Aug 2026</span>
+              <a href="#" class="update-item-title">Result Update – Class X &amp; XII</a>
+            </li>
+            <li>
+              <span class="update-date date-blue">23 Aug 2026</span>
+              <a href="#" class="update-item-title">Examination Notice – 2026</a>
+            </li>
+            <li>
+              <span class="update-date date-blue">20 Aug 2026</span>
+              <a href="#" class="update-item-title">Date Sheet Update</a>
+            </li>
+            <li>
+              <span class="update-date date-blue">18 Aug 2026</span>
+              <a href="#" class="update-item-title">Admit Card – Important Notice</a>
+            </li>
+          </ul>
+
+          <div class="update-card-footer">
+            <a href="#" class="update-footer-btn btn-blue">View All Exam Updates &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 3: NEWS & ANNOUNCEMENTS (PURPLE THEME) -->
+        <div class="cbse-update-card theme-purple">
+          <div class="update-card-header">
+            <div class="update-card-title-box">
+              <div class="update-icon-wrap icon-purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v9a2 2 0 0 1-2 2z"></path>
+                  <path d="M14 2v6h6"></path>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <line x1="10" y1="9" x2="8" y2="9"></line>
+                </svg>
+              </div>
+              <h3 class="update-card-title">News &amp; Announcements</h3>
+            </div>
+            <a href="#" class="update-header-link link-purple">View All</a>
+          </div>
+
+          <ul class="update-list">
+            <li>
+              <span class="update-date date-purple">25 Aug 2026</span>
+              <a href="#" class="update-item-title">CBSE Press Release</a>
+            </li>
+            <li>
+              <span class="update-date date-purple">22 Aug 2026</span>
+              <a href="#" class="update-item-title">Important Announcement</a>
+            </li>
+            <li>
+              <span class="update-date date-purple">19 Aug 2026</span>
+              <a href="#" class="update-item-title">CBSE Notice</a>
+            </li>
+            <li>
+              <span class="update-date date-purple">17 Aug 2026</span>
+              <a href="#" class="update-item-title">Media Update</a>
+            </li>
+          </ul>
+
+          <div class="update-card-footer">
+            <a href="#" class="update-footer-btn btn-purple">View All News &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================
+       IMPORTANT DATES SECTION
+       Horizontal timeline widget placed right before Featured Resources.
+  ================================================================ -->
+  <section class="important-dates-section" id="important-dates">
+    <div class="important-dates-container">
+      
+      <div class="dates-card-wrap">
+        
+        <!-- Header: Title + Calendar Action Link -->
+        <div class="dates-card-header">
+          <h2 class="dates-card-title">Important Dates</h2>
+          <a href="#" class="dates-calendar-link">
+            View Full Calendar
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Horizontal Timeline Items Track -->
+        <div class="dates-timeline-grid">
+
+          <!-- Item 1 (Green) -->
+          <div class="timeline-step">
+            <div class="date-badge badge-green">
+              <div class="badge-top">28</div>
+              <div class="badge-bottom">08 AUG 2026</div>
+            </div>
+            <div class="step-info">
+              <h3 class="step-title">Post Result Services<br>(Class X &amp; XII)</h3>
+              <p class="step-subtitle">Last date to apply for post result services.</p>
+            </div>
+          </div>
+
+          <div class="timeline-connector">
+            <span class="connector-dot"></span>
+          </div>
+
+          <!-- Item 2 (Blue) -->
+          <div class="timeline-step">
+            <div class="date-badge badge-blue">
+              <div class="badge-top">05</div>
+              <div class="badge-bottom">05 SEP 2026</div>
+            </div>
+            <div class="step-info">
+              <h3 class="step-title">Compartment Examination<br>(Class X &amp; XII)</h3>
+              <p class="step-subtitle">Form submission starts from this date.</p>
+            </div>
+          </div>
+
+          <div class="timeline-connector">
+            <span class="connector-dot"></span>
+          </div>
+
+          <!-- Item 3 (Orange) -->
+          <div class="timeline-step">
+            <div class="date-badge badge-orange">
+              <div class="badge-top">12</div>
+              <div class="badge-bottom">12 SEP 2026</div>
+            </div>
+            <div class="step-info">
+              <h3 class="step-title">Improvement Examination<br>(Class XII)</h3>
+              <p class="step-subtitle">Form submission starts from this date.</p>
+            </div>
+          </div>
+
+          <div class="timeline-connector">
+            <span class="connector-dot"></span>
+          </div>
+
+          <!-- Item 4 (Purple) -->
+          <div class="timeline-step">
+            <div class="date-badge badge-purple">
+              <div class="badge-top">18</div>
+              <div class="badge-bottom">18 SEP 2026</div>
+            </div>
+            <div class="step-info">
+              <h3 class="step-title">Other Important Update</h3>
+              <p class="step-subtitle">Details will be announced soon.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FEATURED RESOURCES SECTION
+       Placed right after the "What are you looking for?" section.
+  ================================================================ -->
+  <section class="featured-resources-section" id="featured-resources">
+    <div class="featured-resources-container">
+      <h2 class="featured-resources-title">Featured Resources</h2>
+
+      <div class="featured-resources-grid">
+
+        <!-- Card 1: DigiLocker Academic Documents -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="12" y1="8" x2="12" y2="14"/>
+                <line x1="9" y1="11" x2="15" y2="11"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">DigiLocker<br>Academic Documents</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 2: CBSE Academic Repository -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="14" r="2"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">CBSE Academic<br>Repository</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 3: Forms & Downloads -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Forms &amp;<br>Downloads</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 4: Regional Offices -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Regional<br>Offices</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 5: Locate a School (Where I Belong) -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Locate a School<br>(Where I Belong)</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+        <!-- Card 6: Citizen Reader & RTI -->
+        <a href="#" class="featured-resource-card">
+          <div class="resource-card-left">
+            <div class="resource-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="9" y1="12" x2="15" y2="12"/>
+                <line x1="12" y1="9" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <span class="resource-card-text">Citizen Reader<br>&amp; RTI</span>
+          </div>
+          <i class="fas fa-chevron-right resource-arrow"></i>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer" id="main-footer" role="contentinfo">
+
+    <!--
+      Decorative silhouette background (children, tree, swing, dog).
+      aria-hidden="true" tells screen readers to skip this — it's only visual.
+      This SVG is positioned behind the footer text using CSS (position:absolute).
+    -->
+    <div class="footer-silhouette-wrap" aria-hidden="true">
+      <svg class="footer-sil-svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax meet"
+        xmlns="http://www.w3.org/2000/svg">
+        <!-- BIG TREE (left side) -->
+        <ellipse cx="230" cy="105" rx="72" ry="88" fill="#263238" opacity="0.5" />
+        <ellipse cx="265" cy="90" rx="50" ry="62" fill="#263238" opacity="0.4" />
+        <rect x="220" y="155" width="18" height="55" fill="#263238" opacity="0.5" />
+        <!-- PERSON 1: elderly walking with stick -->
+        <circle cx="105" cy="98" r="12" fill="#263238" opacity="0.55" />
+        <rect x="99" y="110" width="12" height="30" fill="#263238" opacity="0.55" />
+        <line x1="99" y1="122" x2="88" y2="140" stroke="#263238" stroke-width="4.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="111" y1="122" x2="105" y2="140" stroke="#263238" stroke-width="4.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="89" y1="113" x2="77" y2="142" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- PERSON 2: running child -->
+        <circle cx="420" cy="104" r="10" fill="#263238" opacity="0.55" />
+        <rect x="415" y="114" width="10" height="26" fill="#263238" opacity="0.55" />
+        <line x1="415" y1="124" x2="403" y2="140" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="425" y1="124" x2="435" y2="138" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- DOG -->
+        <ellipse cx="530" cy="148" rx="23" ry="11" fill="#263238" opacity="0.5" />
+        <circle cx="550" cy="137" r="10" fill="#263238" opacity="0.5" />
+        <path d="M507,143 Q498,126 507,120" fill="none" stroke="#263238" stroke-width="4.5" opacity="0.5"
+          stroke-linecap="round" />
+        <ellipse cx="556" cy="130" rx="5" ry="9" fill="#263238" opacity="0.5" transform="rotate(30,556,130)" />
+        <!-- PERSON 3: child with arms raised -->
+        <circle cx="660" cy="100" r="10" fill="#263238" opacity="0.55" />
+        <rect x="655" y="110" width="10" height="27" fill="#263238" opacity="0.55" />
+        <line x1="655" y1="118" x2="641" y2="106" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="665" y1="118" x2="679" y2="106" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="657" y1="137" x2="650" y2="155" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="663" y1="137" x2="671" y2="155" stroke="#263238" stroke-width="4" opacity="0.55"
+          stroke-linecap="round" />
+        <!-- SWING SET (right side) -->
+        <line x1="1090" y1="45" x2="1090" y2="148" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1210" y1="45" x2="1210" y2="148" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1085" y1="46" x2="1215" y2="46" stroke="#263238" stroke-width="7" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1118" y1="46" x2="1123" y2="112" stroke="#263238" stroke-width="3" opacity="0.55" />
+        <line x1="1162" y1="46" x2="1157" y2="112" stroke="#263238" stroke-width="3" opacity="0.55" />
+        <rect x="1123" y="110" width="34" height="6" rx="3" fill="#263238" opacity="0.55" />
+        <circle cx="1140" cy="98" r="10" fill="#263238" opacity="0.55" />
+        <!-- PERSON 4: child flying a kite -->
+        <circle cx="1350" cy="106" r="10" fill="#263238" opacity="0.55" />
+        <rect x="1345" y="116" width="10" height="26" fill="#263238" opacity="0.55" />
+        <line x1="1355" y1="120" x2="1370" y2="107" stroke="#263238" stroke-width="3.5" opacity="0.55"
+          stroke-linecap="round" />
+        <line x1="1370" y1="107" x2="1400" y2="58" stroke="#263238" stroke-width="1.5" opacity="0.45" />
+        <polygon points="1400,42 1414,58 1400,74 1386,58" fill="#263238" opacity="0.5" />
+      </svg>
+    </div>
+
+    <!-- 4-column footer content grid -->
+    <div class="footer-grid">
+
+      <!-- COLUMN 1: MEDIA LINKS -->
+      <div class="footer-col" id="footer-col-media">
+        <h3 class="footer-col-heading">MEDIA</h3>
+        <ul class="footer-link-list">
+          <li>
+            <a href="#" class="footer-link">
+              <i class="fas fa-newspaper footer-li-icon" aria-hidden="true"></i>
+              Press Notes
+            </a>
+          </li>
+          <li>
+            <a href="https://facebook.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-facebook-f footer-li-icon" aria-hidden="true"></i>
+              Facebook
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/cbseindia29" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-twitter footer-li-icon" aria-hidden="true"></i>
+              Twitter
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/cbse.hq" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-instagram footer-li-icon" aria-hidden="true"></i>
+              Instagram
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-link">
+              <i class="fab fa-youtube footer-li-icon" aria-hidden="true"></i>
+              Youtube
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 2: CONTACT INFO -->
+      <div class="footer-col" id="footer-col-contact">
+        <h3 class="footer-col-heading">CONTACT</h3>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-map-marker-alt footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Address :</strong> CBSE Integrated Office Complex<br>
+            Sector-23, Phase - 1, Dwarka New Delhi - 110077
+          </p>
+        </div>
+
+        <div class="footer-contact-row">
+          <i class="fas fa-phone footer-contact-icon" aria-hidden="true"></i>
+          <p>
+            <strong>Tel:</strong> 011-24050336, 011-24050337,
+            011-24050338, 011-24050339, 011-24050340,
+            011-24050341, 011-24050342
+          </p>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: USEFUL LINKS -->
+      <div class="footer-col" id="footer-col-useful">
+        <h3 class="footer-col-heading">USEFUL LINKS</h3>
+        <ul class="footer-link-list">
+          <li><a href="sitemap.html" class="footer-link">Website Sitemap</a></li>
+          <li><a href="#" class="footer-link">Statistics Of Result</a></li>
+          <li><a href="#" class="footer-link">Recruitment</a></li>
+          <li><a href="#" class="footer-link">Web Information Manager</a></li>
+          <li><a href="#" class="footer-link">Gallery</a></li>
+          <li>
+            <a href="https://goidirectory.gov.in" target="_blank" rel="noopener" class="footer-link">
+              GOI Directory
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.india.gov.in" target="_blank" rel="noopener" class="footer-link">
+              India Portal
+              <i class="fas fa-external-link-alt footer-ext-icon" title="opens in new tab"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer-link">
+              Website Policy
+              <i class="fas fa-file-pdf footer-ext-icon" aria-hidden="true"></i>
+              (336 KB)
+            </a>
+          </li>
+          <li><a href="#" class="footer-link">Help</a></li>
+          <li><a href="#" class="footer-link">Feedback</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 4: LIVE CLOCK + CERTIFICATE + LAST UPDATED -->
+      <div class="footer-col" id="footer-col-info">
+
+        <!--
+          Live Clock: shows the current time.
+          id="clock-display" is used by script.js to update it every second.
+          aria-live="polite" announces time changes to screen readers.
+        -->
+        <div class="footer-clock" id="footer-clock" aria-live="polite">
+          <span id="clock-display">00:00:00 AM</span>
+        </div>
+
+        <!-- IGBC Certificate badge -->
+        <div class="cert-section">
+          <p class="cert-label">IGBC Certificate (Platinum)</p>
+          <!-- This circular badge is styled with CSS -->
+          <div class="cqw-badge" title="IGBC Green Building - Platinum Rating">
+            <span class="cqw-text">CQW</span>
+          </div>
+        </div>
+
+        <!-- Date of last update -->
+        <div class="last-updated-box">
+          <p class="last-updated-text">
+            Last Updated On 07 July 2026 - 05:00 PM
+          </p>
+        </div>
+
+      </div><!-- END: column 4 -->
+
+    </div><!-- END: footer-grid -->
+
+    <!-- Bottom copyright strip inside the footer -->
+    <div class="copyright-strip">
+      <!-- &#169; is the HTML code for the © symbol -->
+      <p class="copyright-text">&#169; Copyright CBSE</p>
+    </div>
+
+  </footer><!-- END: main-footer -->
+
+
+  <!-- ================================================================
+       CBSE AI ASSISTANT CHATBOT WIDGET
+       Floating widget at the bottom right corner of the page
+  ================================================================ -->
+  <div class="chatbot-widget" id="cbseChatbotWidget">
+
+    <!-- Floating Trigger Button -->
+    <button class="chatbot-trigger-btn" id="chatbotTriggerBtn" aria-label="Open CBSE Helpdesk Chatbot">
+      <i class="fas fa-comments chatbot-icon-open"></i>
+      <i class="fas fa-times chatbot-icon-close"></i>
+      <span class="chatbot-badge-dot"></span>
+    </button>
+
+    <!-- Chat Popup Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+      <!-- Chat Header -->
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <div class="chatbot-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h3 class="chatbot-title">CBSE AI Assistant</h3>
+            <span class="chatbot-status"><span class="status-dot"></span> Online | Official Support</span>
+          </div>
+        </div>
+        <button class="chatbot-close-btn" id="chatbotCloseBtn" aria-label="Close Chatbot">&times;</button>
+      </div>
+
+      <!-- Chat Messages Body -->
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="chat-message bot-message">
+          <div class="message-content">
+            <p>Namaste! 🙏 Welcome to CBSE Official Helpdesk.</p>
+            <p>How can I assist you today?</p>
+          </div>
+        </div>
+
+        <!-- Quick Action Suggestion Chips -->
+        <div class="chat-quick-chips" id="chatQuickChips">
+          <button class="chip-btn" onclick="sendQuickMessage('Board Exam Results')">📊 Exam Results</button>
+          <button class="chip-btn" onclick="sendQuickMessage('CTET 2026')">📝 CTET 2026</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Download Admit Card')">🎟️ Admit Cards</button>
+          <button class="chip-btn" onclick="sendQuickMessage('Verification Process')">🔍 Verification</button>
+        </div>
+      </div>
+
+      <!-- Chat Input Footer -->
+      <div class="chatbot-footer">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your question here..." />
+        <button class="chatbot-send-btn" id="chatbotSendBtn" aria-label="Send Message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--
+    Script tag at the END of <body> (not in <head>).
+    WHY? The browser reads HTML top-to-bottom.
+    If the script is in <head>, it runs BEFORE the HTML elements exist,
+    so JavaScript can't find them. Placing it here means all elements
+    are already loaded when the script runs.
+  -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,2544 @@
+/* ================================================================
+   styles.css - CBSE Website Clone Stylesheet
+   ================================================================
+   CSS = Cascading Style Sheets.
+   This file controls HOW everything LOOKS: colors, sizes, layout.
+
+   HOW CSS WORKS:
+     selector { property: value; }
+     Example: .nav-link { color: red; font-size: 14px; }
+     The selector picks HTML elements, the properties style them.
+
+   CONTENTS OF THIS FILE:
+     1.  CSS Variables        -- reusable color/size values
+     2.  Reset & Base         -- removes browser default styles
+     3.  Top Utility Bar      -- thin strip at the very top
+     4.  Main Header          -- CBSE logo + partner logos
+     5.  Navigation Bar       -- horizontal menu
+     6.  Dropdown Menus       -- submenus that appear on hover
+     7.  Sitemap Bar          -- thin bar below nav
+     8.  Search Section       -- the main search area
+     9.  Footer               -- dark bottom section
+     10. Copyright Strip      -- very bottom strip
+     11. Accessibility        -- high-contrast & font-size classes
+================================================================ */
+
+
+/* ================================================================
+   1. CSS VARIABLES (Custom Properties)
+   Variables let you define a value once and reuse it everywhere.
+   If you change --teal-primary, the new color applies everywhere!
+
+   Syntax:  --variable-name: value;
+   Usage:   color: var(--variable-name);
+================================================================ */
+:root {
+  /* ---- PRIMARY COLORS ---- */
+  --teal-primary:    #2ea2c7;   /* Main teal/blue -- nav, buttons, links    */
+  --teal-dark:       #1a8ab0;   /* Darker teal for hover states             */
+  --teal-search-bar: #3ab3cd;   /* Slightly lighter teal for search bar     */
+
+  /* ---- LAYOUT COLORS ---- */
+  --top-bar-bg:      #f5f5f5;   /* Very light grey -- top utility bar       */
+  --header-bg:       #ffffff;   /* White -- main header                     */
+  --nav-bg:          #ffffff;   /* White -- navigation bar                  */
+  --sitemap-bg:      #f7f7f7;   /* Near-white -- sitemap bar                */
+  --search-bg:       #f7fafc;   /* Soft slate tint matching persona section */
+  --search-card-bg:  #ffffff;   /* Clean white search card */
+
+  /* ---- FOOTER COLORS ---- */
+  --footer-bg:       #3b4b51;   /* Dark slate grey -- main footer           */
+  --copyright-bg:    #202a2d;   /* Very dark -- copyright strip             */
+
+  /* ---- TEXT COLORS ---- */
+  --text-dark:       #333333;   /* Dark grey for most text                  */
+  --text-medium:     #555555;   /* Medium grey for secondary text           */
+  --text-light:      #cccccc;   /* Light grey for footer text               */
+  --text-white:      #ffffff;   /* Pure white                               */
+
+  /* ---- BORDER & SHADOW ---- */
+  --border-light:    #dddddd;   /* Light border color                       */
+  --shadow-sm:       0 2px 8px rgba(0, 0, 0, 0.10); /* Small drop shadow   */
+  --shadow-md:       0 4px 16px rgba(0, 0, 0, 0.15); /* Medium drop shadow  */
+
+  /* ---- TYPOGRAPHY ---- */
+  --font-main:       'Plus Jakarta Sans', 'Hanken Grotesk', 'Open Sans', Arial, sans-serif; /* High-legibility modern font stack */
+  --font-base:       16px;      /* Enhanced base font size for maximum legibility */
+}
+
+
+/* ================================================================
+   2. RESET & BASE STYLES
+   Different browsers apply different default styles (margins, padding,
+   box-sizing). This "reset" removes them so our page looks consistent
+   everywhere.
+================================================================ */
+
+/* The * selector means "apply to EVERY element on the page" */
+*,
+*::before,
+*::after {
+  margin: 0;             /* Remove default outer spacing             */
+  padding: 0;            /* Remove default inner spacing             */
+  /*
+    box-sizing: border-box
+    By default, padding ADDS to an element's width (confusing!).
+    border-box makes padding included in the width — much easier to use.
+    Example: a 200px box with 10px padding is still 200px wide total.
+  */
+  box-sizing: border-box;
+}
+
+/* Base styles for the whole page */
+html {
+  font-size: var(--font-base);  /* Sets the default text size to 14px */
+  scroll-behavior: smooth;       /* Smooth scrolling when clicking anchor links */
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  line-height: 1.5;               /* Space between lines of text */
+  background-color: var(--header-bg);
+}
+
+/* Remove underline & color from all <a> tags by default */
+a {
+  text-decoration: none;
+  color: inherit;                 /* Inherit color from parent element */
+}
+
+/* Remove bullet points from all <ul> lists */
+ul {
+  list-style: none;
+}
+
+/* Make images never overflow their container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ================================================================
+   3. TOP UTILITY BAR
+   The very thin bar at the top.
+   Uses Flexbox to place left group and right group on opposite ends.
+
+   FLEXBOX QUICK GUIDE:
+     display: flex         -- turns container into a flex layout
+     align-items: center   -- vertically center children
+     justify-content: ...  -- horizontal alignment of children
+     gap: 10px             -- space between children
+================================================================ */
+.top-bar {
+  background-color: var(--top-bar-bg);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* Left group LEFT, right group RIGHT */
+  padding: 8px 20px;
+  font-size: 13.5px;
+  min-height: 42px;
+}
+
+/* Left group: Ashoka wheel + government text */
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-medium);
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+/* The Ashoka Chakra SVG icon size */
+.gov-emblem {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0; /* Don't let flex shrink this icon */
+}
+
+/* Right group: accessibility, language, social, search */
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;  /* Wrap to next line if screen is too small */
+}
+
+/* "Skip to main content" link for keyboard/screen-reader users */
+.skip-link {
+  color: var(--text-medium);
+  font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.2s; /* 'transition' makes color change animate smoothly */
+}
+.skip-link:hover { color: var(--teal-primary); }
+
+/* ---- Font Size Control Buttons (A+, A, A-) ---- */
+.font-size-controls {
+  display: flex;
+  gap: 1px;
+}
+
+/*
+  .font-btn styles ALL four accessibility buttons.
+  'button' elements have browser defaults we need to override:
+  background:none removes grey button background.
+  cursor:pointer shows a hand cursor on hover.
+*/
+.font-btn {
+  background: none;
+  border: 1px solid #c0c0c0;
+  padding: 2px 8px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-medium);
+  cursor: pointer;
+  border-radius: 2px;
+  line-height: 1.6;
+  /* transition: smoothly animate background and color on hover */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.font-btn:hover,
+.font-btn:focus {
+  background-color: var(--teal-primary);
+  color: white;
+  border-color: var(--teal-primary);
+  outline: none;  /* Remove default focus ring (we styled it with background) */
+}
+/* The dark "A" button (high contrast toggle) */
+.contrast-btn {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+.contrast-btn:hover,
+.contrast-btn.active-contrast {
+  background-color: var(--teal-primary);
+  border-color: var(--teal-primary);
+}
+
+/* ---- Language Switch ---- */
+.language-switch { display: flex; align-items: center; }
+.lang-link {
+  color: var(--text-medium);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.lang-link:hover { color: var(--teal-primary); text-decoration: underline; }
+
+/* ---- Screen Reader Access ---- */
+.screen-reader-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-medium);
+  font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.screen-reader-link:hover { color: var(--teal-primary); }
+
+/* ---- Social Media Icons ---- */
+.social-icons {
+  display: flex;
+  gap: 5px;
+}
+
+/*
+  Each social icon is a square box with a centered icon inside.
+  The border makes the square box visible.
+  display:flex + align-items + justify-content centers the icon inside.
+*/
+.soc-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  color: #666;
+  font-size: 13px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.soc-icon:hover {
+  background-color: var(--teal-primary);
+  color: white;
+  border-color: var(--teal-primary);
+  text-decoration: none;
+}
+
+/* ---- Top Search Button (top-right corner) ---- */
+.top-search-btn {
+  background-color: var(--teal-primary);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+.top-search-btn:hover { background-color: var(--teal-dark); }
+
+
+/* ================================================================
+   4. MAIN HEADER
+   The white bar with the CBSE logo and partner logos.
+   Uses Flexbox: left (brand) and right (partner logos) on same row.
+================================================================ */
+.main-header {
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e8e8e8;
+  gap: 15px;
+}
+
+/* Left: logo + title side by side */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0; /* Don't let this shrink when space is tight */
+}
+
+/* The Satyamev Jayate emblem image size */
+.gov-emblem-img {
+  height: 28px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* Official CBSE logo with name image */
+.cbse-logo-name-img {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Partner logos (G20, Amrit Mahotsav, Swachh Bharat, DigiCBSE) */
+.partner-img {
+  max-height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ---- Right side: Partner/initiative logos ---- */
+.header-partner-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Each logo wrapper: centers content and adds a right border separator */
+.partner-badge {
+  text-align: center;
+  padding: 4px 12px;
+  border-right: 1px solid #e0e0e0;
+}
+.partner-badge:last-child {
+  border-right: none; /* Remove border from last badge */
+}
+
+/* ---- G20 Logo ---- */
+.g20-wrap { display: flex; flex-direction: column; align-items: center; }
+.g20-main { line-height: 1; }
+/* The "G" is in dark navy */
+.g20-g {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1a1a6e;
+  font-style: italic;
+}
+/* The "20" is in orange */
+.g20-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: #e67e22;
+  font-style: italic;
+}
+.g20-flower { font-size: 13px; line-height: 1.2; }
+.g20-india  { font-size: 8px; font-weight: 600; color: var(--text-dark); line-height: 1.4; }
+
+/* ---- Azadi Ka Amrit Mahotsav Logo ---- */
+.amrit-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.amrit-num-wrap {
+  border: 2px solid #888;
+  border-radius: 4px;
+  padding: 1px 5px;
+  line-height: 1;
+}
+/* The "75" uses the Indian flag gradient (saffron → white → green) */
+.amrit-num {
+  font-size: 26px;
+  font-weight: 900;
+  /*
+    background: linear-gradient(...) applies a gradient color.
+    -webkit-background-clip: text clips the gradient to just the text shape.
+    -webkit-text-fill-color: transparent makes the text itself transparent
+    so the background (gradient) shows through.
+    This creates multicolored text!
+  */
+  background: linear-gradient(to bottom, #ff9933 33%, #138808 67%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+.amrit-label {
+  font-size: 7.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ---- Swachh Bharat Logo ---- */
+.swachh-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.swachh-glasses-svg { width: 42px; height: 22px; }
+.swachh-text { font-size: 8.5px; font-weight: 700; color: var(--text-dark); line-height: 1.3; text-align: center; }
+.swachh-sub  { font-size: 6.5px; color: var(--text-medium); text-align: center; line-height: 1.3; }
+
+/* ---- DigiCBSE Logo ---- */
+.digi-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.digi-svg  { width: 42px; height: 42px; }
+.digi-text { font-size: 10px; font-weight: 700; color: #2ea2c7; }
+.digi-cbse-span { color: #e67e22; }
+
+
+/* ================================================================
+   5. NAVIGATION BAR
+   Horizontal menu bar below the header.
+   display:flex makes nav items sit side by side in one row.
+================================================================ */
+.main-nav {
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.main-nav.is-sticky {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* The <ul> container for all nav items - Strictly Single Row */
+.nav-list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* Each <li> nav item */
+.nav-item {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Each navigation link (the clickable text) */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 13px 6px;
+  font-size: 13.2px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  white-space: nowrap;     /* Prevent text from wrapping to 2 lines */
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--teal-primary);
+  background-color: #f0f9ff;
+  text-decoration: none;
+}
+
+/* Small down-arrow chevron icon beside nav items with dropdowns */
+.nav-chevron {
+  font-size: 8.5px;
+  margin-left: 1px;
+  opacity: 0.75;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
+/* ================================================================
+   6. DROPDOWN MENUS
+   Submenus that appear when hovering over a nav item.
+================================================================ */
+
+/* Hidden by default */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid var(--border-light);
+  border-top: 2px solid var(--teal-primary); /* Teal top accent line */
+  min-width: 210px;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+}
+
+/* Align rightmost dropdowns to the right edge so they stay inside the screen */
+.nav-list > .nav-item:nth-last-child(-n+4) .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+/* Show the dropdown when hovering over the parent nav item */
+.nav-item.has-dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Each item in the dropdown */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  color: var(--text-dark);
+  border-bottom: 1px solid #f2f2f2;
+  transition: background-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.dropdown-menu li:last-child a {
+  border-bottom: none; /* Remove border from last item */
+}
+.dropdown-menu li a:hover {
+  background-color: var(--teal-primary);
+  color: white;
+  text-decoration: none;
+  padding-left: 20px;  /* Slight indent on hover */
+}
+
+/* Rotate the chevron arrow when hovering over nav item with dropdown */
+.nav-item.has-dropdown:hover .nav-chevron {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+
+/* Mega Dropdown Multi-Column System */
+.dropdown-menu.mega-dropdown {
+  min-width: 580px;
+  max-width: 720px;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+  border-top: 3px solid var(--teal-primary);
+}
+
+.nav-item.has-dropdown:hover > .dropdown-menu.mega-dropdown {
+  display: grid;
+}
+
+.mega-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-heading {
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e0f2fe;
+}
+
+.mega-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mega-column ul li a {
+  display: block;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  border-radius: 6px;
+  border-bottom: none !important;
+  white-space: normal;
+  line-height: 1.35;
+  transition: all 0.15s ease;
+}
+
+.mega-column ul li a:hover {
+  background: #f0f9ff;
+  color: #2ea2c7;
+  padding-left: 12px;
+}
+
+
+/* ================================================================
+   7. SITEMAP BAR
+   A very slim bar between navigation and the search section.
+   Text is right-aligned using text-align: right.
+================================================================ */
+.sitemap-bar {
+  background-color: var(--sitemap-bg);
+  border-bottom: 1px solid #e2e2e2;
+  text-align: right; /* Push content to the right */
+  padding: 5px 22px;
+}
+
+.sitemap-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.sitemap-link:hover { color: var(--teal-primary); }
+
+
+/* ================================================================
+   7.5. HERO & LATEST @ CBSE UPDATES SECTION
+   Placed right after the Sitemap Bar.
+================================================================ */
+.hero-updates-section {
+  background-color: #f7fafc;
+  padding: 24px 20px;
+}
+
+.hero-updates-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ---- LEFT: HERO CARD (CAROUSEL) ---- */
+.hero-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 350px;
+  height: 350px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+/* Horizontal Track Container for Fluid Sliding */
+.hero-slider-track {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  will-change: transform;
+}
+
+.hero-slide-item {
+  width: 25%;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-slide-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Carousel Controls (floating at bottom right) */
+.hero-carousel-controls {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.65);
+  padding: 6px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.carousel-arrow:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+}
+  transition: background-color 0.2s, color 0.2s;
+}
+.carousel-arrow:hover {
+  background: #031b33;
+  color: white;
+  border-color: #031b33;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cbd5e0;
+  cursor: pointer;
+  transition: background-color 0.25s, width 0.25s;
+}
+.carousel-dots .dot.active {
+  background-color: #031b33;
+  width: 10px;
+  height: 10px;
+}
+
+
+/* ---- RIGHT: LATEST @ CBSE CARD ---- */
+.updates-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 20px 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.updates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.updates-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1a202c;
+}
+
+.updates-view-all {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3182ce;
+  transition: color 0.2s;
+}
+.updates-view-all:hover {
+  color: #2b6cb0;
+  text-decoration: underline;
+}
+
+.updates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.update-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f7fafc;
+}
+.update-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.update-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.update-icon {
+  color: #2b6cb0;
+  font-size: 15px;
+}
+
+.update-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.update-link {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.update-link:hover {
+  color: #3182ce;
+}
+
+.update-date {
+  font-size: 11px;
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+/* Category Pill Badges */
+.update-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-blue   { background-color: #ebf8ff; color: #2b6cb0; }
+.badge-green  { background-color: #f0fff4; color: #276749; }
+.badge-purple { background-color: #faf5ff; color: #6b46c1; }
+.badge-orange { background-color: #fffaf0; color: #dd6b20; }
+
+
+/* ================================================================
+   8. SEARCH SECTION
+   The main content area. Contains:
+   - Teal "SEARCH" title bar
+   - Light grey background
+   - White search card with the search input
+================================================================ */
+.search-section {
+  background-color: var(--search-bg);
+  /* min-height ensures the section has enough space even with no content */
+  min-height: 240px;
+  padding-bottom: 60px;
+}
+
+/* Teal title bar with the word "SEARCH" */
+.search-title-bar {
+  background: linear-gradient(to right, #2ea2c7, #3ab8d4);
+  padding: 14px 20px;
+  text-align: center;
+}
+.search-heading {
+  color: white;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 3px;  /* Spread letters apart for a title look */
+  text-transform: uppercase;
+}
+
+/* Outer padding container */
+.search-outer-wrap {
+  padding: 28px 18px 10px;
+}
+
+/* The white card that holds the search box */
+.search-card {
+  max-width: 1100px;      /* Don't let it stretch too wide on big screens */
+  margin: 0 auto;        /* Center it horizontally (auto left+right margins) */
+  background-color: var(--search-card-bg);
+  border: 1px solid #d8d8d8;
+  padding: 20px 20px;
+  border-radius: 6px;
+}
+
+/*
+  Search row: the horizontal bar containing icon + input.
+  display:flex makes them sit side by side.
+  border: 1px solid #c8c8c8 draws the search box outline.
+*/
+.search-row {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c8c8c8;
+  background: white;
+  border-radius: 2px;
+  padding: 9px 13px;
+  gap: 10px;
+}
+.search-row:focus-within {
+  /* :focus-within activates when any child (the input) is focused */
+  border-color: var(--teal-primary);
+  box-shadow: 0 0 0 2px rgba(46, 162, 199, 0.15);
+}
+
+/* Magnifying glass icon on the left of the search box */
+.search-icon-left {
+  color: #999;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/*
+  The actual text input field.
+  flex: 1 makes it grow to fill all remaining space in the flex row.
+  border: none removes the default input border (we use .search-row's border).
+  outline: none removes the default blue glow when clicked.
+*/
+.search-input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  /* Remove the default 'x' (clear) button in some browsers */
+  -webkit-appearance: none;
+}
+.search-input-field::placeholder {
+  color: #aaa;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+/* Remove the 'x' clear button in Internet Explorer/Edge */
+.search-input-field::-ms-clear { display: none; }
+
+/* Search submit button (visible but small) */
+.search-submit-btn {
+  background: var(--teal-primary);
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+.search-submit-btn:hover { background-color: var(--teal-dark); }
+
+/* Area where search result messages appear */
+.search-results-area {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-medium);
+  min-height: 20px;
+}
+
+
+/* ================================================================
+   9. FOOTER
+   Dark slate-grey section with 4 columns.
+   CSS Grid is used for the 4-column layout.
+
+   CSS GRID vs FLEXBOX:
+     Flexbox: best for 1-dimensional layouts (row OR column)
+     Grid:    best for 2-dimensional layouts (rows AND columns)
+   For 4 columns, Grid is cleaner.
+================================================================ */
+.main-footer {
+  background-color: var(--footer-bg);
+  color: white;
+  /*
+    position: relative is needed so the .footer-silhouette-wrap
+    (which uses position:absolute) positions itself inside the footer.
+  */
+  position: relative;
+  overflow: hidden; /* Hide any overflow from the silhouette SVG */
+}
+
+/* ---- Decorative Silhouette Background ---- */
+.footer-silhouette-wrap {
+  position: absolute;  /* Removed from normal flow, overlays the footer */
+  bottom: 38px;        /* Sits just above the copyright strip */
+  left: 0;
+  right: 0;
+  height: 185px;
+  pointer-events: none; /* Clicks pass through to links below */
+}
+.footer-sil-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Footer 4-column grid ---- */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  gap: 32px;              /* Space between columns */
+  padding: 42px 40px 65px;
+  max-width: 1380px;
+  margin: 0 auto;
+  position: relative;     /* Sits above the silhouette (z-index) */
+  z-index: 1;
+}
+
+/* Each footer column */
+.footer-col {
+  min-width: 0; /* Prevents grid overflow issues */
+}
+
+/* Column heading (MEDIA, CONTACT, USEFUL LINKS) */
+.footer-col-heading {
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ---- Footer link list ---- */
+.footer-link-list {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 9px;
+}
+
+/* Each footer link */
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  font-size: 13px;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+.footer-link:hover {
+  color: var(--teal-primary);
+  text-decoration: none;
+}
+
+/* Icon before each footer link (Facebook, Twitter, etc.) */
+.footer-li-icon {
+  color: var(--teal-primary);
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+/* Small external link icon (tiny arrow) */
+.footer-ext-icon {
+  font-size: 10px;
+  color: #999;
+  margin-left: 2px;
+}
+
+/* ---- Contact column rows (address, phone) ---- */
+.footer-contact-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.65;
+  align-items: flex-start; /* Align icon to top of multi-line text */
+}
+
+/* Location pin / phone icon */
+.footer-contact-icon {
+  color: var(--teal-primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.footer-contact-row strong {
+  color: white; /* Make label text white */
+}
+
+/* ---- Live Clock ---- */
+.footer-clock {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  font-variant-numeric: tabular-nums; /* Numbers take equal width (prevents clock "jumping") */
+}
+
+/* ---- IGBC Certificate ---- */
+.cert-section {
+  margin-bottom: 18px;
+}
+.cert-label {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Circular CQW badge */
+.cqw-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;     /* 50% border-radius = perfect circle */
+  /* Gradient background from dark blue to lighter blue */
+  background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+  border: 3px solid #90caf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(66, 165, 245, 0.35);
+}
+.cqw-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Last Updated ---- */
+.last-updated-text {
+  font-size: 12.5px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+   10. COPYRIGHT STRIP
+   The very bottom bar inside the footer.
+================================================================ */
+.copyright-strip {
+  background-color: var(--copyright-bg);
+  text-align: center;
+  padding: 12px 20px;
+  position: relative;
+  z-index: 1;            /* Appears above the footer silhouette */
+}
+/* "© Copyright CBSE" text in teal */
+.copyright-text {
+  color: var(--teal-primary);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+/* ================================================================
+   11. ACCESSIBILITY CLASSES
+   Applied by JavaScript when user clicks the A+, A-, or Contrast buttons.
+   JavaScript uses classList.add() and classList.remove() to toggle these.
+================================================================ */
+
+/* High contrast mode: dark background, white text, bright outlines */
+body.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+body.high-contrast .top-bar,
+body.high-contrast .main-header,
+body.high-contrast .main-nav,
+body.high-contrast .sitemap-bar {
+  background-color: #111;
+  border-color: #444;
+}
+body.high-contrast .nav-link,
+body.high-contrast .gov-text,
+body.high-contrast .top-bar-left,
+body.high-contrast .lang-link,
+body.high-contrast .skip-link,
+body.high-contrast .screen-reader-link {
+  color: #fff;
+}
+body.high-contrast .cbse-main-title  { color: #55ddff; }
+body.high-contrast .cbse-tagline     { color: #ccc; }
+body.high-contrast .search-section   { background-color: #1a1a1a; }
+body.high-contrast .search-card      { background-color: #222; border-color: #555; }
+body.high-contrast .search-row       { background: #333; border-color: #666; }
+body.high-contrast .search-input-field { color: #fff; }
+body.high-contrast .sitemap-link     { color: #ddd; }
+body.high-contrast .dropdown-menu    { background: #111; border-color: #555; }
+body.high-contrast .dropdown-menu li a { color: #ddd; border-color: #333; }
+
+/* Large font: increases ALL text on the page */
+body.font-large {
+  font-size: 17px; /* This scales everything since we use rem/em relative units */
+}
+body.font-large .nav-link    { font-size: 13.5px; }
+body.font-large .footer-link { font-size: 14px; }
+
+/* Small font */
+body.font-small {
+  font-size: 11px;
+}
+body.font-small .nav-link    { font-size: 10px; }
+
+
+/* ================================================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   @media rules apply styles only at certain screen widths.
+   max-width: 900px means "only if screen is 900px or narrower".
+   This makes the layout adjust for tablets and phones.
+================================================================ */
+@media (max-width: 1100px) {
+  /* Reduce partner logo sizes on smaller screens */
+  .header-partner-logos { gap: 6px; }
+  .partner-badge        { padding: 4px 7px; }
+}
+
+@media (max-width: 900px) {
+  /* Stack header brand and partner logos vertically */
+  .main-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  /* Footer: switch from 4 columns to 2 columns */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 30px 20px 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Footer: switch to 1 column (everything stacks) */
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Hide some top bar items on very small screens */
+  .screen-reader-link { display: none; }
+  .language-switch    { display: none; }
+  /* Reduce padding */
+  .top-bar { padding: 5px 10px; }
+  .main-header { padding: 10px 12px; }
+  .cbse-main-title { font-size: 15px; }
+}
+
+
+/* ================================================================
+   12. WHAT ARE YOU LOOKING FOR? (PERSONA CARDS SECTION)
+   ================================================================ */
+.persona-section {
+  width: 100%;
+  padding: 36px 0 40px;
+  background-color: #f7fafc;
+  overflow: hidden;
+}
+
+.persona-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.persona-header {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.persona-header-text {
+  flex: 1;
+}
+
+.persona-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.persona-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.persona-nav-btn:hover {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+  transform: translateY(-2px);
+}
+
+.persona-nav-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.persona-title {
+  font-family: var(--font-main);
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+  letter-spacing: -0.015em;
+}
+
+.persona-subtitle {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* MARQUEE SCROLLING WRAPPER - VERTICALLY ALIGNED WITH HERO SECTION */
+.persona-marquee-wrapper {
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 12px 0 24px;
+  margin-bottom: 32px;
+  mask-image: linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+  cursor: grab;
+  user-select: none;
+}
+
+.persona-marquee-wrapper.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.persona-marquee-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* MARQUEE TRACK ANIMATION SPEED */
+.persona-marquee-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: personaMarqueeScroll 130s linear infinite;
+}
+
+.persona-marquee-wrapper:hover .persona-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes personaMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* CBSE PORTAL CARD STYLES */
+.cbse-portal-card {
+  width: 285px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 12px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.cbse-portal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 35px -6px rgba(0, 0, 0, 0.16);
+  border-color: #2ea2c7;
+}
+
+.portal-card-banner {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-card-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.cbse-portal-card:hover .portal-card-banner img {
+  transform: scale(1.05);
+}
+
+.portal-card-footer {
+  padding: 12px 6px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.portal-card-title {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
+.portal-chevron {
+  font-size: 0.75rem;
+  color: #64748b;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cbse-portal-card:hover .portal-chevron {
+  transform: translateY(2px);
+  color: #2ea2c7;
+}
+
+
+/* ================================================================
+   13. CBSE AI ASSISTANT CHATBOT WIDGET
+   ================================================================ */
+.chatbot-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  font-family: var(--font-main);
+}
+
+/* Floating Trigger Button */
+.chatbot-trigger-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ea2c7 0%, #1e40af 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 8px 24px rgba(46, 162, 199, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.chatbot-trigger-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(46, 162, 199, 0.6);
+}
+
+.chatbot-icon-close {
+  display: none;
+}
+
+.chatbot-widget.active .chatbot-icon-open {
+  display: none;
+}
+
+.chatbot-widget.active .chatbot-icon-close {
+  display: block;
+}
+
+.chatbot-badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 13px;
+  height: 13px;
+  background-color: #22c55e;
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+}
+
+/* Chatbot Popup Window */
+.chatbot-window {
+  width: 360px;
+  height: 500px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  bottom: 74px;
+  right: 0;
+  transform: scale(0.85) translateY(24px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, visibility 0.25s ease;
+  transform-origin: bottom right;
+}
+
+.chatbot-widget.active .chatbot-window {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Header */
+.chatbot-header {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatbot-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2ea2c7, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.chatbot-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.chatbot-status {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.chatbot-close-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s ease;
+}
+
+.chatbot-close-btn:hover {
+  color: #ffffff;
+}
+
+/* Chat Messages Body */
+.chatbot-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.chat-message {
+  max-width: 82%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-message.bot-message {
+  align-self: flex-start;
+}
+
+.chat-message.user-message {
+  align-self: flex-end;
+}
+
+.chat-message .message-content {
+  padding: 11px 14px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.chat-message.bot-message .message-content {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px 16px 16px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.chat-message.bot-message .message-content p {
+  margin-bottom: 4px;
+}
+
+.chat-message.bot-message .message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-message.user-message .message-content {
+  background: linear-gradient(135deg, #2ea2c7, #1d4ed8);
+  color: #ffffff;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 3px 10px rgba(46, 162, 199, 0.25);
+}
+
+/* Quick Chips */
+.chat-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.chip-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.chip-btn:hover {
+  background: #2ea2c7;
+  color: #ffffff;
+  border-color: #2ea2c7;
+  transform: translateY(-1px);
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px !important;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #94a3b8;
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+}
+
+/* Chat Input Footer */
+.chatbot-footer {
+  padding: 12px 14px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chatbot-input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 24px;
+  padding: 9px 16px;
+  font-size: 0.86rem;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.chatbot-input:focus {
+  border-color: #2ea2c7;
+}
+
+.chatbot-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #2ea2c7;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.chatbot-send-btn:hover {
+  background: #1a8ab0;
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .chatbot-window {
+    width: calc(100vw - 32px);
+    right: -8px;
+    height: 440px;
+  }
+}
+
+
+/* ================================================================
+   14. SITEMAP PAGE STYLES
+   ================================================================ */
+.sitemap-hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+  padding: 32px 0 28px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sitemap-hero-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sitemap-breadcrumb {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.sitemap-breadcrumb a {
+  color: #2ea2c7;
+}
+
+.sitemap-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.sitemap-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.sitemap-page-title {
+  font-family: var(--font-main);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin-bottom: 6px;
+}
+
+.sitemap-page-subtitle {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+.sitemap-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.sitemap-back-btn:hover {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* Search Card */
+.sitemap-search-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sitemap-search-input-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sitemap-search-icon {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.sitemap-search-input {
+  width: 100%;
+  padding: 11px 16px 11px 42px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sitemap-search-input:focus {
+  border-color: #2ea2c7;
+  box-shadow: 0 0 0 3px rgba(46, 162, 199, 0.15);
+}
+
+.sitemap-filter-count {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+/* Sitemap Body Grid */
+.sitemap-body-section {
+  padding: 40px 0 60px;
+  background-color: #ffffff;
+}
+
+.sitemap-body-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 28px;
+}
+
+.sitemap-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sitemap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+.sitemap-card-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.sitemap-card-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.sitemap-cat-icon {
+  font-size: 1.2rem;
+}
+
+/* Category header themes */
+.header-blue { background: linear-gradient(135deg, #1d4ed8, #2ea2c7); }
+.header-teal { background: linear-gradient(135deg, #0d9488, #06b6d4); }
+.header-purple { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+.header-orange { background: linear-gradient(135deg, #c2410c, #f97316); }
+.header-green { background: linear-gradient(135deg, #15803d, #22c55e); }
+.header-slate { background: linear-gradient(135deg, #334155, #475569); }
+
+.sitemap-link-list {
+  padding: 16px 20px 20px;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sitemap-link-list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: #334155;
+  font-weight: 600;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sitemap-link-list li a i {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sitemap-link-list li a:hover {
+  color: #2ea2c7;
+  transform: translateX(4px);
+}
+
+.sitemap-link-list li a:hover i {
+  color: #2ea2c7;
+}
+
+@media (max-width: 768px) {
+  .sitemap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ================================================================
+   15. FEATURED RESOURCES SECTION
+   ================================================================ */
+.featured-resources-section {
+  width: 100%;
+  padding: 36px 0 48px;
+  background-color: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.featured-resources-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.featured-resources-title {
+  font-family: var(--font-main);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 20px;
+  letter-spacing: -0.015em;
+}
+
+.featured-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.featured-resource-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.featured-resource-card:hover {
+  transform: translateY(-4px);
+  border-color: #2ea2c7;
+  box-shadow: 0 10px 24px rgba(46, 162, 199, 0.15);
+}
+
+.resource-card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resource-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.featured-resource-card:hover .resource-icon-wrap {
+  background: #e0f2fe;
+}
+
+.resource-card-text {
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.resource-arrow {
+  font-size: 0.75rem;
+  color: #1d4ed8;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.featured-resource-card:hover .resource-arrow {
+  transform: translateX(3px);
+  color: #2ea2c7;
+}
+
+@media (max-width: 1100px) {
+  .featured-resources-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .featured-resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .featured-resources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ================================================================
+   16. CBSE TODAY SECTION
+   ================================================================ */
+.cbse-today-section {
+  width: 100%;
+  padding: 44px 0 52px;
+  background-color: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cbse-today-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cbse-today-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.cbse-today-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cbse-today-line {
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background-color: #cbd5e1;
+}
+
+.cbse-today-title {
+  font-family: var(--font-main);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.cbse-today-subtitle {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* 3-Column Grid */
+.cbse-today-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.cbse-update-card {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cbse-update-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+}
+
+/* THEMES */
+/* Green Theme */
+.theme-green {
+  background-color: #f7fdf9;
+  border: 1px solid #dcfce7;
+}
+.icon-green { color: #16a34a; background: #dcfce7; }
+.link-green { color: #16a34a; }
+.date-green { color: #16a34a; font-weight: 700; }
+.bullet-green { background-color: #16a34a; }
+.btn-green { color: #15803d; font-weight: 800; }
+.btn-green:hover { color: #166534; }
+
+/* Blue Theme */
+.theme-blue {
+  background-color: #f8fafc;
+  border: 1px solid #e0f2fe;
+}
+.icon-blue { color: #2563eb; background: #dbeafe; }
+.link-blue { color: #2563eb; }
+.date-blue { color: #2563eb; font-weight: 700; }
+.btn-blue { color: #1d4ed8; font-weight: 800; }
+.btn-blue:hover { color: #1e40af; }
+
+/* Purple Theme */
+.theme-purple {
+  background-color: #fcf8ff;
+  border: 1px solid #f3e8ff;
+}
+.icon-purple { color: #9333ea; background: #f3e8ff; }
+.link-purple { color: #9333ea; }
+.date-purple { color: #9333ea; font-weight: 700; }
+.btn-purple { color: #7e22ce; font-weight: 800; }
+.btn-purple:hover { color: #6b21a8; }
+
+/* Header inside Card */
+.update-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.update-card-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.update-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.update-card-title {
+  font-family: var(--font-main);
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.update-header-link {
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.update-header-link:hover {
+  text-decoration: underline;
+}
+
+/* List Items */
+.update-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.update-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.update-date {
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 95px;
+}
+
+.date-bullet {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.update-item-title {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.update-item-title:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+/* Footer Button */
+.update-card-footer {
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.update-footer-btn {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease;
+}
+
+.update-footer-btn:hover {
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .cbse-today-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ================================================================
+   17. IMPORTANT DATES SECTION
+   ================================================================ */
+.important-dates-section {
+  width: 100%;
+  padding: 24px 0 36px;
+  background-color: #f7fafc;
+}
+
+.important-dates-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dates-card-wrap {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.dates-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dates-card-title {
+  font-family: var(--font-main);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.dates-calendar-link {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.dates-calendar-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Timeline Layout */
+.dates-timeline-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 240px;
+}
+
+/* Date Badges */
+.date-badge {
+  width: 62px;
+  height: 66px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.badge-top {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.badge-bottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.15;
+  padding: 4px;
+}
+
+/* Badge Color Themes */
+/* Green */
+.badge-green { border: 1px solid #bbf7d0; background: #f0fdf4; }
+.badge-green .badge-top { background: #16a34a; }
+.badge-green .badge-bottom { color: #15803d; }
+
+/* Blue */
+.badge-blue { border: 1px solid #bfdbfe; background: #eff6ff; }
+.badge-blue .badge-top { background: #1d4ed8; }
+.badge-blue .badge-bottom { color: #1d4ed8; }
+
+/* Orange */
+.badge-orange { border: 1px solid #fed7aa; background: #fff7ed; }
+.badge-orange .badge-top { background: #ea580c; }
+.badge-orange .badge-bottom { color: #c2410c; }
+
+/* Purple */
+.badge-purple { border: 1px solid #e9d5ff; background: #faf5ff; }
+.badge-purple .badge-top { background: #7e22ce; }
+.badge-purple .badge-bottom { color: #7e22ce; }
+
+/* Step Info Text */
+.step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.step-title {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.step-subtitle {
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Connector Dot */
+.timeline-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  flex-shrink: 0;
+}
+
+.connector-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #60a5fa;
+  box-shadow: 0 0 0 3px #dbeafe;
+}
+
+@media (max-width: 1024px) {
+  .dates-timeline-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .timeline-connector {
+    display: none;
+  }
+}
+
+
+
