@@ -12,9 +12,11 @@ class SearchResultResponse(BaseModel):
     title: str
     description: str | None
     category: str
-    date: datetime
+    date: datetime | str
     source_url: str | None
     document_url: str | None
+    similarity_score: float | None = None
+    match_type: str | None = "keyword"
 
 
 class SearchResponse(BaseModel):
@@ -22,3 +24,4 @@ class SearchResponse(BaseModel):
     query: str
     records_retrieved: int
     results: list[SearchResultResponse]
+

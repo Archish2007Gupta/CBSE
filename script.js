@@ -570,6 +570,380 @@ if (heroCardElem) {
 }
 
 
+/* ================================================================
+   PORTAL SEARCH & AI SEMANTIC SEARCH CONTROLLER
+   Integrates with Python FastAPI Backend Endpoint (/api/search)
+================================================================ */
+
+var currentSearchResults = [];
+var activeFilterTab = 'all';
+
+// Initialize search event listeners on input change, shortcut & autocomplete
+var autocompleteTimer = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+  var searchInput = document.getElementById('search-input');
+  var clearBtn = document.getElementById('search-clear-btn');
+  var autocompleteDropdown = document.getElementById('search-autocomplete-dropdown');
+
+  // Global Keyboard Shortcut: Ctrl+K or Cmd+K to focus search input
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.select();
+        var searchSection = document.getElementById('portal-search-section');
+        if (searchSection) {
+          searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  });
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      var query = searchInput.value.trim();
+      if (clearBtn) {
+        clearBtn.style.display = query ? 'flex' : 'none';
+      }
+
+      // Debounced live autocomplete
+      clearTimeout(autocompleteTimer);
+      if (query.length >= 2) {
+        autocompleteTimer = setTimeout(function () {
+          fetchAutocompleteSuggestions(query);
+        }, 220);
+      } else {
+        hideAutocompleteDropdown();
+      }
+    });
+
+    // Pressing Escape clears search & hides dropdown
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        clearSearchInput();
+        hideAutocompleteDropdown();
+      }
+    });
+
+    // Close autocomplete dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#portal-search-form')) {
+        hideAutocompleteDropdown();
+      }
+    });
+  }
+});
+
+function hideAutocompleteDropdown() {
+  var dropdown = document.getElementById('search-autocomplete-dropdown');
+  if (dropdown) {
+    dropdown.style.display = 'none';
+    dropdown.innerHTML = '';
+  }
+}
+
+async function fetchAutocompleteSuggestions(query) {
+  var dropdown = document.getElementById('search-autocomplete-dropdown');
+  var toggleCheckbox = document.getElementById('semantic-toggle-checkbox');
+  if (!dropdown) return;
+
+  try {
+    var isSemantic = toggleCheckbox ? toggleCheckbox.checked : true;
+    var res = await fetch('/api/search?q=' + encodeURIComponent(query) + '&semantic=' + (isSemantic ? 'true' : 'false'));
+    if (!res.ok) return;
+
+    var data = await res.json();
+    var matches = (data.results || []).slice(0, 4);
+
+    if (matches.length === 0) {
+      hideAutocompleteDropdown();
+      return;
+    }
+
+    var html = matches.map(function (item) {
+      var icon = item.type === 'service' ? 'fa-concierge-bell' : (item.type === 'news' ? 'fa-newspaper' : 'fa-file-pdf');
+      var typeColor = item.type === 'service' ? 'color-service' : (item.type === 'news' ? 'color-news' : 'color-circular');
+      return `
+        <div class="autocomplete-item" onclick="selectAutocompleteItem('${escapeHtml(item.title).replace(/'/g, "\\'")}')">
+          <i class="fas ${icon} ${typeColor}"></i>
+          <div class="autocomplete-info">
+            <span class="autocomplete-title">${escapeHtml(item.title)}</span>
+            <span class="autocomplete-meta">${escapeHtml(item.category || 'General')} &bull; ${escapeHtml(item.date || '')}</span>
+          </div>
+          <i class="fas fa-arrow-right autocomplete-arrow"></i>
+        </div>
+      `;
+    }).join('');
+
+    dropdown.innerHTML = `
+      <div class="autocomplete-header">
+        <span><i class="fas fa-sparkles"></i> Live Suggestions for "${escapeHtml(query)}"</span>
+      </div>
+      <div class="autocomplete-list">${html}</div>
+    `;
+    dropdown.style.display = 'block';
+  } catch (err) {
+    console.debug('Autocomplete fetch ignored:', err);
+  }
+}
+
+function selectAutocompleteItem(title) {
+  var searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.value = title;
+  }
+  hideAutocompleteDropdown();
+  handleSearchSubmit();
+}
+
+function clearSearchInput() {
+  var searchInput = document.getElementById('search-input');
+  var clearBtn = document.getElementById('search-clear-btn');
+  var resultsPanel = document.getElementById('search-results-panel');
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+  }
+  if (clearBtn) {
+    clearBtn.style.display = 'none';
+  }
+  if (resultsPanel) {
+    resultsPanel.style.display = 'none';
+  }
+  hideAutocompleteDropdown();
+  currentSearchResults = [];
+}
+
+function handleSemanticToggleChange(event) {
+  var isChecked = event.target.checked;
+  var modeHint = document.getElementById('search-mode-hint');
+  if (modeHint) {
+    if (isChecked) {
+      modeHint.innerHTML = '<i class="fas fa-brain toggle-ai-icon"></i> AI Semantic Mode matches concepts &amp; context using vector similarity';
+      modeHint.classList.add('ai-active-hint');
+    } else {
+      modeHint.innerHTML = '<i class="fas fa-filter"></i> Keyword Mode matches exact text terms in title &amp; description';
+      modeHint.classList.remove('ai-active-hint');
+    }
+  }
+
+  // Re-run search if query exists
+  var searchInput = document.getElementById('search-input');
+  if (searchInput && searchInput.value.trim().length >= 2) {
+    executePortalSearch(searchInput.value.trim(), isChecked);
+  }
+}
+
+function handleSearchSubmit(event) {
+  if (event) event.preventDefault();
+  hideAutocompleteDropdown();
+
+  var searchInput = document.getElementById('search-input');
+  var toggleCheckbox = document.getElementById('semantic-toggle-checkbox');
+  
+  if (!searchInput) return;
+  var query = searchInput.value.trim();
+  
+  if (!query) {
+    searchInput.focus();
+    return;
+  }
+  
+  var isSemantic = toggleCheckbox ? toggleCheckbox.checked : true;
+  executePortalSearch(query, isSemantic);
+}
+
+function quickSearch(queryText) {
+  hideAutocompleteDropdown();
+  var searchInput = document.getElementById('search-input');
+  var clearBtn = document.getElementById('search-clear-btn');
+  var toggleCheckbox = document.getElementById('semantic-toggle-checkbox');
+  
+  if (searchInput) {
+    searchInput.value = queryText;
+    if (clearBtn) clearBtn.style.display = 'flex';
+  }
+  
+  var isSemantic = toggleCheckbox ? toggleCheckbox.checked : true;
+  executePortalSearch(queryText, isSemantic);
+  
+  // Scroll smoothly to search section if needed
+  var searchSection = document.getElementById('portal-search-section');
+  if (searchSection) {
+    searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+async function executePortalSearch(query, isSemantic) {
+  var panel = document.getElementById('search-results-panel');
+  var loader = document.getElementById('search-skeleton-loader');
+  var resultsList = document.getElementById('search-results-list');
+  var emptyState = document.getElementById('search-empty-state');
+  var countTitle = document.getElementById('results-count-title');
+  var queryBadge = document.getElementById('results-query-badge');
+
+  if (!panel || !resultsList) return;
+
+  // Show panel, show loader, hide list & empty state
+  panel.style.display = 'block';
+  if (loader) loader.style.display = 'grid';
+  if (resultsList) resultsList.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'none';
+
+  if (queryBadge) {
+    queryBadge.innerHTML = 'Query: <strong>"' + escapeHtml(query) + '"</strong> ' + 
+      (isSemantic ? '<span class="badge-tag-ai"><i class="fas fa-sparkles"></i> AI Semantic</span>' : '<span class="badge-tag-keyword"><i class="fas fa-font"></i> Keyword</span>');
+  }
+
+  try {
+    var apiUrl = '/api/search?q=' + encodeURIComponent(query) + '&semantic=' + (isSemantic ? 'true' : 'false');
+    var response = await fetch(apiUrl);
+    
+    if (!response.ok) {
+      throw new Error('Search failed with status ' + response.status);
+    }
+
+    var data = await response.json();
+    currentSearchResults = data.results || [];
+
+    if (loader) loader.style.display = 'none';
+
+    if (countTitle) {
+      countTitle.textContent = 'Found ' + currentSearchResults.length + ' Result' + (currentSearchResults.length === 1 ? '' : 's');
+    }
+
+    if (currentSearchResults.length === 0) {
+      if (emptyState) emptyState.style.display = 'flex';
+      return;
+    }
+
+    if (resultsList) {
+      resultsList.style.display = 'grid';
+      renderSearchResults(activeFilterTab);
+    }
+  } catch (error) {
+    console.error('Portal Search Error:', error);
+    if (loader) loader.style.display = 'none';
+    if (emptyState) {
+      emptyState.style.display = 'flex';
+      emptyState.querySelector('h4').textContent = 'Unable to fetch results';
+      emptyState.querySelector('p').textContent = 'Please make sure the backend Python server is running and try again.';
+    }
+  }
+}
+
+function filterSearchResults(filterType) {
+  activeFilterTab = filterType;
+  
+  // Update active tab UI
+  var tabBtns = document.querySelectorAll('.results-filter-tabs .tab-btn');
+  tabBtns.forEach(function (btn) {
+    if (btn.getAttribute('data-filter') === filterType) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  renderSearchResults(filterType);
+}
+
+function renderSearchResults(filterType) {
+  var resultsList = document.getElementById('search-results-list');
+  var emptyState = document.getElementById('search-empty-state');
+  if (!resultsList) return;
+
+  var filtered = currentSearchResults;
+  if (filterType !== 'all') {
+    filtered = currentSearchResults.filter(function (item) {
+      return item.type === filterType;
+    });
+  }
+
+  if (filtered.length === 0) {
+    resultsList.style.display = 'none';
+    if (emptyState) {
+      emptyState.style.display = 'flex';
+      emptyState.querySelector('h4').textContent = 'No ' + filterType + ' results found';
+      emptyState.querySelector('p').textContent = 'Try selecting "All Results" or enabling AI Semantic Search.';
+    }
+    return;
+  }
+
+  if (emptyState) emptyState.style.display = 'none';
+  resultsList.style.display = 'grid';
+
+  var cardsHtml = filtered.map(function (item) {
+    var matchBadge = item.match_type === 'semantic' 
+      ? '<span class="match-badge badge-semantic"><i class="fas fa-brain"></i> AI Semantic Match</span>'
+      : '<span class="match-badge badge-keyword"><i class="fas fa-magnifying-glass"></i> Keyword Match</span>';
+      
+    var scorePct = (item.similarity_score !== null && item.similarity_score !== undefined) ? Math.round(item.similarity_score * 100) : null;
+    var similarityBadge = (scorePct !== null)
+      ? `
+        <div class="score-pill-group" title="Vector similarity score: ${scorePct}%">
+          <span class="score-badge"><i class="fas fa-chart-line"></i> ${scorePct}% Relevance</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width: ${Math.min(Math.max(scorePct, 10), 100)}%;"></div></div>
+        </div>
+      `
+      : '';
+
+    var typeClass = 'type-' + (item.type || 'circular');
+    var typeLabel = item.type ? item.type.toUpperCase() : 'CIRCULAR';
+    var iconClass = item.type === 'service' ? 'fa-concierge-bell' : (item.type === 'news' ? 'fa-newspaper' : 'fa-file-pdf');
+
+    var linkUrl = item.document_url || item.source_url || '#';
+    var hasDirectLink = linkUrl && linkUrl !== '#';
+
+    return `
+      <div class="search-result-card ${typeClass}">
+        <div class="result-card-header">
+          <div class="result-badges-row">
+            <span class="type-pill ${typeClass}"><i class="fas ${iconClass}"></i> ${typeLabel}</span>
+            <span class="category-pill">${escapeHtml(item.category || 'General')}</span>
+            ${matchBadge}
+            ${similarityBadge}
+          </div>
+          <span class="result-date"><i class="far fa-calendar-alt"></i> ${escapeHtml(item.date || '')}</span>
+        </div>
+
+        <h4 class="result-card-title">
+          <a href="${escapeHtml(linkUrl)}" ${hasDirectLink ? 'target="_blank" rel="noopener"' : ''}>
+            ${escapeHtml(item.title)}
+          </a>
+        </h4>
+
+        <p class="result-card-description">
+          ${escapeHtml(item.description || 'Official CBSE document notification.')}
+        </p>
+
+        <div class="result-card-footer">
+          <a href="${escapeHtml(linkUrl)}" ${hasDirectLink ? 'target="_blank" rel="noopener"' : ''} class="result-action-btn">
+            ${item.document_url ? '<i class="fas fa-download"></i> View / Download Document' : '<i class="fas fa-external-link-alt"></i> Access Portal Link'}
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  resultsList.innerHTML = cardsHtml;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
+
+
 
 
 
