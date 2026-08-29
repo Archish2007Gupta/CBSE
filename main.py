@@ -4,15 +4,18 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-"""Minimal FastAPI application for the CBSE backend."""
+"""CBSE FastAPI application — serves both the backend API and the frontend static files."""
 
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from routers.circulars import router as circulars_router
 from routers.important_dates import router as important_dates_router
@@ -23,6 +26,9 @@ from routers.ai import router as ai_router
 from routers.user import router as user_router
 from routers.notifications import router as notifications_router
 from services import get_supabase_client
+
+# Absolute path to the directory that contains index.html, styles.css, etc.
+FRONTEND_DIR = Path(__file__).parent
 
 app = FastAPI(
     title="CBSE Backend API",
@@ -90,3 +96,38 @@ def test_database_connection() -> dict[str, int | bool]:
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="The database is currently unavailable."
         ) from error
+
+
+# ── Frontend HTML routes ──────────────────────────────────────────────────────
+# These must come AFTER all /api/* routes so API calls are never intercepted.
+
+@app.get("/", response_class=FileResponse)
+def serve_index():
+    """Serve the main CBSE website homepage."""
+    return FileResponse(FRONTEND_DIR / "index.html", media_type="text/html")
+
+
+@app.get("/sitemap", response_class=FileResponse)
+@app.get("/sitemap.html", response_class=FileResponse)
+def serve_sitemap():
+    """Serve the sitemap page."""
+    return FileResponse(FRONTEND_DIR / "sitemap.html", media_type="text/html")
+
+
+# ── Static assets (CSS, JS, images) ──────────────────────────────────────────
+# Mount at root so that relative paths in HTML (e.g. href="styles.css") work.
+app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="static")
+
+
+# ── Entry point ───────────────────────────────────────────────────────────────
+# Allows running the server with:  python main.py
+# (equivalent to: uvicorn main:app --reload --host 127.0.0.1 --port 8000)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True,          # auto-restarts when you save a file
+        log_level="info",
+    )
